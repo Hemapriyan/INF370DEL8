@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Snow_System.Models.VAT>
+
+<h2 class="pageHeading">VAT</h2>
+<br />
+
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            Percentage (%)
+        </th>
+        <th>
+            In effect from
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.Percent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<div class="OptionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />New</div>

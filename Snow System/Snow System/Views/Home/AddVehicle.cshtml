@@ -1,0 +1,74 @@
+﻿@model Snow_System.Models.Vehicle
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h1 class="pageHeading">Add New Vehicle</h1>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class=" CenteringContainer">
+            <div class="form-group">
+                @Html.LabelFor(model => model.LicensePlateNumber, "License Plate Number:", htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.LicensePlateNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LicensePlateNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VehicleDescription, "Vehicle Description:", htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.VehicleDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VehicleDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VeihcleType, "Vehicle Type:", htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.DropDownList("VehicleType", new List<SelectListItem>
+                {
+
+               new SelectListItem {Text = "Workshop", Value="Workshop"},
+               new SelectListItem {Text = "Standard", Value="Standard"},
+                }
+           , htmlAttributes: new { @class = "custom-select btn-primary" })
+
+                    @Html.ValidationMessageFor(model => model.VeihcleType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PurchaseDate, "Purchase Date:", htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    <input type="date" class="form-control datepicker" />
+                    @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</div>
+            <div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>
+        </div>
+    </div>
+
+    <div id="lodgeModal" class="modal animate-opacity">
+        <div class="modal-content modal-background">
+            <header class="">
+                <h2>Confirm Creation</h2>
+            </header>
+            <hr style="margin:0;" />
+            <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+            <div class="">
+                <p>Are you sure you want to create this vehicle?</p>
+            </div>
+            <hr style="margin:0;" />
+            <footer class="" style="">
+                <a href="" onclick="document.getElementById('lodgeModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+                <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+            </footer>
+        </div>
+    </div>
+}

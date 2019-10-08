@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Snow_System.Models.mvcProductModel>
+
+<h1 style="text-align:center;">Products</h1>
+<hr />
+
+
+<div style="text-align:center;">
+    <input type="search" style="width:78%; display:inline-block; margin-left:1%;" class="form-control" placeholder="Search..." />
+    <button class="btn btn-primary" style="display:inline-block; margin-left:1%; "><span class="glyphicon glyphicon-search"></span></button>
+
+    <div style="float:right; display: inline-block">
+        <div  style="width: 180px; display: inline-block">
+            <select class="custom-select btn-primary">
+                <option value="0">Order by:</option>
+                <option value="1">Product type</option>
+                <option value="2">Price</option>
+            </select>
+        </div>
+    </div>
+    <span onclick="openNavb()" style="float: left" class="btn btn-primary"><span class="glyphicon glyphicon-filter"></span> Filter</span>
+</div>
+
+<br />
+<br />
+<div id="sidenavb">
+    <a href="javascript:void(0)" class="closebtn" style="float: right; font-size:25px;" onclick="closeNavb()">&times;</a>
+    <h2>Filter</h2>
+    <div>
+        <h3>Product type</h3>
+        <div>
+            <select class="custom-select btn-primary">
+                <option value="0">Product type:</option>
+                <option value="1">All</option>
+                <option value="2">First aid kits</option>
+                <option value="3">Extinguishers</option>
+            </select>
+        </div>
+    </div>
+    <br />
+    <div>
+        <h3>Filter by price</h3>
+        <div class="slidecontainer">
+            <h4>Minimum:</h4><span id="minamount">R1</span>
+            <input type="range" min="1" max="5000" value="0" class="slider" id="minamountslider">
+            <h4>Maximum:</h4><span id="maxamount">R5000</span>
+            <input type="range" min="1" max="5000" value="5000" class="slider" id="maxamountslider">
+        </div>
+    </div>
+    <br />
+    <button class="btn btn-primary" style="width:100%; border-radius: 0px; bottom: 100px">
+        <span class="glyphicon glyphicon-filter"></span> Filter
+    </button>
+</div>
+
+<div class="main">
+
+    @foreach (var item in Model)
+    {
+        <div class="product">
+            <div class="productpic">
+                <img class="prodpic" alt="" src="~/Resources/Exit Sign.jpg" />
+            </div>
+            <br />
+            <div class="productinfo">
+                <span> <b> @Html.DisplayFor(modelItem => item.Name) </b> </span>
+                <br />
+                <span>@Html.DisplayFor(modelItem => item.Dscription) </span><br />
+                <br />
+            </div>
+            <div class="productbutton">
+                <button style="width:100%;" class="btn btn-primary addcartbutton" onmouseover="priceToCart(this)" onmouseout="cartToPrice(this, @item.SellingPrice)">R @Html.DisplayFor(modelItem => item.SellingPrice).00</button>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    function priceToCart(e) {
+        e.innerHTML = "<span class='glyphicon glyphicon-shopping-cart'></span> Add to cart";
+    }
+
+    function cartToPrice(e, i) {
+        e.innerHTML = "R " + i + ".00";
+    }
+
+    function openNavb() {
+        document.getElementById("sidenavb").style.width = "250px";
+    }
+
+    function closeNavb() {
+        document.getElementById("sidenavb").style.width = "0";
+    }
+
+    var slider = document.getElementById("minamountslider");
+    var output = document.getElementById("minamount");
+    output.innerHTML = "R" + slider.value; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function () {
+        output.innerHTML = "R" + this.value;
+    }
+
+
+    var slider2 = document.getElementById("maxamountslider");
+    var output2 = document.getElementById("maxamount");
+    output2.innerHTML = "R5000"; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider2.oninput = function () {
+        output2.innerHTML = "R" + this.value;
+    }
+
+</script>

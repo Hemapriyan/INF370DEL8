@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Snow_System.Models.ProductType>
+
+<h1 class="page-header pageHeading" style="text-align:center;">Product Types</h1>
+<div class="form-group" style="text-align:center">
+    <input type="search" placeholder="Search product types" style="width:80%;" class="form-control"/>
+    <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+</div>
+<br />
+
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            Product Type Name
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-dark" onclick="TableRowClicked(this)">
+            <td>
+                @Html.DisplayFor(modelItem => item.productTypeDescription)
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="ActionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-plus"></span><br /> New</div>
+<div class="ActionButton btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-edit"></span><br />Edit</div>
+
+<br />

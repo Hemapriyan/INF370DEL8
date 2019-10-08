@@ -1,0 +1,28 @@
+﻿@model Snow_System.BankingDetail
+@{
+    ViewBag.Title = "Payment Information";
+}
+
+<h2 class="pageHeading">Order processed!</h2>
+
+<p style="text-align:center;">Your order has been placed! Please make your payment to this account.</p>
+
+<div class="bankConatainer">
+    <div class="PayentInfoLeft">
+        <span>Account number:  </span><br />
+        <span>Bank:  </span><br />
+        <span>Branch:  </span><br />
+        <span>Account type: </span>
+    </div>
+    <div class="PayentInfoRight" style="text-align:left; width: 40%; ">
+        <span>  @Model.BankAccountNumber</span><br />
+        <span>  @Model.BankName</span><br />
+        <span>  @Model.BranchCode</span><br />
+        <span>  @Model.AccountType</span>
+    </div>
+</div>
+
+<br />
+<p style="text-align:center;">Please note that your order will not be shipped untill the order has been payed for. It might take up to three more days thereafter for the order to be delivered.</p>
+
+<div class="OptionButton BackBtn btn bg-success" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-home"></span> <br />Home</div>

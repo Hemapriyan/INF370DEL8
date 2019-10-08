@@ -1,0 +1,168 @@
+﻿@model IEnumerable<Snow_System.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="page-header pageHeading" style="text-align:center;">Products</h2>
+
+<div style="text-align:center;">
+    <p>
+
+        @using (@Html.BeginForm("Index", "Product", FormMethod.Get))
+        {
+            <div style="margin-right:70px;">
+                <b>Search By:</b>
+                @Html.RadioButton("searchBy", "Name", true) <text>Name </text>
+                @Html.RadioButton("searchBy", "Description") <text>Description</text><br /><br />
+            </div>
+            @Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
+            <a href="@Url.Action("Index","Product")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
+        }
+
+    </p>
+</div>
+
+<br />
+<a href="@Url.Action("AddorEdit","Product")" class="ActionButton ContinueBtn btn btn-success" style="float:left; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Add New</a>
+<a style="float:right;" href="@Url.Action("ExportProducts","Product")"> Download Product Quantity Report PDF </a>
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dscription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantityOnHand)
+        </th>
+        <!--
+        <th>
+            Html.DisplayNameFor(model => model.ExpiryDate)
+        </th>
+            -->
+        <th>
+            @Html.DisplayNameFor(model => model.SellingPrice)
+        </th>
+        <!--
+        <th>
+            Html.DisplayNameFor(model => model.ProductStatusID)
+        </th>-->
+        <th>
+            @Html.DisplayNameFor(model => model.ProductTypeID)
+        </th>
+        <th>Actions</th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">
+                No records match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr class="table-dark">
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dscription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityOnHand)
+                </td>
+                <!--
+                <td>
+                    Html.DisplayFor(modelItem => item.ExpiryDate)
+                </td>-->
+                <td>
+                    @Html.DisplayFor(modelItem => item.SellingPrice)
+                </td>
+                <!--
+                <td>
+                    Html.DisplayFor(modelItem => item.ProductStatusID)
+                </td>-->
+                @if (item.ProductTypeID == 1)
+                {
+                    <td>
+                        Extinguisher
+                    </td>
+                }
+                else if (item.ProductTypeID == 2)
+                {
+                    <td>
+                        Fire Hydrants
+                    </td>
+                }
+                else if (item.ProductTypeID == 3)
+                {
+                    <td>
+                        Fire & Emergency Signs
+                    </td>
+                }
+                else if (item.ProductTypeID == 4)
+                {
+                    <td>
+                        Hoses
+                    </td>
+                }
+                else if (item.ProductTypeID == 5)
+                {
+                    <td>
+                        First Aid Kits
+                    </td>
+                }
+                <td>
+                    <a href="@Url.Action("AddorEdit", "Product", new { id = item.ProductID })" class="btn btn-warning"><i class="fa fa-pencil"></i>Edit</a>
+
+                    <a onclick="Delete(@item.ProductID)" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                </td>
+            </tr>
+        }
+    }
+
+    </table>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Web API CRUD', 'Are you sure you want to delete this record?',function () {
+                window.location.href = '@Url.Action("Delete","Product")/' + id;
+            }, null);
+        }
+    </script>
+}
+<div id="lodgeModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Creation</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to create this product?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('lodgeModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>

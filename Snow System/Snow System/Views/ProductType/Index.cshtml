@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Snow_System.ProductType>
+
+@{
+    ViewBag.Title = "Index";
+}
+<h2 class="page-header pageHeading" style="text-align:center;">Product Types</h2>
+<hr />
+
+<div style="text-align:center;">
+    <p>
+
+        @using (@Html.BeginForm("Index", "ProductType", FormMethod.Get))
+        {
+
+            <b>Search By Description:</b>@Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
+            <a href="@Url.Action("Index","ProductType")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
+        }
+
+    </p>
+</div>
+<a href="@Url.Action("AddorEdit","ProductType")" class="ActionButton ContinueBtn btn btn-success" style="float:left; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Add New</a>
+
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.ProductTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>Actions</th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">
+                No records match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr class="table-dark">
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductTypeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a href="@Url.Action("AddorEdit", "ProductType", new { id = item.ProductTypeID })" class="btn btn-warning"><i class="fa fa-pencil"></i>Edit</a>
+                    <a onclick="Delete(@item.ProductTypeID)" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                </td>
+            </tr>
+        }
+    }
+    </table>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Web API CRUD', 'Are you sure you want to delete this record?',function () {
+                window.location.href = '@Url.Action("Delete","ProductType")/' + id;
+            }, null);
+        }
+    </script>
+}

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Snow_System.Models.Product>
+
+
+<h1 class="page-header pageHeading" style="text-align:center;">Cart</h1>
+<br />
+<div class="cartheadings">
+    <div class="cartitempiece cartitempic">
+    </div>
+    <div class="cartitempiece cartiteminfo">
+        <span>Product information</span>
+    </div>
+    <div class="cartitempiece cartitemqty">
+        <span>Quantity</span>
+    </div>
+    <div class="cartitempiece cartitemsub">
+        <span class="subtotal">Subtotal</span>
+    </div>
+</div>
+<hr />
+@foreach (var item in Model)
+{
+    <div class="cartitem">
+        <div class="cartitempiece cartitempic">
+            <img height="75" src="~/Resources/extinguisher.jpg" />
+        </div>
+        <div class="cartitempiece cartiteminfo">
+            <p>@Html.DisplayFor(modelItem => item.ProductName)</p>
+            <!--<p>@Html.DisplayFor(modelItem => item.ProductType)</p>-->
+            <p>R @Html.DisplayFor(modelItem => item.ProductSellingPrice).00</p>
+        </div>
+        <div class="cartitempiece cartitemqty">
+            <input type="number" class="form-control" value="1" />
+        </div>
+        <div class="cartitempiece cartitemsub">
+            <p class="subtotal">R 250.00</p>
+        </div>
+    </div>
+    <hr />
+}
+<br />
+<div id="cartendingcontainer">
+    <div id="cartending">
+        <div class="cartrundownleft">VAT:</div>
+        <div class="cartrundownright">15%</div>
+        <div class="cartrundownleft">VAT amount</div>
+        <div class="cartrundownright"><span>R</span> <span class="vatamount">50.00</span></div>
+        <div class="cartrundownleft">Total</div>
+        <div class="cartrundownright"><span>R</span> <span class="totalamount">250.00</span></div>
+    </div>
+</div>
+<br />
+<br />
+<div onclick="document.getElementById('MakeOrder').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-credit-card"></span><br />Make order</div>
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</div>
+
+
+<div id="MakeOrder" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Order</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to make this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('MakeOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿
+
+@{
+    
+    
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <h2 class="page-header pageHeading" style="text-align:center;">Scheduler</h2>
+    <br />
+    <style>
+        body {
+            background-color: #2B3E50;
+        }
+    </style>
+</head>
+<body>
+    <div style="height:700px;width:900px;margin:0 auto">
+        @Html.Raw(Model.Render())
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,75 @@
+﻿@model Snow_System.Models.mvcProductModel
+
+
+
+<h1 class="page-header pageHeading" style="text-align:center;">Write Off Stock</h1>
+<hr />
+<div class="TopInfoContainer">
+    <h2 class="SectionHeading">Product Information</h2>
+    <div class="TopInfoLeft" style="width:50%; float: left;">
+        <label for="prodID">Product ID:</label> <span name="prodID"> 000001</span><br />
+        <label for="prodName">Product Name:</label> <span name="supName"> Fire Extinguisher</span><br />
+    </div>
+    <div class="TopInfoLeft" style="width:50%; float: left;">
+        <label for="prodType">Product type: </label> <span name="prodType">Extinguisher</span><br />
+        <label for="prodSellingPrice">Selling price: R</label> <span name="prodSellingPrice"> 1500.00</span>
+    </div>
+</div>
+
+<br />
+<div class="capPaymentContainer">
+    <h2 class="SectionHeading">Payment Details</h2>
+    <div class="form-group">
+        <label for="currentAmount">Current Quantity on Hand:</label>
+        <span id="colourPicker" class="text-success">
+            <br />
+            <span> 2 000.00</span><br />
+        </span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="captureAmount" class="control-label">Amount to be Written Off:</label>
+        <br />
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <input type="number" class="form-control" min="1">
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="newBalance" class="control-label">New Stock Amount:</label>
+        <br />
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <input type="number" class="form-control" min="1">
+            </div>
+        </div>
+    </div>
+    <br />
+    <div>
+        <label for="newBalance" class="control-label">Reason for Write Off:</label>
+        <br />
+       <textarea class="form-control"></textarea>
+    </div>
+</div>
+<div onclick="document.getElementById('WriteOffModal').style.display='block'" class="OptionButton btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Write-off</div>
+<div class="OptionButton btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</div>
+
+<div id="WriteOffModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Return</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to return this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('WriteOffModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>

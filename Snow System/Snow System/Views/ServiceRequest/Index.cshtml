@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Snow_System.ServiceRequest>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <h2 class="page-header pageHeading" style="text-align:center;">Service Requests </h2>
+<hr />
+
+<div style="text-align:center;">
+    <p>
+
+        @using (@Html.BeginForm("Index", "ServiceRequest", FormMethod.Get))
+        {
+
+            <b>Search By Business Name:</b>@Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
+            <a href="@Url.Action("Index","ServiceRequest")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
+        }
+
+    </p>
+</div>
+<a href="@Url.Action("AddorEdit","ProductType")" class="ActionButton ContinueBtn btn btn-success" style="float:left; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Add New</a>
+
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessName)
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceRequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceBookedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationID)
+        </th>
+        <th>Actions</th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">
+                No records match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr class="table-dark">
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceRequestStatu.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceRequestDate)
+                </td>
+                <td>
+                    @if (item.ServiceBookedDate != null)
+                    {
+                    @Html.DisplayFor(modelItem => item.ServiceBookedDate)
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location.StreetAddress), @Html.DisplayFor(modelItem => item.Location.Suburb), @Html.DisplayFor(modelItem => item.Location.City)
+                </td>
+                <td>
+                    @if (item.ServiceRequestStatusID == 1)
+                    {
+                        <a href="@Url.Action("Makebooking", "Calendar", new { id = item.ServiceRequestID })" class="btn btn-info"><span class="glyphicon glyphicon-calendar"></span> Book</a>
+                    }
+                    else if (item.ServiceRequestStatusID == 2)
+                    {
+                        <a href="@Url.Action("getBooking", "Calendar", new { id = item.ServiceRequestID })" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> Assign</a>
+                    }
+
+                    <a href="@Url.Action("AddorEdit", "ServiceRequest", new { id = item.ServiceRequestID })" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a onclick="Delete(@item.ServiceRequestID)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+
+
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Web API CRUD', 'Are you sure you want to delete this record?',function () {
+                window.location.href = '@Url.Action("Delete","ProductType")/' + id;
+            }, null);
+        }
+    </script>
+}

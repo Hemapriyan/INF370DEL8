@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Snow_System.ProductOrder>
+
+
+
+<div class="dash-card card border-primary mb-3">
+    <h3 class="card-header">Product Popularity</h3>
+    <div class="card-body" id="prod-container" >
+        <div class="dash-graph collapsible" id="Chart"></div>
+    </div>
+</div>
+
+@{
+    List<int> ProdAmount = new List<int>();
+    bool ProdFound = false;
+    List<string> Products = new List<string>();
+
+    foreach (var order in Model)
+    {
+        foreach(var line in order.ProductOrderLines)
+        {
+            ProdFound = false;
+            for(int i = 0; i < Products.Count(); i++)
+            {
+                if(Products.ElementAt(i) == line.Product.Name)
+                {
+                    ProdAmount[i] += line.QuantityOrdered;
+                    ProdFound = true;
+                }
+            }
+            if (!ProdFound)
+            {
+                Products.Add(line.Product.Name);
+                ProdAmount.Add(line.QuantityOrdered);
+            }
+        }
+    }
+}
+    <script type="text/javascript">
+    // Load google chart
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+
+    // Draw the chart and set the chart values
+        function drawChart() {
+            var data = [];
+            var Header = ['Product', 'Quantity'];
+            data.push(Header)
+            @for (int i = 0; i < Products.Count(); i++) {
+                @:var temp = [];
+                @:temp.push('@Products.ElementAt(i)', @ProdAmount[i]);
+                @:data.push(temp);
+            }
+
+        var data = google.visualization.arrayToDataTable(data);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = { 'width': 525, 'height': 200 , backgroundColor: 'transparent', colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'], legend: {
+        textStyle: {
+            color: '#ebebeb'
+        }
+    }};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('Chart'));
+        chart.draw(data, options);
+        }
+    </script>

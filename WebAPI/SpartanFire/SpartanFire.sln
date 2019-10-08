@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpartanFireWebAPI", "SpartanFireWebAPI\SpartanFireWebAPI.csproj", "{615040CA-ED14-4153-B44A-3172C632EAE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{615040CA-ED14-4153-B44A-3172C632EAE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{615040CA-ED14-4153-B44A-3172C632EAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{615040CA-ED14-4153-B44A-3172C632EAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{615040CA-ED14-4153-B44A-3172C632EAE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A5B9273-7459-49F9-8970-A5192FB35362}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,111 @@
+﻿@model Snow_System.ProductOrder
+
+@{
+    ViewBag.Title = "Cart";
+    double total = 0;
+    foreach (var item in Model.ProductOrderLines)
+    {
+        total += item.Product.SellingPrice * item.QuantityOrdered;
+    }
+    double vat = total * (ViewBag.VAT / 100);
+    double subtotal = total - vat;
+    total += 50;
+}
+
+<h1 class="page-header pageHeading" style="text-align:center;">Cart</h1>
+<hr />
+<div class="cartheadings">
+    <div class="cartitempiece cartitempic">
+    </div>
+    <div class="cartitempiece cartiteminfo">
+        <span>Product information</span>
+    </div>
+    <div class="cartitempiece cartitemqty">
+        <span>Quantity</span>
+    </div>
+    <div class="cartitempiece cartitemsub">
+        <span class="subtotal">Subtotal(VAT Inclusive)</span>
+    </div>
+</div>
+<hr />
+@if (Model.ProductOrderLines.Count > 0)
+{
+    foreach (var item in Model.ProductOrderLines)
+    {
+        double sub = 0;
+        sub = item.QuantityOrdered * item.Product.SellingPrice;
+        <div class="cartitem">
+            <div class="cartitempiece cartitempic">
+                <img height="75" alt="@item.Product.Name" src="~/Resources/Product/@item.Product.Name .jpg" />
+            </div>
+            <div class="cartitempiece cartiteminfo">
+                <p>@Html.DisplayFor(modelItem => item.Product.Name) @Html.DisplayFor(modelItem => item.Product.Dscription)</p>
+                <p>@item.Product.SellingPrice.ToString("C2")</p>
+
+            </div>
+
+            <div class="cartitempiece cartitemqty">
+                @Html.DisplayFor(modelItem => item.QuantityOrdered)
+            </div>
+            <div class="cartitempiece cartitemsub">
+                <p class="subtotal" id=" @item.ProductID">@sub.ToString("C2")</p>
+            </div>
+            <div class="cartitempiece">
+                <a class="glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;" href="@Url.Action("RemoveFromCart","ProductOrder", new { id = item.ProductID })"></a>
+            </div>
+        </div>
+        <hr />
+    }
+}
+else
+{
+    <div style="text-align: center;">
+        <p>No Items in cart</p>
+    </div>
+}
+<br />
+<div id="cartendingcontainer">
+    <div id="cartending">
+        <div class="cartrundownleft">Subtotal:</div>
+        <div class="cartrundownright"><span class="totalamount">@subtotal.ToString("C2")</span></div>
+        <div class="cartrundownleft">Delivery Fee:</div>
+        <div class="cartrundownright">R50,00</div>
+        <div class="cartrundownleft">VAT (@ViewBag.VAT %):</div>
+        <div class="cartrundownright"><span class="vatamount">@vat.ToString("C2")</span></div>
+        <div class="cartrundownleft">Total:</div>
+        <div class="cartrundownright"><span class="totalamount">@total.ToString("C2")</span></div>
+    </div>
+</div>
+<br />
+<br />
+@if (Model.ProductOrderLines.Count > 0)
+{
+    <div onclick="document.getElementById('MakeOrder').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-credit-card"></span><br />Make order</div>
+}
+
+<a href="@Url.Action("Products", "ProductOrder")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Continue Shopping</a>
+
+
+<div id="MakeOrder" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Order</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to make this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElemeproductorderntById('MakeOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="@Url.Action("ChooseLocationDelivery", "ProductOrder" , new { id = @Model.ProductOrderID, sid = 2})" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>
+
+<script>
+    function CalcSubtotal(id, input, price) {
+        document.getElementById(id).innerHTML = input.value * price;
+    }
+</script>

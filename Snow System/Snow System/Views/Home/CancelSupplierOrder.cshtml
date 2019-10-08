@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Snow_System.Models.Product>
+@{
+    ViewBag.Title = "Cancel Supplier Order";
+}
+<h1 class="page-header pageHeading" style="text-align:center;">Cancel Supplier order</h1>
+
+<div class="TopInfoContainer">
+    <h2 class="SectionHeading">Order Information</h2>
+    <div class="TopInfoLeft">
+        <label for="ordID">  Order ID: </label> <span name="ordIDInfo"> 000001</span><br />
+        <label for="ordDate">  Date placed:</label> <span name="ordDate">2019/08/06</span>
+    </div>
+    <div class="TopInfoLeft">
+        <label for="ordLocation">Order Location:</label> <span name="ordLocation"> 8 Dalton Road, Wendywood</span><br />
+    </div>
+    <div style="opacity:0;">.</div>
+</div>
+
+<br />
+<h2 class="SectionHeading">Product list</h2>
+
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            Name
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Quantity on hand
+        </th>
+        <th>
+            Amount ordered
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductQuantityOnHand)
+            </td>
+            <td>
+                10
+            </td>
+        </tr>
+    }
+
+</table>
+<div id="AuxilaryOptionsContainer">
+    <br />
+    <label>Email supplier?</label>
+    <br />
+    <div class="btn-group btn-group-toggle" id="emailSupplier" data-toggle="buttons">
+        <label class="btn btn-primary active toggleOption">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Yes
+        </label>
+        <label class="btn btn-primary toggleOption">
+            <input type="radio" name="options" id="option2" autocomplete="off"> No
+        </label>
+    </div>
+</div>
+<br />
+<br />
+<div onclick="document.getElementById('CancelModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right;"><span class="glyphicon glyphicon-ok-circle"></span> <br />Cancel Supplier Order</div>
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</div>
+
+
+<div id="CancelModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Cancellation</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to cancel this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('CancelModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>

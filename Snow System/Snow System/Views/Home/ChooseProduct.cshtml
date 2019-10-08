@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Snow_System.Models.Product>
+
+
+<h1 class="page-header pageHeading" style="text-align:center;">Select Products to Order</h1>
+<hr />
+<div class="form-group" style="text-align:center">
+    <input type="search" placeholder="Search products" style="width:80%;" class="form-control" />
+    <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+</div>
+<br />
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            Product Name
+        </th>
+        <th>
+            Product Type
+        </th>
+        <th>
+            Quantity on Hand
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr onclick="chooseProduct(this)" class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductQuantityOnHand)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<div style="margin-bottom:10%;">
+    <div class="OptionButton ContinueBtn btn btn-success" style="float:right;"><span class="glyphicon glyphicon-ok-circle"></span><br />Add products to list</div>
+    <div class="OptionButton btn btn-primary" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />Add new product</div>
+    <div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>
+</div>
+    <script>
+        function chooseProduct(e) {
+            e.style.backgroundColor = "orange"
+        }
+    </script>

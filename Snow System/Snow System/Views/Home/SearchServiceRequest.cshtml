@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Snow_System.Models.mvcServiceRequestModel>
+
+
+<h2 class="page-header pageHeading" style="text-align:center;">Service Requests</h2>
+<hr />
+
+<div style="text-align:center;" class="form-group">
+    <input type="search" style="width:78%; display:inline-block; margin-left:1%;" class="form-control" placeholder="Search..." />
+    <button class="btn btn-primary" style="display:inline-block; margin-left:1%; "><span class="glyphicon glyphicon-search"></span></button>
+    <br />
+    <div style="float:right; display: inline-block">
+        <div style="display: inline-block">
+            <select class="custom-select btn-primary">
+                <option value="0">Order by:</option>
+                <option value="1">Product Type</option>
+                <option value="2">Price</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceRequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceBookedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceRequestDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceBookedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client)
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />New</div>
+<div class="ActionButton ContinueBtn btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-calendar"></span><br />Book</div>
+<div class="ActionButton ContinueBtn btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-calendar"></span><br />Assign</div>
+<div class="ActionButton ContinueBtn btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-calendar"></span><br />Rescheduale</div>
+<div class="ActionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-trash"></span><br />Delete</div>

@@ -1,0 +1,46 @@
+﻿@using (Html.BeginForm())
+{
+    <h2 class="pageHeading">Export Data</h2>
+    <hr />
+    <div class="CenteringContainer">
+        <div class="form-group">
+            <label>Export from Table: </label>
+            <div class="col-md-12">
+                <div>
+                    @Html.DropDownList("Table", new List<SelectListItem>
+            {
+
+           new SelectListItem {Text = "Client", Value="Client"},
+           new SelectListItem {Text = "Supplier", Value="Supplier"},
+           new SelectListItem {Text = "Product", Value="Product"},
+            }
+       , htmlAttributes: new { @class = "custom-select btn-primary" })
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Export as: </label>
+            <div class="col-md-12">
+                <div>
+                    @Html.DropDownList("fileType", new List<SelectListItem>
+            {
+
+           new SelectListItem {Text = "Excel", Value="Excel"},
+           new SelectListItem {Text = "CSS", Value="CSS"},
+            }
+       , htmlAttributes: new { @class = "custom-select btn-primary" })
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="" style="padding-top: 3%;">
+        <div class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-export"></span> <br />Export Data</div>
+        <div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>
+    </div>
+}

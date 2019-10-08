@@ -1,0 +1,122 @@
+﻿@model Snow_System.ProductOrder
+
+@{
+    ViewBag.Title = "Make Order For Client";
+}
+<h1 class="page-header pageHeading" style="text-align:center;">Make a Supplier Order</h1>
+<div class="TopInfoContainer">
+    <h2 class="SectionHeading">Supplier Information</h2>
+    <div class="TopInfoLeft" style="width:50%; float: left;">
+        <label for="supID">Client ID:</label> <span name="supID"> @Model.ProductOrderID</span><br />
+        <label for="supName">Client Name:</label> <span name="supName"> @ViewBag.ClientName</span><br />
+    </div>
+    <div>
+        <label for="supContactInfo">Client Contact Number:</label> <span name="supContactInfo"> @ViewBag.ClientNumber</span><br />
+        <label for="supEmail">Client Email:</label> <a href="mailto: @ViewBag.ClientEmail" name="supEmail">@ViewBag.ClientEmail</a>
+    </div>
+</div>
+<br />
+@if (@ViewBag.Status != "Delivered")
+{
+    using (Html.BeginForm("AddProduct", "ProductOrder"))
+    {
+        <div style=" text-align:center; border: solid 2px #DF691A; padding-bottom: 2%;">
+            <h2 style="padding-top: 1%;">Select Product</h2>
+            <div style="padding-top: 1%; padding-bottom: 1%;">
+                <div style="padding-left: 4%; padding-right: 4%; display:inline-block; ">
+                    <label style="margin-right: 2%;">Product: </label>
+                    <select class="custom-select btn-primary" name="Product">
+                        @foreach (var prod in ViewBag.products)
+                        {
+                            <option value="@prod.ProductID">@prod.Name (@prod.Dscription)</option>
+                        }
+                    </select>
+                </div>
+                <div style="padding-left: 4%; padding-right: 4%; display:inline-block; ">
+                    <label style="margin-right: 2%;">Quantity: </label>
+                    <input name="Quantity" type="number" min="1" placeholder="Quantity" value="1" />
+                </div>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Add to Order</button>
+            <br />
+        </div>
+    }
+}
+<br />
+<h2 class="SectionHeading">Products list</h2>
+
+<table class="table">
+    <tr class="table-primary">
+        <th>
+            Product Name
+        </th>
+        <th>
+            Product Description
+        </th>
+        <th>
+            Product Type
+        </th>
+        <th>
+            Quantity On Hand
+        </th>
+        <th>
+            Amount To Order
+        </th>
+        <th>
+            <p class=" remove-icon glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;"></p>
+        </th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model.ProductOrderLines)
+        {
+            <tr class="table-dark" style="cursor:default;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Dscription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductStatu.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.QuantityOnHand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityOrdered)
+                </td>
+                <td>
+                    @if (Model.ProductOrderLines != null)
+                    {
+                    <p class=" remove-icon glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;"></p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<br />
+
+<div href="@Url.Action("","", new { Model.ProductOrderID } )" class="OptionButton ContinueBtn btn btn-success" style="float:right;"><span class="glyphicon glyphicon-ok-circle"></span> <br />Make Order for Client</div>
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</div>
+
+<div id="MakeOrder" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Order</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to make this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('MakeOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div> 

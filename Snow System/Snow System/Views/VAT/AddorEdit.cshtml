@@ -1,0 +1,72 @@
+﻿@model Snow_System.Models.mvcVATModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2 class="pageHeading">Add new VAT</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="CenteringContainer">
+
+            @Html.HiddenFor(model => model.VATID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VATRate, htmlAttributes: new { @class = "control-label " })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.VATRate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VATRate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EffectiveDate, htmlAttributes: new { @class = "control-label " })
+                <br /><br />
+                @Html.EditorFor(m => m.EffectiveDate, new { @class = "form-control datepicker", @id = "datepicker" })
+                <div class="col-md-12">
+
+                    @Html.ValidationMessageFor(model => model.EffectiveDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="form-group">
+            <button onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</button>
+            <button class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</button>
+
+        </div>
+    </div>
+    /*
+    <div id="lodgeModal" class="modal animate-opacity">
+        <div class="modal-content modal-background">
+            <header class="">
+                <h2>Confirm Creation</h2>
+            </header>
+            <hr style="margin:0;" />
+            <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+            <div class="">
+                <p>Are you sure you want to create this Vehicle?</p>
+            </div>
+            <hr style="margin:0;" />
+            <footer class="" style="">
+                <a href="" onclick="document.getElementById('lodgeModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+                <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+            </footer>
+        </div>
+    </div>*/
+
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+
+
+
+
+
+}

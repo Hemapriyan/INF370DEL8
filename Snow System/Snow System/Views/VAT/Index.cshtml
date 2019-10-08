@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Snow_System.Models.mvcVATModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+   
+<a href="@Url.Action("AddorEdit","VAT")" class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Add New</a>
+
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.VATID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VATRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EffectiveDate)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.VATID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VATRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffectiveDate)
+            </td>
+            <td>
+                <a href="@Url.Action("AddorEdit","VAT", new { id =item.VATID})" class="btn btn-warning"><i class="fa fa-pencil"></i>Edit</a>
+                <a onclick="Delete(@item.VATID)" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Web API CRUD', 'Are you sure you want to delete this VAT record?',function () {
+                window.location.href = '@Url.Action("Delete","VAT")/' + id;
+            }, null);
+        }
+    </script>
+}

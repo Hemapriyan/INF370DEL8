@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Snow_System.ClientFeedback>
+
+@{
+    int count = 0;
+
+    double prof = 0;
+    double clean = 0;
+    double frnd = 0;
+    double punc = 0;
+    double qual = 0;
+    double totalAvg = 0;
+
+    int countRec = 0;
+
+    double profRec = 0;
+    double cleanRec = 0;
+    double frndRec = 0;
+    double puncRec = 0;
+    double qualRec = 0;
+    double totalAvgRec;
+
+
+    foreach (var item in Model)
+    {
+        count += 1;
+        prof += Convert.ToDouble(item.Profesionalism);
+        clean += Convert.ToDouble(item.Cleanliness);
+        frnd += Convert.ToDouble(item.Friendliness);
+        punc += Convert.ToDouble(item.Punctuality);
+        qual += Convert.ToDouble(item.ServiceQuality);
+
+        totalAvg = (prof + clean + frnd + punc + qual) / 5;
+
+        if (item.ServiceRequest.ServiceBookedDate >= DateTime.Today.AddMonths(-3))
+        {
+            countRec += 1;
+            profRec += Convert.ToDouble(item.Profesionalism);
+            cleanRec += Convert.ToDouble(item.Cleanliness);
+            frndRec += Convert.ToDouble(item.Friendliness);
+            puncRec += Convert.ToDouble(item.Punctuality);
+            qualRec += Convert.ToDouble(item.ServiceQuality);
+
+            totalAvgRec = (profRec + cleanRec + frndRec + puncRec + qualRec) / 5;
+        }
+    }
+    prof = prof / count;
+    clean = clean / count;
+    frnd = frnd / count;
+    punc = punc / count;
+    qual = qual / count;
+    profRec = profRec / count;
+    cleanRec = cleanRec / count;
+    frndRec = frndRec / count;
+    puncRec = puncRec / count;
+    qualRec = qualRec / count;
+    totalAvg = totalAvg / count;
+}
+
+
+<div class="dash-card card border-primary mb-3">
+    <h3 class="card-header">Average Ratings</h3>
+    <div class="card-body">
+        <table class="table dash-table fixed_header table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th style="width:33.33333%;" class="table-primary">
+                        All time @if (count > 0)
+                        {<span class="badge badge-pill badge-info">@count</span>}
+                    </th>
+                    <th style="width:33.33333%;" class="table-primary">
+                        Past 3 months @if (countRec > 0)
+                        {<span class="badge badge-pill badge-info">@countRec</span>}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th style="width:33.33333%;" class="table-primary">Professionalism</th>
+                    <td>@prof</td>
+                    <td>@profRec</td>
+                </tr>
+                <tr>
+                    <th style="width:33.33333%;" class="table-primary">Cleanliness</th>
+                    <td>@clean</td>
+                    <td>@cleanRec</td>
+                </tr>
+                <tr>
+                    <th style="width:33.33333%;" class="table-primary">Friendliness</th>
+                    <td>@frnd</td>
+                    <td>@frndRec</td>
+                </tr>
+                <tr>
+                    <th style="width:33.33333%;" class="table-primary">Punctuality</th>
+                    <td >@punc</td>
+                    <td >@puncRec</td>
+                </tr>
+                <tr>
+                    <th style="width:33.33333%;" class="table-primary">Service Quality</th>
+                    <td >@qual</td>
+                    <td >@qualRec</td>
+                </tr>
+                <tr>
+                    <th style="width:33.33333%;" class="table-primary">Overall</th>
+                    <td class="table-dark">@qual</td>
+                    <td class="table-dark">@qualRec</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

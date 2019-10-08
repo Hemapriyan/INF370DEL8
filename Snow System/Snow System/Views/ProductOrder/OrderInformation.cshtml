@@ -1,0 +1,162 @@
+﻿@model Snow_System.ProductOrder
+
+
+@{
+    ViewBag.Title = "Order Information";
+}
+
+<h1 class="page-header pageHeading" style="text-align:center;">Order Information</h1>
+<br />
+
+<div class="TopInfoContainer">
+    <div class="TopInfoLeft">
+        <label for="ordID">Order ID:</label> <span name="ordID"> @Model.ProductOrderID</span><br />
+        <label for="datePlaced">Date Placed:</label> <span name="datePlaced">@string.Format("{0:dd MMMM yyyy } ", Model.DateOfOrder)</span><br />
+        <label for="clientName">Client:</label> <span name="clientName">@Model.Location.Client.ClientName @Model.Location.Client.ClientSurname</span><br />
+        <label for="clientnumber">Client Number:</label> <span name="clientNumber">@Model.Location.Client.ContactNumber</span><br />
+    </div>
+    <div class="TopInfoLeft">
+        <label for="orderStatus">Order Status: </label> <span name="supContactInfo">@Model.ProductOrderStatu.Description</span><br />
+        <label for="location">Delivery Address:</label> <span name="location"> @Model.Location.Client.HouseAddress</span><br />
+        <label for="clientEmail">Client Email:</label> <a href='mailto: @Model.Location.Client.EmailAddress' name="clientEmail"> @Model.Location.Client.EmailAddress</a>
+    </div>
+</div>
+
+<br />
+<br />
+
+<div class="cartheadings">
+    <div class="cartitempiece cartitempic">
+    </div>
+    <div class="cartitempiece cartiteminfo">
+        <span>Product information</span>
+    </div>
+    <div class="cartitempiece cartitemqty">
+        <span>Quantity</span>
+    </div>
+    <div class="cartitempiece cartitemsub">
+        <span class="subtotal">Subtotal</span>
+    </div>
+</div>
+<hr />
+@foreach (var item in Model.ProductOrderLines)
+{
+    double sub = 0;
+    sub = item.QuantityOrdered * item.Product.SellingPrice;
+    <div class="cartitem">
+        <div class="cartitempiece cartitempic" onclick="console.log(@ViewBag.test)">
+            <img height="75" alt="@item.Product.Name" src="~/Resources/Product/@item.Product.Name .jpg" />
+        </div>
+        <div class="cartitempiece cartiteminfo">
+            <p>@item.Product.Name</p>
+            <p>R @item.Product.SellingPrice.ToString("C2")</p>
+        </div>
+        <div class="cartitempiece cartitemqty">
+            <p>@item.QuantityOrdered</p>
+        </div>
+        <div class="cartitempiece cartitemsub">
+            <p class="subtotal">@sub.ToString("C2")</p>
+        </div>
+    </div>
+    <hr />
+}
+
+@{
+    double total = 0;
+    foreach (var item in Model.ProductOrderLines)
+    {
+        total += item.Product.SellingPrice * item.QuantityOrdered;
+    }
+    double vat = total * (ViewBag.VAT / 100);
+    double subtotal = total - vat;
+    total += 50;
+}
+<br />
+<div id="cartendingcontainer">
+    <div id="cartending">
+        <div class="cartrundownleft">Subtotal:</div>
+        <div class="cartrundownright"><span class="totalamount">@subtotal.ToString("C2")</span></div>
+        <div class="cartrundownleft">Delivery Fee:</div>
+        <div class="cartrundownright">R50,00</div>
+        <div class="cartrundownleft">VAT (@ViewBag.VAT %):</div>
+        <div class="cartrundownright"><span class="vatamount">@vat.ToString("C2")</span></div>
+        <div class="cartrundownleft">Total:</div>
+        <div class="cartrundownright"><span class="totalamount">@total.ToString("C2")</span></div>
+    </div>
+</div>
+<br />
+<br />
+<p style="text-align:center;"><b><span class="glyphicon glyphicon-info-sign"></span> Disclamer: </b>Please note that returning an order may only take place within 30 (thirty) days of receiving the order.<br />You may be charged a R50.00 delivery price.<br />For inquiries please contact <a href="mailto: orders@firesupplier.co.za">supplies@spartanfire.co.za</a></p>
+<br />
+<br />
+@if (Model.ProductOrderStatusID == 2)
+{
+    <div onclick="document.getElementById('CancelModal').style.display='block'" class="OptionButton ContinueBtn btn btn-warning" style="float:right"><span class="glyphicon glyphicon-remove-sign"></span><br />Cancel Order</div>
+    <div onclick="document.getElementById('CapturePaymentModal').style.display='block'" class="OptionButton ContinueBtn btn btn-primary" style="float:right; margin-right: 5px;"><span class="glyphicon glyphicon-credit-card"></span><br />Capture Payment</div>
+}
+else if (Model.ProductOrderStatusID == 6)
+{
+    <div onclick="document.getElementById('ReturnOrderModal').style.display='block'" class="OptionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 5px;"><span class="glyphicon glyphicon-share-alt icon-flipped"></span><br />Return Order</div>
+}
+else if (Model.ProductOrderStatusID == 7)
+{
+    <a href="@Url.Action("TakeInReturnedStock","ProductOrder", new { id = Model.ProductOrderID })" class="OptionButton ContinueBtn btn btn-primary" style="float:right; margin-right: 5px;"><span class="glyphicon glyphicon-share-alt"></span><br />Take in Return</a>
+
+}
+
+<a href="@Url.Action("Index","ProductOrder", new { id = Model.ProductOrderID } )" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-chevron-left"></span> <br />View All Orders</a>
+
+<div id="CancelModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Cancellation</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to cancel this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <div href="" onclick="document.getElementById('CancelModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
+            <a href="@Url.Action("UpdatingStatus", "ProductOrder" , new { id = @Model.ProductOrderID, sid = 9})" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>
+
+<div id="ReturnOrderModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Return</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to return this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <div href="" onclick="document.getElementById('ReturnOrderModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
+            <a href="@Url.Action("UpdatingStatus", "ProductOrder" , new { id = @Model.ProductOrderID, sid = 7})"  class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>
+
+<div id="CapturePaymentModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Capture Payment</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to capture payment for this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <div href="" onclick="document.getElementById('CapturePaymentModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
+            <a href="@Url.Action("UpdatingStatus", "ProductOrder" , new { id = @Model.ProductOrderID, sid = 3})" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>
+

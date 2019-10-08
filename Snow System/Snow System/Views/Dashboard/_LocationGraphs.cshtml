@@ -1,0 +1,165 @@
+﻿@model IEnumerable<Snow_System.Location>
+
+
+<div class="dash-card card border-primary mb-3">
+    <h3 class="card-header"> Location Types</h3>
+    <div class="card-body" id="type-container">
+        <div class="dash-graph" id="TypeChart"></div>
+    </div>
+</div>
+
+<div class="dash-card card border-primary mb-3">
+    <h3 class="card-header" > City Popularity</h3>
+    <div class="card-body" id="city-container">
+        <div class="dash-graph" id="CityChart"></div>
+    </div>
+</div>
+
+<div class="dash-card card border-primary mb-3">
+    <h3 class="card-header" >Suburb Popularity</h3>
+    <div class="card-body" id="suburb-container">
+        <div class="dash-graph" id="SuburbChart"></div>
+    </div>
+</div>
+
+@{
+    int pri = 0;
+    int com = 0;
+
+    foreach (var item in Model)
+    {
+        if (item.LocationTypeID == 1)
+        {
+            pri += 1;
+        }
+        else
+        {
+            com += 1;
+        }
+    }
+
+    List<int> SubAmount = new List<int>();
+    List<int> CityAmount = new List<int>();
+    bool subFound = false;
+    bool cityFound = false;
+    List<string> suburb = new List<string>();
+    List<string> City = new List<string>();
+    foreach (var loc in Model)
+    {
+        subFound = false;
+        cityFound = false;
+        for (int i = 1; i < suburb.Count(); i++)
+        {
+            if (suburb.ElementAt(i) == loc.Suburb)
+            {
+                subFound = true;
+                SubAmount[i] += 1;
+                break;
+            }
+
+        }
+        if (!subFound)
+        {
+            suburb.Add(loc.Suburb);
+            SubAmount.Add(1);
+        }
+
+        for (int i = 1; i < City.Count(); i++)
+        {
+            if (City.ElementAt(i) == loc.City)
+            {
+                cityFound = true;
+                CityAmount[i] += 1;
+                break;
+            }
+
+        }
+        if (!cityFound)
+        {
+            City.Add(loc.City);
+            CityAmount.Add(1);
+        }
+    }
+    <script type="text/javascript">
+    // Load google chart
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawTypeChart);
+    google.charts.setOnLoadCallback(drawCityChart);
+    google.charts.setOnLoadCallback(drawSuburbChart);
+
+
+    // Draw the chart and set the chart values
+    function drawTypeChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Location Type', 'Amount'],
+            ['Private', @pri],
+            ['Commercial', @com]
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {
+            'width': 525, 'height': 200, backgroundColor: 'transparent', colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'], legend: {
+                textStyle: {
+                    color: '#ebebeb'
+                }
+            }
+        }
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('TypeChart'));
+        chart.draw(data, options);
+    }
+
+        function drawCityChart() {
+            var data = [];
+            var Header = ['City', 'Quantity'];
+            data.push(Header)
+        @for (int i = 0; i < City.Count(); i++) {
+                @:var temp = [];
+                @:temp.push('@City.ElementAt(i)', @CityAmount[i]);
+                @:data.push(temp);
+            }
+            var data = google.visualization.arrayToDataTable(data);
+
+        // Optional; add a title and set the width and height of the chart
+            var options = {
+                'width': 525, 'height': 200, backgroundColor: 'transparent', colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'], legend: {
+                    textStyle: {
+                        color: '#ebebeb'
+                    }
+                }
+            };
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('CityChart'));
+        chart.draw(data, options);
+        }
+
+        function drawSuburbChart() {
+        var data = [];
+            var Header = ['City', 'Quantity'];
+            data.push(Header)
+        @for (int i = 0; i < suburb.Count(); i++) {
+                @:var temp = [];
+                @:temp.push('@suburb.ElementAt(i)', @SubAmount[i]);
+                @:data.push(temp);
+            }
+
+            var data = google.visualization.arrayToDataTable(data);
+
+        // Optional; add a title and set the width and height of the chart
+            var options = {
+                'width': 525, 'height': 200, backgroundColor: 'transparent', colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'], legend: {
+                    textStyle: {
+                        color: '#ebebeb'
+                    }
+                }
+            };
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('SuburbChart'));
+        chart.draw(data, options);
+        }
+
+    </script>
+}

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Snow_System.Models.Supplier>
+
+<h1 class="page-header pageHeading" style="text-align:center;">Suppliers</h1>
+<div style="text-align:center;" class="form-group">
+    <input type="search" placeholder="Search supplier" style="width:80%;" class="form-control" />
+    <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+</div>
+<br />
+<br />
+
+
+<table id="SearchTable" class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            Supplier Name
+        </th>
+        <th>
+            Contact Number
+        </th>
+        <th>
+            Email Address
+        </th>
+        <th>
+            Registration Number
+        </th>
+        <th>
+            Credit Balance
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.supplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contactNumber)
+            </td>
+            <td>
+                <a href="sendto(@item.emailAddress)">@Html.DisplayFor(modelItem => item.emailAddress)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.registrationNumber)
+            </td>
+            <td style="color:#1aff1a;">
+                R @Html.DisplayFor(modelItem => item.creditBalance)
+            </td>
+        </tr>
+    }
+
+
+
+</table>
+
+<div class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />New</div>
+<div class="ActionButton btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-edit"></span><br />Edit</div>
+<div class="ActionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-record"></span><br />Place Order</div>
+<div class="ActionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-piggy-bank"></span><br />Capture Payment</div>
+<br />
+<br />
+<br />
+
+<script>
+    //$(document).ready(function () {
+    //  $("#SearchTable td").click(function () {
+    //    $("#SearchTable tr").style.backgroundColor = "white";
+    //})
+    //}
+
+    function SelectItem(e) {
+        //itms = document.getElementsByClassName("ListItem");
+        //for (itm in itms) {
+        //    itm.style.backgroundColor = "white";
+        //}
+        e.style.backgroundColor = "orange";
+    }
+
+    function HoverOver(e) {
+        if (e.backgroundColor == "orange") {
+            e.style.backgroundColor = "red";
+        }
+
+        //e.style.cursor = "pointer";
+    }
+
+    function HoverOut(e) {
+        if (e.backgroundColor == "red") {
+            e.style.backgroundColor = "white";
+        }
+    }
+</script>

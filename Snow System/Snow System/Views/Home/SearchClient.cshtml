@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Snow_System.Models.Client>
+
+<h2 class="page-header pageHeading" style="text-align:center;">Clients</h2>
+
+<div style="text-align:center;" class="form-group">
+    <input type="search" style="width:78%; display:inline-block; margin-left:1%;" class="form-control" placeholder="Search..." />
+    <button class="btn btn-primary" style="display:inline-block; margin-left:1%; "><span class="glyphicon glyphicon-search"></span></button>
+
+    <div style="float:right; display: inline-block">
+        <div style="display: inline-block">
+            <select class="custom-select btn-primary">
+                <option value="0">Order by:</option>
+                <option value="1">Product Type</option>
+                <option value="2">Price</option>
+            </select>
+        </div>
+    </div>
+</div>
+<br />
+
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhysicalAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientType)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhysicalAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientType)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="ActionBtnContainer">
+    <div class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />New Location</div>
+    <div class="ActionButton btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-edit"></span><br />Edit Client</div>
+    <div class="ActionButton btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-eye-open"></span><br />View Locations</div>
+    <div class="ActionButton btn btn-primary" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-shopping-cart"></span><br />Start Product Order</div>
+    <div class="ActionButton btn btn-primary" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-shopping-cart"></span><br />Request service</div>
+</div>
+<br />
+<br />

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Snow_System.Models.mvcClientModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="pageHeading">Booking Subsystem</h2>
+    <div style="text-align:center;" class="form-group">
+        <input type="search" style="width:78%; display:inline-block; margin-left:1%;" class="form-control" placeholder="Search..." />
+        <button class="btn btn-primary" style="display:inline-block; margin-left:1%; "><span class="glyphicon glyphicon-search"></span></button>
+        <br />
+       
+        <br />
+    </div>
+<table class="table table table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.ClientID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientSurname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HouseAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientTypeID)
+        </th>
+        
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr class="table-dark">
+    <td>
+        @Html.DisplayFor(modelItem => item.ClientID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ClientName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ClientSurname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ContactNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EmailAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HouseAddress)
+    </td>
+    @if (item.ClientTypeID == 1)
+    {
+        <td>
+            Private
+        </td>
+
+    }
+    else
+    {
+        <td>
+            Commercial
+        </td>
+    }
+    
+    <td>
+    </td>
+</tr>
+}
+
+</table>
+<div class="ActionBtnContainer">
+    <div class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />Make Service Request</div>
+    <a href="@Url.Action("AddOrEdit","Client")" class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span><br />Book Service Date</></a>
+    <div class="ActionButton btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-eye-open"></span><br />Maintain Service booking</div>
+    <div class="ActionButton btn btn-primary" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-shopping-cart"></span><br />Search Booking</div>
+    
+</div>

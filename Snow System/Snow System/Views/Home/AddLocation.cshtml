@@ -1,0 +1,112 @@
+﻿@model Snow_System.Models.Location
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2 class="pageHeading">Add a New Location</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="CenteringContainer">
+            <h3>Location Details</h3>
+            <div class="form-group">
+                @Html.LabelFor(model => model.LocationName, htmlAttributes: new { @class = "control-label" }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.LocationName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LocationName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StreetAddress, htmlAttributes: new { @class = "control-label" }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.StreetAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StreetAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Suburb, htmlAttributes: new { @class = "control-label" }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Suburb, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Suburb, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label" }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LocationType, htmlAttributes: new { @class = "control-label" }):
+                <div class="col-md-12">
+                    <select class="custom-select btn-primary">
+                        <option>Private</option>
+                        <option>Commercial</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.LocationType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <h3>Contact Person Details</h3>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactPersonName, htmlAttributes: new { @class = "control-label" }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactPersonNumber, htmlAttributes: new { @class = "control-label" }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ContactPersonNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ContactPersonNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactPersonEmail, htmlAttributes: new { @class = "control-label" }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ContactPersonEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ContactPersonEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</div>
+            <div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>
+        </div>
+    </div>
+
+    <div id="lodgeModal" class="modal animate-opacity">
+        <div class="modal-content modal-background">
+            <header class="">
+                <h2>Confirm Creation</h2>
+            </header>
+            <hr style="margin:0;" />
+            <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+            <div class="">
+                <p>Are you sure you want to create this location?</p>
+            </div>
+            <hr style="margin:0;" />
+            <footer class="" style="">
+                <a href="" onclick="document.getElementById('lodgeModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+                <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+            </footer>
+        </div>
+    </div>
+}

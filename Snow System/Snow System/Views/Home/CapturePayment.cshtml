@@ -1,0 +1,77 @@
+﻿@model Snow_System.Models.Supplier
+
+@{
+    ViewBag.Title = "Capture payment to supplier";
+}
+<h1 class="page-header pageHeading" style="text-align:center;">Capture a payment to the supplier</h1>
+
+<div class="TopInfoContainer">
+    <h2 class="SectionHeading">Supplier Information</h2>
+    <div class="TopInfoLeft" style="width:50%; float: left;">
+        <label for="supID">Supplier ID:</label> <span name="supID"> 000001</span><br />
+        <label for="supName">Supplier Name:</label> <span name="supName"> Fire Supplies</span><br />
+    </div>
+    <div class="TopInfoLeft" style="width:50%; float: left;">
+        <label for="supContactInfo">Supplier contact number:</label> <span name="supContactInfo"> 011 802 5444</span><br />
+        <label for="supEmail">Supplier email:</label> <a href="mailto: orders@firesupplier.co.za" name="supEmail"> orders@firesupplier.co.za</a>
+    </div>
+</div>
+<br />
+<div class="capPaymentContainer">
+    <h2 class="SectionHeading">Payment Details</h2>
+    <div class="form-group">
+        <label for="currentAmount">Current credit amount</label>
+        <br />
+        <span id="colourPicker" class="text-success">
+            <span>R</span>
+            <span name="currentAmount" > 2 000.00</span><br />
+        </span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="captureAmount" class="control-label">Amount to be Captured:</label>
+        <br />
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">R</span>
+                </div>
+                <input name="captureAmount" type="number" class="form-control" min="0">
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="newBalance" class="control-label">New Balance:</label>
+        <br />
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">R</span>
+                </div>
+                <input name="newBalance" type="number" class="form-control"  min="0">
+            </div>
+        </div>
+    </div>
+</div>
+<div onclick="document.getElementById('CapturePaymentModal').style.display='block'" class="OptionButton btn btn-success" style="float:right;"><span class="glyphicon glyphicon-ok-circle"></span> <br />Capture payment</div>
+<div class="OptionButton btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</div>
+
+
+<div id="CapturePaymentModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Capture Payment</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to capture payment for this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('CapturePaymentModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>

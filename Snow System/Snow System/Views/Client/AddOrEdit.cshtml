@@ -1,0 +1,163 @@
+﻿@model Snow_System.Models.ClientModelGlobal
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2 class="pageHeading">Add new Client</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="CenteringContainer">
+
+        @Html.HiddenFor(model => model.emp.UserID)
+
+
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.emp.EmailAddress, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.emp.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.emp.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.emp.UserName, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.emp.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.emp.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.emp.Password, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.emp.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.emp.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.user.UserRoleID)
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.u.UserRoleID, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.u.UserRoleID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.u.UserRoleID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        @Html.HiddenFor(model => model.emp.ClientID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.emp.ClientName, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.emp.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.emp.ClientName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.emp.ClientSurname, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.emp.ClientSurname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.emp.ClientSurname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.emp.ContactNumber, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.emp.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.emp.ContactNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.emp.HouseAddress, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.emp.HouseAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.emp.HouseAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+        @Html.LabelFor(model => model.c.ClientTypeID, htmlAttributes: new { @class = "control-label " })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.c.ClientTypeID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.c.ClientTypeID, "", new { @class = "text-danger" })
+        </div>*@
+
+        @*<div class="form-group">
+        @Html.LabelFor(model => model.c.ClientTypeID, htmlAttributes: new { @class = "control-label " })
+        <div class="col-md-12">
+            <select name="ClientTypeID" class="custom-select" style="color:black;">
+                <option selected="">Open this select menu</option>
+                @foreach (var item in Model.ClientTypeList)
+                {
+                    <option value="@item.ClientTypeID">@item.Description</option>
+
+                }
+            </select>
+            </div>
+        </div>*@
+
+
+        <div class="form-group">
+            <select name="ClientTypeID" class="custom-select" style="color:black;">
+                <option>Select</option>
+                @foreach (var item in Model.ClientTypeList)
+                {
+                    if (item.ClientTypeID == Model.emp.ClientTypeID)
+                    {
+                        <option selected="selected" value="@item.ClientTypeID">@item.Description</option>
+                    }
+                    else
+                    {
+                        <option value="@item.ClientTypeID">@item.Description</option>
+                    }
+                }
+            </select>
+        </div>
+
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.c.UserID, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.c.UserID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.c.UserID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    </div>
+        
+
+
+
+    </div>
+    <div>
+        <div class="form-group">
+            <button onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right;bottom: 0; right: 0; "><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</button>
+
+            <a href="@Url.Action("Index","Client")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
+
+
+
+        </div>
+    </div>
+    
+
+
+    
+
+
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+
+
+
+
+
+}

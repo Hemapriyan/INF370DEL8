@@ -1,0 +1,137 @@
+﻿
+@model IEnumerable<Snow_System.Models.Product>
+
+
+@{
+    ViewBag.Title = "Assign Employeee to Service";
+}
+
+<h1 class="page-header pageHeading" style="text-align:center;">Order information</h1>
+<br />
+
+<div class="TopInfoContainer">
+    <div class="TopInfoLeft">
+        <label for="ordID">Order ID:</label> <span name="ordID"> 000001</span><br />
+        <label for="datePlaced">Date placed:</label> <span name="datePlaced">2019/08/19</span><br />
+        <label for="clientName">Client:</label> <span name="clientName">John cleese</span><br />
+        <label for="clientnumber">Client number:</label> <span name="clientNumber">083 2145</span><br />
+    </div>
+    <div class="TopInfoLeft">
+        <label for="orderStatus">Order Status: </label> <span name="supContactInfo">Packed</span><br />
+        <label for="location">Delivery address:</label> <span name="location"> 8 Foxington Ave, Glenwood, Pretoria</span><br />
+        <label for="clientEmail">Client email:</label> <a href="mailto: orders@firesupplier.co.za" name="clientEmail"> cleeseentertainment@gmail.com</a>
+    </div>
+</div>
+
+<br />
+<br />
+
+<div class="cartheadings">
+    <div class="cartitempiece cartitempic">
+    </div>
+    <div class="cartitempiece cartiteminfo">
+        <span>Product information</span>
+    </div>
+    <div class="cartitempiece cartitemqty">
+        <span>Quantity</span>
+    </div>
+    <div class="cartitempiece cartitemsub">
+        <span class="subtotal">Subtotal</span>
+    </div>
+</div>
+<hr />
+@foreach (var item in Model)
+{
+    <div class="cartitem">
+        <div class="cartitempiece cartitempic">
+            <img height="75" alt="@item.ProductName" src="~/Resources/extinguisher.jpg" />
+        </div>
+        <div class="cartitempiece cartiteminfo">
+            <p>@Html.DisplayFor(modelItem => item.ProductName)</p>
+            <p>R @Html.DisplayFor(modelItem => item.ProductSellingPrice)</p>
+        </div>
+        <div class="cartitempiece cartitemqty">
+            2
+        </div>
+        <div class="cartitempiece cartitemsub">
+            <p class="subtotal">R 250.00</p>
+        </div>
+    </div>
+    <hr />
+}
+<br />
+<div id="cartendingcontainer">
+    <div id="cartending">
+        <div class="cartrundownleft">Delivery Fee:</div>
+        <div class="cartrundownright">R50</div>
+        <div class="cartrundownleft">VAT:</div>
+        <div class="cartrundownright">15%</div>
+        <div class="cartrundownleft">VAT amount:</div>
+        <div class="cartrundownright"><span>R</span> <span class="vatamount">50.00</span></div>
+        <div class="cartrundownleft">Total:</div>
+        <div class="cartrundownright"><span>R</span> <span class="totalamount">250.00</span></div>
+    </div>
+</div>
+<br />
+<br />
+<p style="text-align:center;"><b>Disclamer: </b>Please note that returning an order may only take place within 30 (thirty) days of receiving the order.<br />You may be charged a R50.00 delivery price.<br />For inquiries please contact <a href="mailto: orders@firesupplier.co.za">supplies@spartanfire.co.za</a></p>
+<br />
+<br />
+<div onclick="document.getElementById('CancelModal').style.display='block'" class="OptionButton ContinueBtn btn btn-warning" style="float:right"><span class="glyphicon glyphicon-remove-sign"></span><br />Cancel order</div>
+<div onclick="document.getElementById('ReturnOrderModal').style.display='block'" class="OptionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 5px;"><span class="glyphicon glyphicon-share-alt icon-flipped"></span><br />Return order</div>
+<div onclick="document.getElementById('CapturePaymentModal').style.display='block'" class="OptionButton ContinueBtn btn btn-primary" style="float:right; margin-right: 5px;"><span class="glyphicon glyphicon-credit-card"></span><br />Capture Payment</div>
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-chevron-left"></span> <br />Back</div>
+
+<div id="CancelModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Cancellation</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to cancel this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('CancelModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>
+
+<div id="ReturnOrderModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Return</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to return this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('ReturnOrderModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>
+
+<div id="CapturePaymentModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Capture Payment</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to capture payment for this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('CapturePaymentModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>

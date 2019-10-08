@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Snow_System.Delivery>
+
+@{
+    int Count = 0;
+    if (Model != null)
+    {
+        foreach (var i in Model)
+        {
+            Count += 1;
+        }
+    }
+}
+    <div class="dash-card card border-primary mb-3">
+        <h3 class="card-header">Unassigned Packages @if(Count > 0){<span class="badge badge-pill badge-primary">@Count</span>}</h3>
+        <div class="card-body">
+            @if (Count >= 1)
+            {
+                <table class="table dash-table fixed_header">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%">Order ID</th>
+                            <th style="width: 20%">Delivery ID</th>
+                            <th style="width: 20%">Delivery Status</th>
+                            <th style="width: 20%">Products Qty</th>
+                            <th style="width: 20%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="width: 20%">@item.ProductOrderID</td>
+                                <td style="width: 20%">@item.DeliveryID</td>
+                                <td style="width: 20%">@item.DeliveryStatu.Description</td>
+                                <td style="width: 20%">Amount placeholder</td>
+                                <td style="width: 20%">
+                                    <button class="btn btn-outline-primary"><span class="glyphicon glyphicon-user"></span></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="dash-none">No outstanding deliveries</p>
+            }
+        </div>
+        <div class="card-footer text-muted">
+            <p>
+                <button type="button" class="btn btn-info card-btn">View All</button>
+            </p>
+        </div>
+    </div>

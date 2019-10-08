@@ -1,0 +1,164 @@
+﻿<!-- Slideshow container -->
+<div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
+        <img src="~/Image/Vehicle-Pic-768x264.jpg" style="width:100%">
+        <div class="text">Spartan fire</div>
+    </div>
+
+    <div class="mySlides fade">
+        <img src="~/Resources/Slider-2.png" style="width:100%">
+        <div class="text">Services</div>
+    </div>
+
+    <div class="mySlides fade">
+        <img src="~/Resources/Slider-3.png" style="width:100%">
+        <div class="text">Product procurment</div>
+    </div>
+
+    <!-- Next and previous buttons -->
+    <span class="prev" onclick="plusSlides(-1)">&#10094;</span>
+    <span class="next" onclick="plusSlides(1)">&#10095;</span>
+</div>
+<br>
+
+<!-- The dots/circles -->
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
+
+<section class="second-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="service-item">
+                    <div class="icon" style="color:green;">
+                        <img src="~/Image/First-Aid-150x150.png" alt="">
+                    </div>
+                    <h4>First Aid</h4>
+                    <p>First aid training and supply of first aid kits.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="service-item">
+                    <div class="icon">
+                        <img src="~/Image/Supply-150x150.png" alt="">
+                    </div>
+                    <h4>Supply & Installation</h4>
+                    <p>We Supply only SABS approved hydrants, hoses and extinguishers</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="service-item">
+                    <div class="icon">
+                        <img src="~/Image/Servicing-150x150.png" alt="">
+                    </div>
+                    <h4>Servicing Support</h4>
+                    <p>
+                        We service existing hydrants, extinguishers and fire hose reels
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="service-item">
+                    <div class="icon">
+                        <img src="~/Image/Safety-Signs-1-150x150.png" alt="">
+                    </div>
+                    <h4>Emergency Signs</h4>
+                    <p>We supply and install fire and emergency signage.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div style="text-align:center">
+        <br />
+        <h3 style="text-shadow: 0 0 5px #FF0000;" class="pageHeading">WHY CHOOSE US?</h3>
+    </div>
+    <div class="row">
+
+        <p>We come to you, our fully equipped mobile workshop allows us to service at your premises, reducing costs and turnaround time. We take pride in our work. We are committed to excellent customer service and providing you with a hassle free experience.</p>
+
+        <div class="column">
+            <img src="~/Image/Footer-Logo-3-300x128.png" />
+        </div>
+        <div class="column">
+            <img src="~/Image/spartan-2-300x128.jpg" />
+        </div>
+
+    </div>
+</div>
+
+<style>
+
+    /* Style the container/contact section */
+    .container {
+        margin-top: 10px;
+        border-radius: 5px;
+        background-color: black;
+        padding: 10px;
+    }
+
+    /* Create two columns that float next to eachother */
+    .column {
+        float: left;
+        width: 50%;
+        margin-top: 6px;
+        padding: 20px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .column p {
+        font-size: 16px;
+    }
+</style>

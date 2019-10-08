@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Snow_System.Models.EmployeeType>
+
+<h2 class="page-header pageHeading" style="text-align:center;">Employee Types</h2>
+<hr />
+
+<div style="text-align:center;">
+    <input type="search" style="width:78%; display:inline-block; margin-left:1%;" class="form-control" placeholder="Search..." />
+    <button class="btn btn-primary" style="display:inline-block; margin-left:1%; "><span class="glyphicon glyphicon-search"></span></button>
+</div>
+<br />
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeTypeName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeTypeName)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<div class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />New</div>
+<div class="ActionButton btn btn-primary" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-edit"></span><br />Edit</div>

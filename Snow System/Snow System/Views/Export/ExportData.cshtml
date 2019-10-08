@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "ExportData";
+}
+
+
+    <style>
+        a {
+            color: whitesmoke;
+        }
+     
+    </style>
+
+<h2 class="pageHeading">Export Data</h2>
+<hr />
+<br />
+
+<button class="btn btn-outline-primary btn-block btn-lg"><a href="@Url.Action("ExportEmployeeDataToExcel","Export")">Export Employee Data</a></button>
+<br />
+<br />
+<button class="btn btn-outline-danger btn-block btn-lg"><a href="@Url.Action("ExportClientDataToExcel","Export")">Export Client Data</a></button>
+<br />
+<br />
+<button class="btn btn-outline-info btn-block btn-lg"><a href="@Url.Action("ExportProductDataToExcel","Export")">Export Product Data</a></button>
+<br />
+<br />
+<button class="btn btn-outline-warning btn-block btn-lg"><a href="@Url.Action("ExportSupplierDataToExcel","Export")">Export Supplier Data</a></button>

@@ -1,0 +1,114 @@
+﻿@model Snow_System.Models.Product
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2 class="pageHeading">Add a new Product</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="CenteringContainer">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductType, "Product type:", htmlAttributes: new { @class = "control-label " }):
+                <div class="col-md-12">
+                    <div>
+                        @Html.DropDownList("VehicleType", new List<SelectListItem>
+                {
+
+               new SelectListItem {Text = "Workshop", Value="Workshop"},
+               new SelectListItem {Text = "Standard", Value="Standard"},
+                }
+           , htmlAttributes: new { @class = "custom-select btn-primary" })
+
+                    </div>
+                    <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> New Product Type</button>
+                    @Html.ValidationMessageFor(model => model.ProductType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductName, "Product Name:", htmlAttributes: new { @class = "control-label " }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductDescription, "Product Description:", htmlAttributes: new { @class = "control-label " }):
+                <div class="col-md-12">
+                    <textarea class="form-control"></textarea>
+                    @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductQuantityOnHand, "Quantity on Hand:", htmlAttributes: new { @class = "control-label " }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ProductQuantityOnHand, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductQuantityOnHand, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductSellingPrice, "Selling price (R):", htmlAttributes: new { @class = "control-label 5" }):
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ProductSellingPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductSellingPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductStatus, htmlAttributes: new { @class = "control-label 5" }):
+                <div class="col-md-12">
+                    @Html.DropDownList("ProductStatus", new List<SelectListItem>
+                {
+
+               new SelectListItem {Text = "Active", Value="Active"},
+               new SelectListItem {Text = "Not shown", Value="Not shown"},
+               new SelectListItem {Text = "Archived", Value="Archived"}
+                }
+           , htmlAttributes: new { @class = "custom-select btn-primary" })
+                    @Html.ValidationMessageFor(model => model.ProductStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductPic, "Product Picture:", htmlAttributes: new { @class = "control-label " }):
+                <div class="col-md-12">
+                    <div class="custom-file ">
+                        <input type="file" class="custom-file-input" id="productPic" />
+                        <label class="custom-file-label" for="productPic">Choose file</label>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ProductPic, "", new { @class = "text-danger" })
+                </div>
+                <img src="~/Resources/extinguisher.jpg" alt="Product" width="100" height="100" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</div>
+            <div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>
+        </div>
+    </div>
+
+    <div id="lodgeModal" class="modal animate-opacity">
+        <div class="modal-content modal-background">
+            <header class="">
+                <h2>Confirm Creation</h2>
+            </header>
+            <hr style="margin:0;" />
+            <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+            <div class="">
+                <p>Are you sure you want to create this product?</p>
+            </div>
+            <hr style="margin:0;" />
+            <footer class="" style="">
+                <a href="" onclick="document.getElementById('lodgeModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+                <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+            </footer>
+        </div>
+    </div>
+}

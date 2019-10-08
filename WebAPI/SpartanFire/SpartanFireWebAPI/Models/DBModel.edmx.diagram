@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bcc5c85871c849999de03cd2263bf1ea" Name="Diagram1">
+        <EntityTypeShape EntityType="SpartanFireDBModel.AssignDelivery" Width="1.5" PointX="19.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.AuditLog" Width="1.5" PointX="7.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.AuditLogType" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.BankingDetail" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.CheckEquipment" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.CheckEquipmentLine" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.CheckEquipmentStatu" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Client" Width="1.5" PointX="7.5" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ClientFeedback" Width="1.5" PointX="20.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.CompanyInfo" Width="1.5" PointX="9.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Complaint" Width="1.5" PointX="9.75" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Delivery" Width="1.5" PointX="17.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.DeliveryLine" Width="1.5" PointX="19.5" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.DeliveryStatu" Width="1.5" PointX="15" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Employee" Width="1.5" PointX="10.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.EmployeeRequest" Width="1.5" PointX="20.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.EmployeeType" Width="1.5" PointX="8.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Equipment" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Functionality" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Location" Width="1.5" PointX="12.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.LocationType" Width="1.5" PointX="10.5" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Login" Width="1.5" PointX="7.5" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Product" Width="1.5" PointX="15" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ProductOrder" Width="1.5" PointX="15" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ProductOrderLine" Width="1.5" PointX="17.25" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ProductOrderReturn" Width="1.5" PointX="17.25" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ProductOrderReturnLine" Width="1.5" PointX="19.5" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ProductOrderStatu" Width="1.5" PointX="12.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ProductStatu" Width="1.5" PointX="12.75" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ProductType" Width="1.5" PointX="12.75" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Service" Width="1.5" PointX="23.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ServiceItem" Width="1.5" PointX="21" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ServiceItemSize" Width="1.5" PointX="21" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ServiceItemType" Width="1.5" PointX="18.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ServiceLine" Width="1.5" PointX="25.5" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ServiceRequest" Width="1.5" PointX="18" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.ServiceRequestStatu" Width="1.5" PointX="15.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Supplier" Width="1.5" PointX="17.75" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.SupplierOrder" Width="1.5" PointX="20" PointY="35.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.SupplierOrderLine" Width="1.5" PointX="22.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.SupplierOrderReturn" Width="1.5" PointX="22.25" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.SupplierOrderReturnLine" Width="1.5" PointX="24.5" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.SupplierStatu" Width="1.5" PointX="17.75" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.User" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.UserRole" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.VAT" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.Vehicle" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.VehicleType" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.WorkDone" Width="1.5" PointX="18.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.WriteOfProduct" Width="1.5" PointX="17.25" PointY="30.75" IsExpanded="true" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_AssignDelivery_Delivery" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_AssignDelivery_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_AuditLog_AuditLogType" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_AuditLog_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_CheckEquipment_Vehicle" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_CheckEquipmentLine_CheckEquipment" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_CheckEquipmentLine_CheckEquipmentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_CheckEquipmentLine_Equipment" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Client_ClientType" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_CompanyInfo_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Complaint_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Location_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ClientFeedback_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Complaint_ServiceRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Delivery_DeliveryStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Delivery_ProductOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_DeliveryLine_Delivery" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Employee_EmployeeType" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Employee_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_EmployeeRequest_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_EmployeeRequest_ServiceRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Location_LocationType" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ProductOrder_ProductOrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ServiceRequest_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Login_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Product_ProductStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Product_ProductType" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ProductOrderLine_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ServiceLine_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_SupplierOrderLine_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_WriteOfProduct_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ProductOrder_ProductOrderStatus1" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ProductOrderLine_ProductOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ProductOrderReturnLine_ProductOrderLine" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ProductOrderReturnLine_ProductOrderReturn" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Service_ServiceItem" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Service_ServiceRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ServiceLine_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ServiceItem_ServiceItemType" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ServiceItem_WorkDone" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ServiceItemSize_ServiceItemType" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_ServiceRequest_ServiceRequestStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_SupplierOrder_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_SupplierOrder_SupplierStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_SupplierOrderLine_SupplierOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_SupplierOrderReturnLine_SupplierOrderLine" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_SupplierOrderReturnLine_SupplierOrderReturn1" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_User_UserRole" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FK_Vehicle_VehicleType" ManuallyRouted="false" />
+        <AssociationConnector Association="SpartanFireDBModel.FunctionalityAccess" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

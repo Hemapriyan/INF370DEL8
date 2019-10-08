@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Snow_System.SupplierOrder>
+@{
+    int Count = 0;
+    if (Model != null)
+    {
+        foreach (var i in Model)
+        {
+            Count += 1;
+        }
+    }
+}
+<div class="dash-card card border-primary mb-3">
+    <h3 class="card-header">Outstanding Supplier Orders @if(Count > 0) {<span class="badge badge-pill badge-primary">@Count</span>}</h3>
+    <div class="card-body">
+        @if (Count >= 1)
+        {
+            <table class="table dash-table fixed_header">
+                <thead>
+                    <tr>
+                        <th>
+                            Order ID
+                        </th>
+                        <th>
+                            Date Placed
+                        </th>
+                        <th>
+                            Supplier Name
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SupplierOrderID)
+                        </td>
+                        <td>
+                            @string.Format("{0:dd/MM/yyyy } ", item.OrderDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary"><span class="glyphicon glyphicon-ok-circle"></span></button>
+                            <button type="button" class="btn btn-outline-danger"><span class="glyphicon glyphicon-remove-sign"></span></button>
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p class="dash-none">No outstanding orders</p>
+        }
+    </div>
+    <div class="card-footer text-muted">
+        <p>
+            <button type="button" class="btn btn-primary card-btn">Create New</button>
+            <button type="button" class="btn btn-info card-btn">View All</button>
+        </p>
+    </div>
+</div>
+
+<script>
+
+</script>

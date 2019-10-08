@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Snow_System.Vehicle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="page-header pageHeading" style="text-align:center;">Vehicles</h1>
+
+<div style="text-align:center;">
+    <p>
+
+        @using (@Html.BeginForm("Index", "Vehicle", FormMethod.Get))
+        {
+
+            <div style="margin-right:70px;">
+                <b>Search By:</b>
+                @Html.RadioButton("searchBy", "Description", true) <text> Description </text>
+                @Html.RadioButton("searchBy", "Licence") <text>Licence Number </text><br /><br />
+
+            </div>
+            @Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
+            <a href="@Url.Action("Index","Vehicle")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
+        }
+
+    </p>
+</div>
+<br />
+<hr />
+<br />
+<a href="@Url.Action("AddorEdit","Vehicle")" class="ActionButton ContinueBtn btn btn-success" style="float:left; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Add New</a>
+<a href="@Url.Action("Index","TreeView")" class="ActionButton ContinueBtn btn btn-success" style="float:left; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Tree view</a>
+
+<table class="table table-hover">
+    <tr class="table-primary">
+
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LicenseNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleTypeID)
+        </th>
+        <th>Actions</th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="7">
+                No records match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr class="table-dark">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicenseNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
+                @if (item.VehicleTypeID == 1)
+                {
+                    <td>
+                        Workshop
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Standard
+                    </td>
+                }
+                <td>
+                    <a href="@Url.Action("AddorEdit", "Vehicle", new { id = item.VehicleID })" class="btn btn-warning"><i class="fa fa-pencil"></i>Edit</a>
+                    <a onclick="Delete(@item.VehicleID)" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Web API CRUD', 'Are you sure you want to delete this record?',function () {
+                window.location.href = '@Url.Action("Delete","Vehicle")/' + id;
+            }, null);
+        }
+    </script>
+}

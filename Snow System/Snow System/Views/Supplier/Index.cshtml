@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Snow_System.Supplier>
+
+<h1 class="page-header pageHeading" style="text-align:center;">Suppliers</h1>
+<<div style="text-align:center;">
+    <p>
+
+        @using (@Html.BeginForm("Index", "Supplier", FormMethod.Get))
+        {
+
+            <div style="margin-right:70px;">
+                <b>Search By:</b>
+                @Html.RadioButton("searchBy", "ContactName", true) <text> Name </text>
+                @Html.RadioButton("searchBy", "ContactNumber") <text> Number</text>
+                @Html.RadioButton("searchBy", "Registration") <text>Registration </text><br /><br />
+
+            </div>
+            @Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
+            <a href="@Url.Action("Index","Supplier")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
+        }
+
+    </p>
+</div>
+<br />
+<a href="@Url.Action("AddorEdit","Supplier")" class="ActionButton ContinueBtn btn btn-success" style="float:left; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Add New</a>
+<a style="float:right;" href="@Url.Action("ExportSupplier","Supplier")"> Download Supplier Report PDF </a>
+
+<br />
+<style>
+    table a .cancel-icon {
+        color: blue;
+        text-decoration: none;
+    }
+
+    table .cancel-icon:hover {
+        text-decoration: none;
+        color: aqua;
+    }
+
+    .green {
+        color: lightgreen;
+    }
+
+    .red {
+        color: red;
+    }
+</style>
+
+<table id="SearchTable" class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            Supplier Name
+        </th>
+        <th>
+            Contact Number
+        </th>
+        <th>
+            Email Address
+        </th>
+        <th>
+            Registration Number
+        </th>
+        <th>
+            Credit Balance
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="7">
+                No records match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr class="table-dark">
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupplierName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNumber)
+                </td>
+                <td>
+                    <a href="mailto: @item.EmailAddress">@Html.DisplayFor(modelItem => item.EmailAddress)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                </td>
+                @if (item.CreditBalance >= 0)
+                {
+                    <td class="green">
+                        @item.CreditBalance.ToString("C2")
+                    </td>
+                }
+                else
+                {
+                    <td class="red">
+                        @item.CreditBalance.ToString("C2")
+                    </td>
+                }
+                <td>
+                    <a href="@Url.Action("CapturePayment", "Supplier", new { id = item.SupplierID })" class="btn btn-info"> Capture Payment</a>
+                    <a href="@Url.Action("MakeSupplierOrder", "Supplier", new { id = item.SupplierID })" class="btn btn-success"> Place Order</a>
+                    <a href="@Url.Action("AddorEdit", "Supplier", new { id = item.SupplierID })" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-pencil
+"></span>
+                    </a>
+                    <a onclick="Delete(@item.SupplierID)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+<br />
+<br />
+<br />
+
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        $(function () {
+            var successMessage = '@TempData["ErrorMessage"]'
+            if (successMessage != '')
+                alertify.error(successMessage);
+        });
+        function Delete(id) {
+            alertify.confirm('Web API CRUD', 'Are you sure you want to delete this record?',function () {
+                window.location.href = '@Url.Action("Delete","Supplier")/' + id;
+            }, null);
+        }
+    </script>
+}

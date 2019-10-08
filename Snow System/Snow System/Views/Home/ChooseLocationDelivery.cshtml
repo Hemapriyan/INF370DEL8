@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Snow_System.Models.Location>
+
+<h1 class="page-header pageHeading" style="text-align:center;">Choose Delivery Location</h1>
+<hr />
+
+<p style="text-align:center;">Choose the location for the delivery:</p>
+<div id="newlocationcontainer" style="margin-bottom: 10px;">
+    <span class="glyphicon glyphicon-open"></span> Pickup Delivery
+</div>
+@foreach (var item in Model)
+{
+    
+    <div class="locationitem">
+        <div class="locationpiece locationinfo">
+            <div>
+                <b>@Html.DisplayFor(modelItem => item.LocationName)</b>
+            </div>
+            <span>
+                @Html.DisplayFor(modelItem => item.StreetAddress),
+            </span>
+            <span>
+                @Html.DisplayFor(modelItem => item.Suburb),
+            </span>
+            <br />
+            <span>
+                @Html.DisplayFor(modelItem => item.City),
+            </span>
+            <span>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </span>
+        </div>
+        <div class="locationpiece contactdetails">
+            <div>
+                <b>Contact person details:</b>
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.ContactPersonName)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.ContactPersonNumber)
+            </div>
+        </div>
+        <div class="locationpiece locationeditbuttoncontainer" style="width:28%;">
+            <button class="btn btn-info"> <span class="glyphicon glyphicon-pencil"></span> Edit</button>
+        </div>
+        <div class="locationpiece" style="width:4%;">
+            <span style="font-size:200%;" class="glyphicon glyphicon-chevron-right"></span>
+        </div>
+    </div>
+}
+
+<div id="newlocationcontainer">
+    <span class="glyphicon glyphicon-plus"></span> Add a new location
+</div>
+
+<br />
+
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; width: 120px"><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>

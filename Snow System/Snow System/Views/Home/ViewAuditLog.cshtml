@@ -1,0 +1,47 @@
+﻿@using (Html.BeginForm())
+{
+    <h2 class="pageHeading">Export Data</h2>
+    <hr />
+    <div class="CenteringContainer">
+        <div class="form-group">
+            <label>Start Date </label>
+            <div class="col-md-12">
+                <div>
+                    <input type="date" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>End Date </label>
+            <div class="col-md-12">
+                <div>
+                    <input type="date" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Audit type:</label>
+            <div class="col-md-12">
+                <div>
+                    @Html.DropDownList("AuditType", new List<SelectListItem>
+            {
+
+           new SelectListItem {Text = "All", Value="All"},
+           new SelectListItem {Text = "Create", Value="Create"},
+           new SelectListItem {Text = "Update", Value="Update"},
+           new SelectListItem {Text = "Delete", Value="Delete"},
+            }
+       , htmlAttributes: new { @class = "custom-select btn-primary" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="" style="padding-top: 3%;">
+        <div class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-eye-open"></span> <br />View Audit Log</div>
+        <div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>
+    </div>
+}

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Snow_System.Models.Product>
+
+@{
+    ViewBag.Title = "Return Supplier Order";
+}
+
+<h1 class="page-header pageHeading" style="text-align:center;">Return Supplier Order</h1>
+
+<div class="TopInfoContainer">
+    <h2 class="SectionHeading">Order Information</h2>
+    <div class="TopInfoLeft">
+        <label for="ordID">  Order ID: </label> <span name="ordIDInfo"> 000001</span><br />
+        <label for="ordDate">  Date placed:</label> <span name="ordDate">2019/08/06</span>
+    </div>
+    <div class="TopInfoRight">
+        <label for="ordLocation">Order Location:</label> <span name="ordLocation"> 8 Dalton Road, Wendywood</span><br />
+        <label for="ordDate">Date received:</label> <span name="ordDate">2019/10/06</span>
+    </div>
+</div>
+<br />
+<h2 class="SectionHeading">Product list</h2>
+<table class="table">
+    <tr class="table-primary">
+        <th>
+            Name
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Quantity on Hand
+        </th>
+        <th>
+            Amount Ordered
+        </th>
+        <th>
+            Amount to Return
+        </th>
+        <th>
+            Reason for Return
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr class="table-dark" style="cursor:default;">
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductQuantityOnHand)
+    </td>
+    <td>
+        10
+    </td>
+    <td>
+        <input type="number" class="form-control" min="0" value="0" />
+    </td>
+    <td>
+        <input type="text" placeholder="Reason for return"  class="form-control"/>
+    </td>
+</tr>
+    }
+</table>
+
+<div id="AuxilaryOptionsContainer">
+    <br />
+    <label>Email supplier?</label>
+    <br />
+    <div class="btn-group btn-group-toggle" id="emailSupplier" data-toggle="buttons">
+        <label class="btn btn-primary active toggleOption">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Yes
+        </label>
+        <label class="btn btn-primary toggleOption">
+            <input type="radio" name="options" id="option2" autocomplete="off"> No
+        </label>
+    </div>
+
+
+</div>
+<br />
+<br />
+<div onclick="document.getElementById('ReturnOrderModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Return Order</div>
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>
+
+<script>
+    $(document).ready(function () {
+        $("#emailSuppliers .btn").click(function () {
+            $(this).button('toggle');
+        });
+    });
+</script>
+
+<div id="ReturnOrderModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Return</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to return this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('ReturnOrderModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>

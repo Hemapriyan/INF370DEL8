@@ -1,0 +1,15 @@
+﻿<div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign"></span></div>
+<h3 class="pageHeading">Continue to book order?</h3>
+<div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <br />
+
+        <div class="form-actions no-color">
+            <div class="OptionButton ContinueBtn btn btn-success btn-confirm" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Yes</div>
+            <div class="OptionButton BackBtn btn btn-danger btn-confirm" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
+        </div>
+    }
+</div>

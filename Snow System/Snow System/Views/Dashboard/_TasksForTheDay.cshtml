@@ -1,0 +1,183 @@
+﻿@{
+    int serCount = 0;
+    int delCount = 0;
+    if (ViewBag.Services != null)
+    {
+        foreach (var i in ViewBag.Services)
+        {
+            serCount += 1;
+        }
+    }
+    if (ViewBag.Deliveries != null)
+    {
+        foreach (var i in ViewBag.Deliveries)
+        {
+            delCount += 1;
+        }
+    }
+}
+
+<div>
+    <div class="dash-card-large dash-main card border-primary mb-3">
+        <h3 class="card-header">
+            Tasks For the Day
+        </h3>
+        <div class="card-subheading" style="background-color:#1f303f;">
+            <button id="delbutton" class="btn btn-primary" onclick="DelClicked()">Deliveries</button>
+            <button id="serbutton" class="btn btn-outline-primary" onclick="SerClick()">Services</button>
+        </div>
+        <div class="card-body card-body-large">
+            <div id="deliveries" style="background-color: #0f2b45;">
+                <h3 class="card-subheading">Deliveries @if (delCount > 0)
+                {<span class="badge badge-pill badge-primary">@delCount</span>}</h3>
+                <div class="toleft">
+                    @if (delCount != 0)
+                    {
+                        <div class="task-list">
+                            @foreach (Delivery del in ViewBag.Deliveries)
+                            {
+                            <div class="task-list-item" id="@del.DeliveryID" onclick="Selectdelivery(this, '@del.DeliveryID', '@del.Location.StreetAddress', '@srv.Location.Suburb', '@srv.Location.City', '@srv.Location.ContactPersonName', '@srv.Location.LocationType.Description', '@srv.Location.ContactPersonNumber', '@srv.Location.Client.ClientName', '@srv.Location.Client.ClientSurname', '@srv.Location.Client.EmailAddress')">
+                                <span class="task-item">
+                                    Client: @srv.Location.Client.ClientName @srv.Location.Client.ClientSurname
+                                </span>
+                                <br />
+                                <span class="task-item">
+                                    Location: @srv.Location.StreetAddress, @srv.Location.Suburb
+                                </span>
+                            </div>
+                            }
+                        </div>
+                        <div class="task-info">
+                            <p class="dash-none"> No item selected </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="dash-none">No deliveries schedualed for today</p>
+                    }
+                </div>
+            </div>
+            <div id="services" style="background-color: #0f2b45;">
+                <h3 class="card-subheading">
+                    Services @if (serCount > 0)
+                    {<span class="badge badge-pill badge-primary">@serCount</span>}
+                </h3>
+                <div class="toleft">
+                    @if (serCount != 0)
+                    {
+                        <div class="task-list">
+                            @foreach (var srv in ViewBag.Services)
+                            {
+                                <div class="task-list-item" id="@srv.ServiceRequestID" onclick="SelectService(this, '@srv.ServiceRequestID', '@srv.Location.StreetAddress', '@srv.Location.Suburb', '@srv.Location.City', '@srv.Location.ContactPersonName', '@srv.Location.LocationType.Description', '@srv.Location.ContactPersonNumber', '@srv.Location.Client.ClientName', '@srv.Location.Client.ClientSurname', '@srv.Location.Client.EmailAddress')">
+                                    <span class="task-item">
+                                        Client: @srv.Location.Client.ClientName @srv.Location.Client.ClientSurname
+                                    </span>
+                                    <br />
+                                    <span class="task-item">
+                                        Location: @srv.Location.StreetAddress, @srv.Location.Suburb
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                        <div class="task-info" id="ServiceInfo">
+                            <p class="dash-none"> No item selected </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="dash-none">No services schedualed for today</p>
+                    }
+                </div>
+            </div>
+        </div>
+            <div class="card-footer text-muted">
+                <p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                    <button class="btn btn-info card-btn-large ">View Calander</button>
+                </p>
+            </div>
+        </div>
+    </div>
+<br />
+<script>
+    function DelClicked() {
+        var servicebtn = document.getElementById("serbutton");
+        var deliverybtn = document.getElementById("delbutton");
+        var deliverycontainer = document.getElementById("deliveries");
+        var servicecontainer = document.getElementById("services");
+        servicebtn.classList.add("btn-outline-primary");
+        servicebtn.classList.remove("btn-primary");
+        deliverybtn.classList.add("btn-primary");
+        deliverybtn.classList.remove("btn-outline-primary");
+        deliverycontainer.style.display = "block";
+        servicecontainer.style.display = "none";
+    }
+
+    function SerClick() {
+        var servicebtn = document.getElementById("serbutton");
+        var deliverybtn = document.getElementById("delbutton");
+        var deliverycontainer = document.getElementById("deliveries");
+        var servicecontainer = document.getElementById("services");
+        servicebtn.classList.add("btn-primary");
+        servicebtn.classList.remove("btn-outline-primary");
+        deliverybtn.classList.add("btn-outline-primary");
+        deliverybtn.classList.remove("btn-primary");
+        deliverycontainer.style.display = "none";
+        servicecontainer.style.display = "block";
+    }
+    
+    function SelectService(e, SID, StrAdd, Sub, Cit, ContPerName, Type, ContPersNum, CliName, CliSur, CliEmail ) {
+        var selectedItems = document.getElementsByClassName("Selected-Service");
+        if (selectedItems != null) {
+            for (i = 0; i < selectedItems.length; i++) {
+                selectedItems[i].classList.add("task-list-item");
+                selectedItems[i].classList.remove("Selected-Service");
+            }
+        }
+        
+        e.classList.add("Selected-Service");
+        e.classList.remove("task-list-item");
+        var InfoContainer = document.getElementById("ServiceInfo");
+        InfoContainer.innerHTML = "";
+
+        var node = document.createElement("p");
+        var textnode = document.createTextNode("#" + SID);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Service Type: " + Type);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Client: " + CliName + " " + CliSur);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        
+        var email = document.createElement("a");
+        var mail = document.createTextNode(CliEmail)
+        email.setAttribute('href', 'mailto:' + CliEmail);
+        email.appendChild(mail);
+        node = document.createElement("p");
+        textnode = document.createTextNode("Client Email: ");
+        node.appendChild(textnode);
+        node.appendChild(email);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Address: " + StrAdd + ", " + Sub + ", " + Cit);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Contact Person: " + ContPerName);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Contact Person Number: " + ContPersNum);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+    }
+</script>

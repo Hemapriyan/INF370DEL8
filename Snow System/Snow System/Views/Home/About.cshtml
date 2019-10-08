@@ -1,0 +1,100 @@
+﻿@model Snow_System.Models.GlobalVariable
+
+@{
+    if (Model == null)
+    {
+        Layout = "~/Views/Shared/_clientLayout.cshtml";
+    }
+    else if (Model.UserRoleId == 1)
+    {
+        Layout = "~/Views/Shared/_clientLayout.cshtml";
+    }
+    else /*if (Model.UserRoleId == 2 || Model.UserRoleId == 3 || Model.UserRoleId == 4 || Model.UserRoleId==5)*/
+    {
+        Layout = "~/Views/Shared/_client_EmployeeLayout.cshtml";
+    }
+}
+
+
+<div class="container">
+    <div style="text-align:center">
+        <h1 style="text-shadow: 0 0 5px #FF0000;">About Us</h1>
+        <p></p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <img src="~/Image/certificate.jpg" style="width:100%; height:650px;">
+        </div>
+        <div class="column">
+            <p>“We specialise in the service, supply and installation of fire protection equipment (fire extinguishers, hose reels & hydrants). We also supply safety signage, fire blankets a</p>
+            <br />
+            <p>
+                Our mission is to offer quality fire safety products and services. Based in Sunderland ridge, Centurion, our fully equipped mobile workshop allows us to service at our clients premises ensuring faster turn around times. Our specialist service and equipment are aimed at any kind of businesses, factories, workshops, stores, homes, offices, housing estates, schools, apartment buildings and shopping malls.
+            </p>
+            <br />
+            <p>
+                We service all equipment in accordance with the regulations of SANS 1475. We are authorised by SACAS to service fire equipment. We are also registered members of SAQCC Fire.
+            </p>
+            <br />
+            <p>
+                Our technicians are fully qualified and experienced. They are also registered with SAQCC Fire”
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Style inputs */
+    input[type=text], select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+    /* Style the container/contact section */
+    .container {
+        margin-top: 10px;
+        border-radius: 5px;
+        background-color: black;
+        padding: 10px;
+    }
+
+    /* Create two columns that float next to eachother */
+    .column {
+        float: left;
+        width: 50%;
+        margin-top: 6px;
+        padding: 20px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .column p {
+        font-size: 16px;
+    }
+</style>

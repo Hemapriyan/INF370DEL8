@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Snow_System.ServiceRequest>
+@{
+    int Count = 0;
+    if (Model != null)
+    {
+        foreach (var i in Model)
+        {
+            Count += 1;
+        }
+    }
+}
+<div class="dash-card card border-primary mb-3">
+    <h3 class="card-header">Services @if(Count > 0) {<span class="badge badge-pill badge-primary">@Count</span>}</h3>
+    <div class="card-body">
+        @if (Count >= 1)
+        {
+            <table class="table dash-table fixed_header">
+                <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Suburb</th>
+                        <th>Date of Requast</th>
+                        <th>Type</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Location.Client.ClientName @item.Location.Client.ClientSurname</td>
+                        <td>@item.Location.Suburb</td>
+                        <td>@string.Format("{0:dd/MM/yyyy } ", item.ServiceRequestDate)</td>
+                        <td>@item.Location.LocationType.Description</td>
+                        <td>
+                            @if (item.ServiceRequestStatusID == 1)
+                            {
+                                <button type="button" class="btn btn-outline-primary"><span class="glyphicon glyphicon-calendar"></span></button>
+                            }
+                            else if (item.ServiceRequestStatusID == 2)
+                            {
+                                <button type="button" class="btn btn-outline-primary"><span class="glyphicon glyphicon-user"></span></button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p class="dash-none">No outstanding services</p>
+
+        }
+    </div>
+    <div class="card-footer text-muted">
+        <p>
+            <button type="button" class="btn btn-primary card-btn">Create New</button>
+            <button type="button" class="btn btn-info card-btn">View All</button>
+        </p>
+    </div>
+</div>

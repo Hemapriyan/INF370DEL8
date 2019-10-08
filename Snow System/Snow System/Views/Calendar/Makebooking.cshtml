@@ -1,0 +1,20 @@
+﻿@model Snow_System.ServiceRequest
+
+@{
+    ViewBag.Title = "Makebooking";
+}
+
+<h2>Makebooking</h2>
+<div class="dateTime">
+    @using (Html.BeginForm("StoreBooking", "Calendar", FormMethod.Post))
+    {
+        @Html.HiddenFor(m=>m.ServiceRequestID);
+        <label>Start Date</label>
+        @Html.TextBoxFor(m => m.ServiceBookedDate, "yyyy-MM-dd", new { @value = "2019-Jan-01", @type = "date", @class = "form-control" })
+
+        <label>End Date</label>
+        @Html.TextBoxFor(m => m.ServiceRequestEndDate, "yyyy-MM-dd", new { @value = "2019-Jan-01", @type = "date", @class = "form-control" })
+        <button type="submit">Make boooking</button>
+    }
+</div>
+

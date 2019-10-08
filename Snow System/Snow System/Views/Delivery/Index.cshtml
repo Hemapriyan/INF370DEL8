@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Snow_System.Delivery>
+
+<h1 class="page-header pageHeading" style="text-align:center;">Deliveries</h1>
+<hr />
+@*<div style="text-align:center;" class="form-group">
+    <input type="search" placeholder="Search supplier" style="width:80%;" class="form-control" />
+    <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+</div>
+<br />*@
+<div style="text-align:center;">
+    <p>
+
+        @using (@Html.BeginForm("Index", "Delivery", FormMethod.Get))
+        {
+            <b>Search By Status:</b>
+            @Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
+            <a href="@Url.Action("Index","Delivery")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
+        }
+
+    </p>
+</div>
+
+<table id="SearchTable" class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            Order Number
+        </th>
+
+        <th>
+            Number Of Products
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Date of Delivery
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">
+                No records match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+        var r = new Random();
+        var randomNumber = 0;
+        foreach (var item in Model)
+        {
+
+
+            randomNumber = r.Next(10) + 1;
+            <tr class="table-dark">
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductOrderID)
+                </td>
+                <td>
+                    @randomNumber
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryStatu.Description)
+                </td>
+                @if (item.DeliveryStatusID == 2)
+                {
+                    <td>
+                        @string.Format("{0:dd MMMM yyyy } ", item.DateOfDelivery)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Not Delivered
+                    </td>
+                }
+                <td>
+                    <a style="text-decoration: none; color:greenyellow;" href="@Url.Action("AssignDelivery", "Delivery", new {id = item.DeliveryID })" class="glyphicon glyphicon glyphicon-flag">Assign</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+<div style="display:none;">
+    <div class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />New</div>
+    <div class="ActionButton btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-edit"></span><br />Edit</div>
+    <div class="ActionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-record"></span><br />Place Order</div>
+    <div class="ActionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-piggy-bank"></span><br />Capture Payment</div>
+</div>
+<br />
+<br />
+<br />

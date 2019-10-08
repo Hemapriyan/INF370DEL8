@@ -1,0 +1,113 @@
+﻿@model Snow_System.Models.mvcProductOrderModel
+
+@{
+    ViewBag.Title = "Take in Order Return";
+}
+
+<h1 class="page-header pageHeading" style="text-align:center;">Take in Returned Stock</h1>
+<hr />
+
+<div class="TopInfoContainer">
+    <h2 class="SectionHeading">Order Information</h2>
+    <div class="TopInfoLeft">
+        <label for="ordID">  Order ID: </label> <span name="ordIDInfo"> @Model.ProductOrderID</span><br />
+        <label for="ordDate">  Date placed:</label> <span name="ordDate">@Model.DateOfOrder</span>
+    </div>
+    <div class="TopInfoRight">
+        <label for="ordLocation">Order Location:</label> <span name="ordLocation"> @Model.Client.HouseAddress</span><br />
+    </div>
+</div>
+<br />
+<h2 class="SectionHeading">Product list</h2>
+<table class="table">
+    <tr class="table-primary">
+        <th>
+            Name
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Quantity on Hand
+        </th>
+        <th>
+            Amount Ordered
+        </th>
+        <th>
+            Amount to Return
+        </th>
+        <th>
+            Reason for Return
+        </th>
+        <th>
+            Payback Amount
+        </th>
+    </tr>
+    @Html.BeginForm(){
+    @foreach (var item in Model.ProductOrderLines)
+    {
+        <tr class="table-dark" style="cursor:default;">
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.QuantityOnHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityOrdered)
+            </td>
+            <td>
+                @Html.EditorFor(model => item.QuantityOrdered, new { htmlAttributes = new { @class = "form-control" }})
+                <input type="number" class="form-control return-amount" max="@item.QuantityOrdered" min="0" value="0" onkeydown="CalcSubtotal(@item.ProductID, this, @item.Product.SellingPrice)" />
+            </td>
+            <td>
+                @Html.EditorFor(model => item.ProductOrderReturnLines, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" placeholder="Reason for return" class="form-control return-reason" />
+            </td>
+            <td id="@item.ProductID">
+            </td>
+        </tr>
+    }
+</table>
+
+<div id="AuxilaryOptionsContainer">
+
+</div>
+<br />
+<br />
+<div onclick="document.getElementById('ReturnOrderModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Capture Return</div>
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>
+
+<script>
+    $(document).ready(function () {
+        $("#emailSuppliers .btn").click(function () {
+            $(this).button('toggle');
+        });
+    });
+
+    function CalcSubtotal(id, input, price) {
+        document.getElementById(id).innerHTML = "R" + input.value * price + ".00";
+    }
+</script>
+
+<div id="ReturnOrderModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Return</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to return this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <div onclick="document.getElementById('ReturnOrderModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
+            <div class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</div>
+        </footer>
+    </div>
+</div>
+}

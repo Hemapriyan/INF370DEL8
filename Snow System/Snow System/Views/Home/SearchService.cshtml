@@ -1,0 +1,66 @@
+﻿
+@model IEnumerable<Snow_System.ServiceRequest>
+
+<h1 class="page-header pageHeading" style="text-align:center;">Services</h1>
+<hr />
+<div style="text-align:center;">
+    <input type="search" style="width:78%; display:inline-block; margin-left:1%;" class="form-control" placeholder="Search..." />
+    <button class="btn btn-primary" style="display:inline-block; margin-left:1%; "><span class="glyphicon glyphicon-search"></span></button>
+    <br />
+</div>
+<br />
+<div>
+    <div class="searchorderpiece">
+        <b>Order Details</b>
+    </div>
+    <div class="searchorderpiece">
+        <b>Service Address</b>
+    </div>
+    <div class="searchorderpiece">
+        <b>Contact Person Details</b>
+    </div>
+</div>
+    <div class="searchorderitem">
+        <div class="searchorderpiece">
+            <div>
+                <b>Order #:</b> <span style="text-align:right;">35216541321</span>
+            </div>
+            <div>
+                <b>Date placed:</b> <span style="text-align:right;">2019/08/19</span>
+            </div>
+        </div>
+        <!--Not shown if client-->
+        <div class="searchorderpiece">
+            <span>
+                8 Dalton Road,
+            </span>
+            <span>
+                Wendywood,
+            </span>
+            <br />
+            <span>
+                Sandton,
+            </span>
+            <span>
+                2144
+            </span>
+        </div>
+
+        <div class="searchorderpiece" style="width:22%;">
+            <div>
+                Justin Michel
+            </div>
+            <div>
+                0846746995
+            </div>
+        </div>
+        <div class="searchorderpiece" style="width:12%;">
+            <span style="font-size:200%; float:right;" class="glyphicon glyphicon-chevron-right"></span>
+        </div>
+    </div>
+
+
+<br />
+<div class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-plus"></span><br /> New</div>
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0;"><span class="glyphicon glyphicon-chevron-left"></span><br />Back</div>
+

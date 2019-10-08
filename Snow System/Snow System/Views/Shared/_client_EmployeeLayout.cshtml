@@ -1,0 +1,268 @@
+﻿@model Snow_System.Models.GlobalVariable
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/Global.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/fullcalendar.min.js"></script>
+    <script src="~/Scripts/fullcalendar.js"></script>
+</head>
+<body>
+    <!----->
+    <nav style="margin-top:-50px;" class="navbar navbar-expand-lg navbar-dark bg-primary">
+        @Html.ActionLink("home", "Index", null, new { @class = "navbarpic" })
+
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto" style="margin-left: 2%;">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "Home", "Home")
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("View Products", "Products", "ProductOrder")
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Services", "Service", "Home")
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("About", "About", "Home")
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Contact Us", "ContactUs", "Home")
+                </li>
+
+            </ul>
+            @*@Html.Partial("_LoginPartial")*@
+            <div class="form-inline my-2 my-lg-0">
+                <ul class="navbar-nav mr-auto">
+
+                    @if (Model == null)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Log In", "Index", "Login")
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Register", "AddOrEdit", "RegisterClient")
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Log Out", "LogOut", "Login")
+                        </li>
+                    }
+
+
+
+                    <ul class="form-inline my-2 my-lg-0">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                            <ul class="dropdown-menu dropdown-cart" role="menu">
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>R23</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right"></button>
+                                        </span>
+                                    </span>
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>R23</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        </span>
+                                    </span>
+                                </li>
+                                <hr />
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>R23</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        </span>
+                                    </span>
+                                </li>
+                                <hr />
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>R23</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        </span>
+                                    </span>
+                                </li>
+                                <li class="divider"></li>
+                                <li class="btn btn-primary" style="width:100%;"><span class="glyphicon glyphicon-credit-card"></span> Checkout</li>
+                            </ul>
+                        </li>
+
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span></a>
+                            <ul class="dropdown-menu dropdown-account" role="menu">
+                                <li>
+                                    <span class="item">
+                                        <span class="glyphicon glyphicon-list-alt" style="margin:10px;"></span> Account information
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="item">
+                                        <span class="glyphicon glyphicon-tasks" style="margin:10px;"></span> Orders
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="item">
+                                        <span class="glyphicon glyphicon-wrench" style="margin:10px;"></span> Services
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="item">
+                                        <span class="glyphicon glyphicon-log-out" style="margin:10px;"></span> Logout
+                                    </span>
+                                </li>
+                                </ ul>
+                        </li>
+                    </ul>
+</div>
+        </div>
+    </nav>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <span class="btn" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776;</span>
+        <div id="navbarColor02">
+            <ul class="navbar-nav my-2 my-lg-0">
+                <li class="nav-item">
+                    @Html.ActionLink("Help", "SearchBookings", "Home")
+                </li>
+                <li class="nav-item">
+
+                    <a href="@Url.Action("Logout","Login")">Logout</a>
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        @Html.ActionLink("Dashboard", "Index", "Dashboard")
+        <hr />
+        @Html.ActionLink("Deliveries", "Index", "Delivery")
+        @Html.ActionLink("Supplier Orders", "Index", "Supplier")
+        @Html.ActionLink("Product Orders", "Index", "ProductOrder")
+        @Html.ActionLink("Suppliers", "Index", "Supplier")
+        @Html.ActionLink("Products", "Index", "Product")
+        @Html.ActionLink("Product Types", "Index", "ProductType")<!--("Display name on page side nav","name of html page","name of controller")-->
+        @Html.ActionLink("Bookings", "Index", "Calendar")<!--("Display name on page side nav","name of html page","name of controller")-->
+        @Html.ActionLink("Audit Log", "Index", "AuditLog")
+
+        @Html.ActionLink("Employees", "Index", "Employees")
+        @Html.ActionLink("Employee Types", "Index", "EmployeeType")<!--("Display name on page side nav","name of html page","name of controller")-->
+
+        @Html.ActionLink("Clients", "Index", "Client")<!--("Display name on page side nav","name of html page","name of controller")-->
+        @Html.ActionLink("Equipment", "Index", "Equipment")
+        @Html.ActionLink("Services", "Index", "Service")<!--("Display name on page side nav","name of html page","name of controller")-->
+
+        @Html.ActionLink("Vehicles", "Index", "Vehicle")
+        @Html.ActionLink("Locations", "Index", "Location")
+        @*@Html.ActionLink("User Roles", "Index", "UserRole")*@
+        @Html.ActionLink("Administration", "AdminDashboard", "Home")
+    </div>
+
+    <div class="container body-content" id="main">
+        @RenderBody()
+
+        <footer style="padding-top: 10%;">
+            <hr />
+            <p>&copy; @DateTime.Now.Year -  Spartan Fire </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/alertify.min.js"></script>
+    @RenderSection("scripts", required: false)
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "260px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+        function dropdowna() {
+            document.getElementById("dropdowna").classList.toggle("show");
+        }
+
+        function dropdownb() {
+            document.getElementById("dropdownb").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+
+                    }
+                }
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>
+
+@*<script type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</script>*@
+

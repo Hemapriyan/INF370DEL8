@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Snow_System.AssignDelivery>
+
+@{
+    ViewBag.Title = "Assign employeee to Delivery";
+}
+<h1 class="page-header pageHeading" style="text-align:center;">Assign Employee to Delivery</h1>
+<hr />
+<div class="TopInfoContainer">
+    <h2 class="SectionHeading">Order Information</h2>
+    <div class="TopInfoLeft">
+        <label for="ordID">  Order ID: </label> <span name="ordIDInfo"> @ViewBag.orderId</span><br />
+    </div>
+    <div class="TopInfoRight">
+        <label for="ordStatus">Order status: </label> <span name="ordStatus">@ViewBag.Status</span><br />
+        <label for="ordLocation">Order Location: </label> <span name="ordLocation"> @ViewBag.Address</span>
+    </div>
+</div>
+
+<br />
+@if (@ViewBag.Status != "Delivered")
+{
+    using (Html.BeginForm("Assign", "Delivery"))
+    {
+        @Html.Hidden("DelID", Convert.ToInt32(TempData["DeliveryID"]));
+        <div style=" text-align:center;">
+            <select class="custom-select btn-primary" name="employee">
+                @foreach (var emp in ViewBag.employees)
+                {
+                    <option value="@emp.EmployeeID">@emp.Name @emp.Surname</option>
+                }
+            </select>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Assign Employee</button>
+        </div>
+    }
+}
+<br />
+<h2 class="SectionHeading">Assigned Employee(s)</h2>
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Certification
+        </th>
+        <th></th>
+    </tr>
+    @if (Model == null)
+    {
+        <td>No Employees assigned</td>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr class="table-dark" style="cursor:default;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.Surname)
+                </td>
+                <td>
+                    Technician
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.Certification)
+                </td>
+                <td>
+                    @if (item.Delivery.DeliveryStatusID != 2)
+                    {
+                        <p style=" text-decoration: none; " class="remove-icon glyphicon glyphicon-remove-sign"></p>
+                    }
+                </td>
+            </tr>
+        }
+    }
+</table>
+<br />
+
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</div>
+
+<div id="AssignModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Assignation</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to assign these employees?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <span onclick="document.getElementById('AssignModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</span>
+            <a href="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>

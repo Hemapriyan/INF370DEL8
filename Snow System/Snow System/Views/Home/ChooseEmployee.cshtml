@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Snow_System.Models.Employee>
+
+
+<h1 class="page-header pageHeading" style="text-align:center;">Select Employees to Assign</h1>
+<hr />
+<div class="form-group" style="text-align:center">
+    <input type="search" placeholder="Search employees" style="width:80%;" class="form-control"/>
+    <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+</div>
+<br />
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.surName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employeeType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.certification)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr onclick="selectEmployee(this)" class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.surName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.employeeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.certification)
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+
+<div style="margin-bottom:10%;">
+    <div class="OptionButton btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span><br />Assign employees</div>
+    <div class="OptionButton btn btn-primary" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />Add new employee</div>
+    <div class="OptionButton btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</div>
+</div>
+<script>
+    function selectEmployee(e) {
+        e.style.backgroundColor = "orange"
+    }
+</script>

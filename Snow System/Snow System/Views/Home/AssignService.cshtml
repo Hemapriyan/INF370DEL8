@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Snow_System.Models.EmployeeModel>
+
+@{
+    ViewBag.Title = "Assign Employeee to Service";
+}
+<h1 class="page-header pageHeading" style="text-align:center;">Assign Employee to Service</h1>
+<hr />
+<div class="TopInfoContainer">
+    <h2 class="SectionHeading">Service Information</h2>
+    <div class="TopInfoLeft">
+        <label for="ordID">  Order ID: </label> <span name="ordIDInfo"> 000001</span><br />
+        <label for="ordDate">  Date placed: </label> <span name="ordDate">2019/08/06</span>
+    </div>
+    <div class="TopInfoRight">
+        <label for="ordStatus">Order status: </label> <span name="ordStatus">Packaged</span><br />
+        <label for="ordLocation">Order Location: </label> <span name="ordLocation"> 8 Dalton Road, Wendywood</span>
+    </div>
+</div>
+
+<br />
+<h2 class="SectionHeading">Assigned employee(s)</h2>
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Certification
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-dark" style="cursor:default;">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Certification)
+            </td>
+            <td>
+                <p class="remove-icon glyphicon glyphicon-remove-sign"></p>
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    <button class="btn btn-primary" value="Assign employee" style="margin:auto;"><span class="glyphicon glyphicon-plus-sign"></span> Assign employees</button><br>
+</div>
+<br />
+
+<div onclick="document.getElementById('AssignModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Assign Delivery</div>
+<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</div>
+
+<div id="AssignModal" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Assignation</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to assign these employees?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <a href="" onclick="document.getElementById('AssignModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
+            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>

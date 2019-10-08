@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Snow_System.Models.mvcUserModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("AddorEdit","User")" class="btn btn-success"> <i class="fa fa-plus"></i>Create New</a>
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.UserEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserPassword)
+        </th>
+     
+        <th>
+            @Html.DisplayNameFor(model => model.UserRoleID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.UserEmail)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserPassword)
+    </td>
+
+    @if (item.UserRoleID == 1)
+    {
+        <td>
+            Client
+        </td>
+    }
+    else
+    {
+        <td>
+            Admin
+        </td>
+    }
+<td>
+    <a href="@Url.Action("AddorEdit","User", new { id =item.UserID})" class="btn btn-default"><i class="fa fa-pencil"></i>Edit</a>
+    <a onclick="Delete(@item.UserID)" class="btn btn-default"><i class="fa fa-trash"></i>Delete</a>
+</td>
+</tr>
+}
+
+</table>
