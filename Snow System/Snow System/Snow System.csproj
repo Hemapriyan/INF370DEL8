@@ -338,37 +338,37 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="AssignDelivery.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="AuditLog.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="AuditLogType.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="BankingDetail.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CheckEquipment.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CheckEquipmentLine.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CheckEquipmentStatu.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Client.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ClientFeedback.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CompanyInfo.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Complaint.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuditLogController.cs" />
@@ -422,41 +422,41 @@
     </Compile>
     <Compile Include="CustomFilters\AuthLogAttribute.cs" />
     <Compile Include="Delivery.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DeliveryLine.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DeliveryStatu.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeeRequest.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeeType.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Equipment.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Functionality.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="Location.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="LocationType.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ClientModelGlobal.cs" />
@@ -519,108 +519,105 @@
     <Compile Include="Models\mvcWriteOfProductModel.cs" />
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Product.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductOrder.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductOrderLine.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductOrderReturn.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductOrderReturnLine.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductOrderStatu.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductStatu.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductType.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiceItem.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiceItemSize.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiceItemType.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiceLine.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiceRequest.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiceRequestStatu.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Spartan.Context.cs">
+    <Compile Include="SpartanFireEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Spartan.Context.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Spartan.cs">
+    <Compile Include="SpartanFireEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Spartan.Designer.cs">
+    <Compile Include="SpartanFireEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Spartan.edmx</DependentUpon>
+      <DependentUpon>SpartanFireEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Supplier.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SupplierOrder.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SupplierOrderLine.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SupplierOrderReturn.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SupplierOrderReturnLine.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SupplierStatu.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserRole.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VAT.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Vehicle.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VehicleType.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkDone.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="WriteOfProduct.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
+      <DependentUpon>SpartanFireEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -990,15 +987,15 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Spartan.Context.tt">
+    <Content Include="SpartanFireEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Spartan.edmx</DependentUpon>
-      <LastGenOutput>Spartan.Context.cs</LastGenOutput>
+      <DependentUpon>SpartanFireEntities.edmx</DependentUpon>
+      <LastGenOutput>SpartanFireEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Spartan.tt">
+    <Content Include="SpartanFireEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Spartan.edmx</DependentUpon>
-      <LastGenOutput>Spartan.cs</LastGenOutput>
+      <DependentUpon>SpartanFireEntities.edmx</DependentUpon>
+      <LastGenOutput>SpartanFireEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1204,12 +1201,12 @@
     <Content Include="Views\Location\ChooseLocationDelivery.cshtml" />
     <Content Include="Views\TreeView\Index.cshtml" />
     <Content Include="Views\AuditLog\Index.cshtml" />
-    <EntityDeploy Include="Spartan.edmx">
+    <EntityDeploy Include="SpartanFireEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Spartan.Designer.cs</LastGenOutput>
+      <LastGenOutput>SpartanFireEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Spartan.edmx.diagram">
-      <DependentUpon>Spartan.edmx</DependentUpon>
+    <Content Include="SpartanFireEntities.edmx.diagram">
+      <DependentUpon>SpartanFireEntities.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
