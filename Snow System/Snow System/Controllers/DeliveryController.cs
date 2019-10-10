@@ -13,10 +13,8 @@ namespace Snow_System.Controllers
         // GET: Delivery
         public ActionResult Index(string searchBy, string search)
         {
-            return View(db.Deliveries.Where(x => x.DeliveryStatu.Description.StartsWith(search) || search == null).ToList());
             db.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<Delivery> dels = db.Deliveries.Include(d => d.DeliveryStatu).ToList();
-            return View(dels);
+            return View(db.Deliveries.Where(x => x.DeliveryStatu.Description.StartsWith(search) || search == null).ToList());
         }
 
         public ActionResult AssignDelivery(int? id)

@@ -492,16 +492,6 @@
     <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="SupplierOrders" Relationship="Self.FK_SupplierOrder_SupplierStatus" FromRole="SupplierStatus" ToRole="SupplierOrder" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserID" />
@@ -1212,7 +1202,6 @@
     <EntitySet Name="SupplierOrderReturns" EntityType="Self.SupplierOrderReturn" />
     <EntitySet Name="SupplierOrderReturnLines" EntityType="Self.SupplierOrderReturnLine" />
     <EntitySet Name="SupplierStatus" EntityType="Self.SupplierStatu" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
     <EntitySet Name="VATs" EntityType="Self.VAT" />

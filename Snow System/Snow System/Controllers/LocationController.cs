@@ -28,12 +28,11 @@ namespace Snow_System.Controllers
 
         //    }
 
-        //}
-
+        //
         public ActionResult AddorEdit( int cid, int id = 0 )
         {
-            int action = Convert.ToInt32(TempData["ActionID"]);
-            ViewBag.ActionID = TempData["ActionID"];
+            int action = Convert.ToInt32(Session["Action"]);
+            ViewBag.ActionID = Session["ActionID"];
             if (id == 0)
             {
                 Location lcn = new Location();
@@ -53,13 +52,12 @@ namespace Snow_System.Controllers
 
         public ActionResult AddorEdit(Location eqp)
         {
-
+            int action = Convert.ToInt32(Session["Action"]);
             eqp.LocationTypeID = 1;
             if (eqp.LocationID == 0)
             {
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("Location", eqp).Result;
                 TempData["SuccessMessage"] = "Saved Successfully";
-
 
             }
             else
@@ -67,17 +65,17 @@ namespace Snow_System.Controllers
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Location/" + eqp.LocationID, eqp).Result;
                 TempData["SuccessMessage"] = "Updated Successfully";
             }
-            return RedirectToAction("Index");
-
+            return RedirectToAction("GoBack");
         }
 
         public ActionResult Delete(int id)
         {
+            int ClientID = db.Locations.Where(loc => loc.LocationID == id).Select(loc=>loc.ClientID).FirstOrDefault();
+            List<Location> cLocations = db.Locations.Where(x => x.ClientID == ClientID).ToList();
             HttpResponseMessage response = GlobalVariables.WebAPIClient.DeleteAsync("Location/" + id.ToString()).Result;
             TempData["SuccessMessage"] = "Deleted Successfully";
 
-            return RedirectToAction("Index");
-
+            return RedirectToAction("GoBack");
         }
         // GET: Location
         public ActionResult Index(string searchBy, string search)
@@ -91,6 +89,11 @@ namespace Snow_System.Controllers
             else if (searchBy == "City")
             {
                 return View(db.Locations.Where(x => x.City.StartsWith(search) || search == null).ToList());
+            }
+            else if (searchBy == "ClientID")
+            {
+                ViewBag.Client = Convert.ToInt32(search);
+                return View(db.Locations.Where(x => x.ClientID == Convert.ToInt32(search) || search == null).ToList());
             }
             else
             {
@@ -167,24 +170,90 @@ namespace Snow_System.Controllers
 
         //}
 
-        public ActionResult ChooseLocationDelivery(int id)
+        public ActionResult ChooseLocationDelivery(int id)//Takes in Product Order ID
         {
             db.Configuration.ProxyCreationEnabled = false;
             ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id).FirstOrDefault();
             List<Location> l = po.Location.Client.Locations.ToList();
-            TempData["ActionID"] = 1;
-            TempData["OrderID"] = id;
+            Session["ActionID"] = 3;
+            Session["OrderID"] = id;
             return View(l);
         }
 
-        public ActionResult ChooseLocationService(int id)
+        public ActionResult ChooseLocationService(int id)// takes in service ID
         {
             db.Configuration.ProxyCreationEnabled = false;
             ServiceRequest po = db.ServiceRequests.Where(p => p.ServiceRequestID == id).FirstOrDefault();
             List<Location> l = po.Location.Client.Locations.ToList();
-            TempData["ActionID"] = 2;
-            TempData["ServeID"] = id;
+            Session["ActionID"] = 4;
+            Session["ServeID"] = id;
             return View(l);
+        }
+
+        public ActionResult GoBack()
+        {
+            if (Convert.ToInt32(Session["UserRoleID"]) == 1)
+            {
+                if (Convert.ToInt32(Session["ActionID"]) == 1)
+                {
+                    return RedirectToAction("Home", "Home");
+                }
+                if (Convert.ToInt32(Session["ActionID"]) == 2)
+                {
+                    return RedirectToAction("Locations");
+                }
+                else if (Convert.ToInt32(Session["ActionID"]) == 3)
+                {
+                    return RedirectToAction("ChooseLocationDelivery" , new { id  = Convert.ToInt32(Session["OrderID"]) });
+                }
+                else
+                {
+                    return RedirectToAction("ChooseLocationService", new {id = Convert.ToInt32(Session["ServiceID"]) });
+                }
+            }
+            else
+            {
+                if (Convert.ToInt32(Session["ActionID"]) == 1)
+                {
+                    return RedirectToAction("EmployeeChooseOrderLocation", new { id = Convert.ToInt32(Session["OrderID"]) });
+                }
+                else if (Convert.ToInt32(Session["ActionID"]) == 2)
+                {
+                    return RedirectToAction("EmployeeChooseServiceLocation", new { id = Convert.ToInt32(Session["ServiceID"]) });
+                }
+                else 
+                {
+                    return RedirectToAction("Index", "Client");
+
+                }
+            }
+        }
+
+        public ActionResult EmployeeChooseOrderLocation(int id)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id).FirstOrDefault();
+            List<Location> l = po.Location.Client.Locations.ToList();
+            Session["ActionID"] = 1;
+            Session["OrderID"] = id;
+            return View(l);
+        }
+
+        public ActionResult EmployeeChooseServiceLocation(int id)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            ServiceRequest po = db.ServiceRequests.Where(p => p.ServiceRequestID == id).FirstOrDefault();
+            List<Location> l = po.Location.Client.Locations.ToList();
+            Session["ActionID"] = 2;
+            Session["ServeID"] = id;
+            return View(l);
+        }
+
+        public ActionResult Locations()
+        {
+            int clientID = Convert.ToInt32(Session["ClientID"]);
+            List<Location> ClientLocations = db.Locations.Where(l => l.ClientID == clientID).ToList();
+            return View(ClientLocations);
         }
     }
 }
