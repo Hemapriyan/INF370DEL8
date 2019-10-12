@@ -1190,7 +1190,6 @@
     <Content Include="Views\ProductOrder\OrderInformation.cshtml" />
     <Content Include="Views\ProductOrder\Products.cshtml" />
     <Content Include="Views\ProductOrder\TakeInReturnedStock.cshtml" />
-    <Content Include="Views\ProductOrder\UpdatingStatus.cshtml" />
     <Content Include="Views\Supplier\AddorEdit.cshtml" />
     <Content Include="Views\Supplier\CapturePayment.cshtml" />
     <Content Include="Views\Supplier\Index.cshtml" />

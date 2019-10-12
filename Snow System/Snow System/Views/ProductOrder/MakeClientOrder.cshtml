@@ -28,7 +28,7 @@
                     <select class="custom-select btn-primary" name="Product">
                         @foreach (var prod in ViewBag.products)
                         {
-                            <option value="@prod.ProductID">@prod.Name (@prod.Dscription)</option>
+                            <option value="@prod.ProductID">@prod.Name</option>
                         }
                     </select>
                 </div>
@@ -75,10 +75,10 @@
                     @Html.DisplayFor(modelItem => item.Product.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Product.Dscription)
+                    @Html.DisplayFor(modelItem => item.Product.ProductDescription)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Product.ProductStatu.Description)
+                    @Html.DisplayFor(modelItem => item.Product.ProductType.Description)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Product.QuantityOnHand)

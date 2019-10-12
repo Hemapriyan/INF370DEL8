@@ -23,7 +23,7 @@ namespace Snow_System.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var senderEmail = new MailAddress("u15194711@tuks.co.za", "Hema");
+                    var senderEmail = new MailAddress("u15194711@tuks.co.za", "Spartan Fire");
                     var receiverEmail = new MailAddress(receiver, "Receiver");
                     var password = "AmmaH1987";
                     var sub = subject;
@@ -62,23 +62,24 @@ namespace Snow_System.Controllers
         {
             if (ModelState.IsValid)
             {
-                var senderEmail = new MailAddress("u15194711@tuks.co.za", "Hema");
-                var receiverEmail = new MailAddress("justin.michel.95@gmail.com", "Receiver");
+                var senderEmail = new MailAddress("u15194711@tuks.co.za", "Spartan Fire");
+                var receiverEmail = new MailAddress(so.Supplier.EmailAddress , "Receiver");
                 var password = "AmmaH1987";
                 var sub = "Spartan Fire - New Order - " + DateTime.Now.ToString("yyyy/MM/dd");
 
-                string body = "Dear " + so.Supplier.SupplierName + "Please see the following table of items we would like to order from you" +  "<table> <tr> " +
+                string body = "Dear " + so.Supplier.SupplierName + "<br> Please see the following table of items we would like to order from you <br/>" + 
+                    "<table> <tr> " +
                     "<td> Product </td> " +
                     "<td> Quantity </td>" +
                     "</tr>";
 
                 foreach (SupplierOrderLine sol in so.SupplierOrderLines)
                 {
-                    body+= "<tr> <td> " + sol.Product.Name + "</td>> <td>" + sol.QuantityOrdered +"</td></tr>";
+                    body+= "<tr> <td> " + sol.Product.Name + "</td>> <td>" + sol.QuantityOrdered +"</td> </tr>";
                 }
                 body += "</table>" +
-                    "<br><br>" +
-                    "Regards Spartan Fire<br>";
+                    "<br/><br/>" +
+                    "Regards Spartan Fire";
                 var smtp = new SmtpClient
                 {
                     Host = "smtp.gmail.com",

@@ -32,7 +32,15 @@ namespace Snow_System.Controllers
         public ActionResult AddorEdit( int cid, int id = 0 )
         {
             int action = Convert.ToInt32(Session["Action"]);
-            ViewBag.ActionID = Session["ActionID"];
+            if (Convert.ToInt32(Session["UserRoleID"]) == 1)
+            {
+                ViewBag.ActionID = Session["ActionID"];
+            }
+            else
+            {
+                ViewBag.ActionID = 2;
+            }
+            
             if (id == 0)
             {
                 Location lcn = new Location();
@@ -52,7 +60,11 @@ namespace Snow_System.Controllers
 
         public ActionResult AddorEdit(Location eqp)
         {
-            int action = Convert.ToInt32(Session["Action"]);
+            int action = Convert.ToInt32(Session["ActionID"]);
+            if (action == 0)
+            {
+                Session["ActionID"] = 3;
+            }
             eqp.LocationTypeID = 1;
             if (eqp.LocationID == 0)
             {
@@ -74,9 +86,10 @@ namespace Snow_System.Controllers
             List<Location> cLocations = db.Locations.Where(x => x.ClientID == ClientID).ToList();
             HttpResponseMessage response = GlobalVariables.WebAPIClient.DeleteAsync("Location/" + id.ToString()).Result;
             TempData["SuccessMessage"] = "Deleted Successfully";
-
             return RedirectToAction("GoBack");
         }
+
+
         // GET: Location
         public ActionResult Index(string searchBy, string search)
         {
@@ -92,8 +105,12 @@ namespace Snow_System.Controllers
             }
             else if (searchBy == "ClientID")
             {
+                int cid = Convert.ToInt32(search);
                 ViewBag.Client = Convert.ToInt32(search);
-                return View(db.Locations.Where(x => x.ClientID == Convert.ToInt32(search) || search == null).ToList());
+                string cn = db.Clients.Where(c => c.ClientID == cid).Select(c => c.ClientName).FirstOrDefault() + " " + db.Clients.Where(c => c.ClientID == cid).Select(c => c.ClientSurname).FirstOrDefault() ;
+                ViewBag.ClientName = cn;
+                Session["ClientID"] = cid;
+                return View(db.Locations.Where(x => x.ClientID == cid).ToList());
             }
             else
             {
@@ -221,10 +238,14 @@ namespace Snow_System.Controllers
                 {
                     return RedirectToAction("EmployeeChooseServiceLocation", new { id = Convert.ToInt32(Session["ServiceID"]) });
                 }
-                else 
+                else if (Convert.ToInt32(Session["ActionID"]) == 3)
+                {
+                    int s = Convert.ToInt32(Session["ClientID"]);
+                    return RedirectToAction("Index", "Location" , new { searchBy = "ClientID", search = s });
+                }
+                else
                 {
                     return RedirectToAction("Index", "Client");
-
                 }
             }
         }

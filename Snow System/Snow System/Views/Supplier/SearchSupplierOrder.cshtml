@@ -62,7 +62,7 @@
                 @item.SupplierOrderID
             </td>
             <td>
-                @item.Supplier.ContactPersonName @item.Supplier.ContactPersonSurname
+                @item.Supplier.SupplierName
             </td>
             <td>
                 @string.Format("{0:dd MMMM yyyy } ", item.OrderDate)
@@ -73,14 +73,16 @@
             <td style="text-align:center">
                 <a class="btn btn-info" style="text-decoration: none;" href="@Url.Action("SupplierOrderInformation", "Supplier", new { id = item.SupplierOrderID })"><span class="glyphicon glyphicon-eye-open"></span></a>
 
-                @if (item.SupplierStatusID == 1)
-    {
-                    <div onclick="@{temp = item.SupplierOrderID;} document.getElementById('CancelModal').style.display = 'block'; " class=" btn btn-danger"><span class="glyphicon glyphicon-remove-sign"></span></div>
-        }
-        else if (item.SupplierStatusID == 3)
-        {
+                @if (item.SupplierStatusID == 6)
+                {
+                    <a href="@Url.Action("TakeInSupplierOrder","Supplier", item.SupplierOrderID)" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span></a>
+
+                    <div onclick="@{temp = item.SupplierOrderID;} document.getElementById('CancelModal').style.display = 'block';" class=" btn btn-danger"><span class="glyphicon glyphicon-remove-sign"></span></div>
+                }
+                else if (item.SupplierStatusID == 3)
+                {
                     <div onclick="document.getElementById('ReturnOrderModal').style.display = 'block'; @{temp = item.SupplierOrderID;}" class=" btn btn-warning" style="margin-right: 5px;"><span class="glyphicon glyphicon-share-alt icon-flipped"></span></div>
-        }
+                }
             </td>
         </tr>
             }
@@ -88,12 +90,6 @@
 
 </table>
 
-<div style="display:none">
-    <div class="OptionButton ContinueBtn btn btn-success" style="float:right; margin-right: 8px;"><span class="glyphicon glyphicon-record"></span><br />Take In Stock</div>
-    <div class="OptionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 8px;"><span class="glyphicon glyphicon-repeat"></span><br />Return Order</div>
-    <div class="OptionButton ContinueBtn btn btn-danger" style="float:right; margin-right: 8px;"><span class="glyphicon glyphicon-remove"></span><br />Cancel Order</div>
-
-</div>
 <br />
 <br />
 <br />

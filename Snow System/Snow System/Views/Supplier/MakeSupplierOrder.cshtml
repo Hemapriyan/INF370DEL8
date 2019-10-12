@@ -1,7 +1,7 @@
 ﻿@model Snow_System.SupplierOrder
 
 @{
-    ViewBag.Title = "Make supplier order";
+    ViewBag.Title = "Make Supplier Order";
 }
 
 <script>
@@ -64,9 +64,6 @@
                 Product Name
             </th>
             <th>
-                Description
-            </th>
-            <th>
                 Product Type
             </th>
             <th>
@@ -78,19 +75,16 @@
             <th>
                 @if (Model.SupplierOrderLines.Count() > 1)
                 {
-                <a href="@Url.Action("RemoveAll", "Supplier")" class="remove-icon glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;"></a>
+                    <a href="@Url.Action("RemoveAll", "Supplier")" class="remove-icon glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;"></a>
                 }
             </th>
         </tr>
         <tbody>
             @foreach (var item in Model.SupplierOrderLines)
-                {
+            {
                 <tr class="table-dark" style="cursor:default;">
                     <td>
                         @Html.DisplayFor(modelItem => item.Product.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.Dscription)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Product.ProductType.Description)
@@ -105,43 +99,47 @@
                         <a href="@Url.Action("Remove", "Supplier", new { id = item.ProductID })" class="remove-icon glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;"></a>
                     </td>
                 </tr>
-                }
+            }
         </tbody>
 
     </table>
-    @Html.BeginForm("FinalizeOrder","Supplier"){
-    <div style="text-align:center;">
-        <label>Emeil Supplier?</label>
-        <br />
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-primary active">
-                <input onclick="setYes()" type="radio" name="options" value="Yes" id="option1" autocomplete="off" checked=""> Yes
-            </label>
-            <label class="btn btn-primary">
-                <input onclick="setNo()" type="radio" name="options" value="No" id="option2" autocomplete="off"> No
-            </label>
-        </div>
-    </div>
-    <button type="submit" class="OptionButton ContinueBtn btn btn-success" style="float:right;"><span class="glyphicon glyphicon-ok-circle"></span> <br />Make Supplier Order</button>
 
-<a href="@Url.Action("Index", "Supplier")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</a>
 
-<div id="MakeOrder" class="modal animate-opacity">
-    <div class="modal-content modal-background">
-        <header class="">
-            <h2>Confirm Order</h2>
-        </header>
-        <hr style="margin:0;" />
-        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
-        <div class="">
-            <p>Are you sure you want to make this order?</p>
+    @Html.BeginForm("FinalizeOrder", "Supplier"){
+        <div style="text-align:center;">
+            <label>Emeil Supplier?</label>
+            <br />
+            <div class="btn-group btn-group-toggle" data-toggle="buttons" name="options">
+                <label class="btn btn-primary active">
+                    <input onclick="setYes()" type="radio" name="options" value="yes" id="option1" autocomplete="off" checked=""> Yes
+                </label>
+                <label class="btn btn-primary">
+                    <input onclick="setNo()" type="radio" name="options" value="no" id="option2" autocomplete="off"> No
+                </label>
+            </div>
         </div>
-        <hr style="margin:0;" />
-        <footer class="" style="">
-            <button onclick="document.getElementById('MakeOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</button>
-            <a class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
-        </footer>
-    </div>
-</div>
+
+        <button type="submit" class="OptionButton ContinueBtn btn btn-success" style="float:right;"><span class="glyphicon glyphicon-ok-circle"></span> <br />Make Supplier Order</button>
+
+
+        <div id="MakeOrder" class="modal animate-opacity">
+            <div class="modal-content modal-background">
+                <header class="">
+                    <h2>Confirm Order</h2>
+                </header>
+                <hr style="margin:0;" />
+                <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+                <div class="">
+                    <p>Are you sure you want to make this order?</p>
+                </div>
+                <hr style="margin:0;" />
+                <footer class="" style="">
+                    <button onclick="document.getElementById('MakeOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</button>
+                    <a class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+                </footer>
+            </div>
+        </div>
     }
 }
+
+<a href="@Url.Action("Index", "Supplier")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</a>

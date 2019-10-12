@@ -42,7 +42,8 @@ namespace Snow_System.Controllers
                     Globals.Password = userModel.UserPassword;
                     if (userDetails.UserRoleID == 1)
                     {
-                        Location l = db.Locations.Where(m=>m.ClientID == userDetails.UserID).FirstOrDefault();
+
+                        Location l = db.Locations.Where(m=>m.ClientID == temp).FirstOrDefault();
                         if(l == null)
                         {
                             Session["ActionID"] = 1;
@@ -68,7 +69,6 @@ namespace Snow_System.Controllers
         {
             Globals.Username = "";
             Globals.Password = "";
-            int userID = (int)Session["UserID"];
             Session.Abandon();
 
 

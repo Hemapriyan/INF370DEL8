@@ -20,7 +20,7 @@
 
 
             <div class="form-group">
-                @Html.LabelFor(model => model.StreetAddress, htmlAttributes: new { @class = "control-label " })
+                @Html.LabelFor(model => model.StreetAddress, "Street Address", htmlAttributes: new { @class = "control-label " })
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.StreetAddress, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.StreetAddress, "", new { @class = "text-danger" })
@@ -44,7 +44,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label " })
+                @Html.LabelFor(model => model.PostalCode,"Postal Code" ,htmlAttributes: new { @class = "control-label " })
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
@@ -52,7 +52,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ContactPersonName, htmlAttributes: new { @class = "control-label " })
+                @Html.LabelFor(model => model.ContactPersonName, "Contact Person Name" ,htmlAttributes: new { @class = "control-label " })
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
@@ -60,7 +60,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ContactPersonNumber, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.ContactPersonNumber, "Contact Number" ,htmlAttributes: new { @class = "control-label" })
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.ContactPersonNumber, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ContactPersonNumber, "", new { @class = "text-danger" })
@@ -97,7 +97,7 @@
         <div class="form-group">
 
             <button onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</button>
-            @if (ViewBag.Action > 1)
+            @if (ViewBag.ActionID > 1)
             {
                 <a href="@Url.Action("GoBack","Location")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
             }

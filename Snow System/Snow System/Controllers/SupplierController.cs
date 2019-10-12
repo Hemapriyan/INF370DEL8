@@ -132,13 +132,29 @@ namespace Snow_System.Controllers
                 db.SaveChanges();
             }
             HttpResponseMessage update = GlobalVariables.WebAPIClient.PutAsJsonAsync("SupplierOrder/" + id, so).Result;
-            return RedirectToAction("SupplierOrderInformation", new { id = so.SupplierOrderID });
+            if (sid == 5)
+            {
+                TempData["SuccessMessage"] = "Order returned";
+            }
+            else if (sid == 3)
+            {
+                TempData["SuccessMessage"] = "Order received in full";
+            }
+            else if (sid == 4)
+            {
+                TempData["SuccessMessage"] = "Order cancelled";
+            }
+            else if (sid == 2)
+            {
+                TempData["SuccessMessage"] = "Order partially received - put on backordered";
+            }
+            return RedirectToAction("Index");
         }
 
         public ActionResult MakeSupplierOrder(int? id)
         {
-            ViewBag.products = db.Products.ToList();
             db.Configuration.ProxyCreationEnabled = false;
+            ViewBag.products = db.Products.ToList();
             SupplierOrder so = db.SupplierOrders.Where(order => order.SupplierID == id)
                                                 .Where(order => order.SupplierStatusID == 1)
                                                 .Include(order => order.SupplierOrderLines)
@@ -166,7 +182,8 @@ namespace Snow_System.Controllers
             int SuppOrdID = Convert.ToInt32(TempData["SuppOrdID"]);
             SupplierOrder so = db.SupplierOrders.Include(sos=>sos.Supplier)
                                                 .Include(sos=>sos.SupplierOrderLines)
-                                                .Where(sos=>sos.SupplierOrderID == SuppOrdID).FirstOrDefault();
+                                                .Where(sos=>sos.SupplierOrderID == SuppOrdID)
+                                                .FirstOrDefault();
             foreach(SupplierOrderLine sol in so.SupplierOrderLines)
             {
                 if(sol.ProductID == Product)
@@ -204,7 +221,7 @@ namespace Snow_System.Controllers
                 so.SupplierOrderLines.Remove(sol);
             }
             db.SaveChanges();
-            return RedirectToAction("MakeSupplierOrder", new { id = TempData["SuppOrdID"] });
+            return RedirectToAction("MakeSupplierOrder", new { id = so.SupplierID });
         }
 
         public ActionResult Remove(int? id)
@@ -224,7 +241,7 @@ namespace Snow_System.Controllers
                     break;
                 }
             }
-            return RedirectToAction("MakeSupplierOrder", new { id = TempData["SuppOrdID"] });
+            return RedirectToAction("MakeSupplierOrder", new { id = so.SupplierID });
         }
 
 
