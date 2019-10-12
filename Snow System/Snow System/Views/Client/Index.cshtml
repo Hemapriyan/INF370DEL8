@@ -42,15 +42,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ContactNumber)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmailAddress)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HouseAddress)
-                </th>
-                <th>
-                    Client Type
-                </th>
+              <th>
+                  @Html.DisplayNameFor(model=>model.UserName)
+              </th>
+              
+               
                 <th>Actions</th>
             </tr>
         </thead>
@@ -78,14 +74,10 @@
                         @Html.DisplayFor(modelItem => item.ContactNumber)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                        @Html.DisplayFor(modelItem=> item.User.UserEmail)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HouseAddress)
-                    </td>
-                    <td>
-                        @item.ClientType.Description
-                    </td>
+                    
+                    
                     <td>
                         <a href="@Url.Action("AddorEdit", "Location", new { cid = item.ClientID })" class="btn btn-info">Add Location</a>
                         <a href="@Url.Action("MakeClientOrder", "ProductOrder", new { id = item.ClientID })" class="btn btn-warning">Make Order</a>

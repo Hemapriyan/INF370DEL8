@@ -11,7 +11,9 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ServiceItem
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +23,9 @@ namespace Snow_System
         }
     
         public int ServiceItemID { get; set; }
+       
+        [DataType(DataType.Text)]
+        [DisplayName("Item Number")]
         public int itemNumber { get; set; }
         public int WorkDoneID { get; set; }
         public int ServiceItemTypeID { get; set; }

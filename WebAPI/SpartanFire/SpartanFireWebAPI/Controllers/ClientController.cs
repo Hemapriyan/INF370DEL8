@@ -33,6 +33,8 @@ namespace SpartanFireWebAPI.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             model.emp = db.Clients.Find(id);
             model.user = db.Users.Find(model.emp.UserID);
+           
+
            // model.emp.UserName = model.user.UserEmail;
             //model.emp.Password = model.user.UserPassword;
 
@@ -61,6 +63,7 @@ namespace SpartanFireWebAPI.Controllers
 
             db.Entry(client.emp).State = EntityState.Modified;
             db.Entry(client.user).State = EntityState.Modified;
+            
 
             try
             {
@@ -83,24 +86,46 @@ namespace SpartanFireWebAPI.Controllers
 
         // POST: api/Client
         [ResponseType(typeof(Client))]
-        public IHttpActionResult PostClient(ClientModel client)
+        public IHttpActionResult PostClient(Client client)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
-            }
-            db.Users.Add(client.user);
-            db.SaveChanges();
-            client.emp.UserID = (db.Users
-                        .OrderByDescending(p => p.UserID)
-                        .First().UserID);
-            db.Clients.Add(client.emp);
-            db.SaveChanges();
-            //db.Clients.Add(client);
-            //db.SaveChanges();
+                db.Configuration.ProxyCreationEnabled = false;
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                db.Users.Add(client.User);
+                db.SaveChanges();
+                client.UserID = (db.Users
+                            .OrderByDescending(p => p.UserID)
+                            .First().UserID);
+                db.Clients.Add(client);
+                db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = client.emp.ClientID }, client);
+                
+
+                //db.Clients.Add(client);
+                //db.SaveChanges();
+                return CreatedAtRoute("DefaultApi", new { id = client.ClientID }, client);
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
         }
 
         // DELETE: api/Client/5

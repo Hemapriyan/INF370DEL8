@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,7 +21,15 @@ namespace Snow_System.Controllers
 
         public ActionResult Index(string searchBy, string search)
         {
-            mvcClientModel cust = new mvcClientModel();
+            //int d=ConvertTo...
+            v.DateAccessed = DateTime.Now;
+            v.TableAccessed = "Client";
+            v.ChangesMade = "Viewed Clients Table";
+            v.AuditLogTypeID = 1;
+            //v.UserID = eqp.user.UserID;
+            db.AuditLogs.Add(v);
+            db.SaveChanges();
+            Client cust = new Client();
             
             if (searchBy == "Contact Number")
             {
@@ -44,52 +53,57 @@ namespace Snow_System.Controllers
 
             if (id == 0)
             {
-                ClientModelGlobal cust = new ClientModelGlobal();
-                cust.emp = new mvcClientModel();
+                Client cust = new Client();
+               // cust.emp = new Client();
                 
                 return View(cust);
             }                
             
             else
             {
-                ClientModelGlobal cust = new ClientModelGlobal();
+                Client cust = new Client();
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Client/" + id.ToString()).Result;
-                cust.emp = new mvcClientModel();
                 
-                cust.emp = response.Content.ReadAsAsync<mvcClientModel>().Result;
+                
+                cust = response.Content.ReadAsAsync<Client>().Result;
                 return View(cust);
             }
         }
         [HttpPost]
 
-        public ActionResult AddorEdit(mvcClientModel emp,int ClientTypeID)
+        public ActionResult AddorEdit(Client emp)
         {
-            Location loc = new Location();
+            //Location loc = new Location();
 
-            ClientModelGlobal model_ = new ClientModelGlobal();
-            model_.emp = new mvcClientModel();
-            model_.emp = emp;
-            emp.ClientTypeID = ClientTypeID;
+            Client model_ = new Client();
 
-            model_.user = new User();
-            model_.user.UserID = emp.UserID;
-            model_.user.UserPassword = emp.Password;
-            model_.user.UserEmail = emp.UserName;
-            model_.user.UserRoleID = 1;
+            model_ = new Client();
+            model_ = emp;
+            model_.ClientTypeID = 1;
+
+            model_.User = new User();
+            model_.User.UserPassword = RandomPassword(7);
+            model_.User.UserID = emp.UserID;
+            model_.User.UserEmail = emp.UserName;
+            model_.User.UserRoleID = 1;
+
+            //added by me 11-0ct 17h00 below code. testing of adding location at the same time as adding client
 
             //model_.location = new Location();
             //model_.location.LocationID = emp.LocationID;
-            //loc.StreetAddress = emp.StreetAddress;
+            //model_.location.StreetAddress = emp.StreetAddress;
             //model_.location.Suburb = emp.Suburb;
             //model_.location.City = emp.City;
             //model_.location.PostalCode = emp.PostalCode;
             //model_.location.ContactPersonName = emp.ContactPersonName;
             //model_.location.ContactPersonNumber = emp.ContactPersonNumber;
-            //model_.location.LocationTypeID=emp.LocationTypeID;
-
-
+            //model_.location.LocationTypeID = emp.LocationTypeID;
 
             
+
+
+
+
             //db.SaveChanges();
 
 
@@ -100,14 +114,6 @@ namespace Snow_System.Controllers
 
                     HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("Client", model_).Result;
                    
-                    //db.Clients.Add(emp.c);
-
-                    //db.Users.Add(emp.u);
-
-                    //db.SaveChanges();
-
-
-
                     TempData["SuccessMessage"] = "Saved Successfully";
 
                     n.DateAccessed = DateTime.Now;
@@ -138,7 +144,7 @@ namespace Snow_System.Controllers
             }
             else
             {
-                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Client/"+ model_.emp.ClientID, model_).Result;
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Client/"+ model_.ClientID, model_).Result;
                 TempData["SuccessMessage"] = "Updated Successfully";
                 n.DateAccessed = DateTime.Now;
                 n.TableAccessed = "Client";
@@ -179,6 +185,39 @@ namespace Snow_System.Controllers
 
             return RedirectToAction("Index");
 
+        }
+
+        // Generate a random number between two numbers    
+        public int RandomNumber(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max);
+        }
+
+        // Generate a random string with a given size and case.   
+        // If second parameter is true, the return string is lowercase  
+        public string RandomString(int size, bool lowerCase)
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+            if (lowerCase)
+                return builder.ToString().ToLower();
+            return builder.ToString();
+        }
+        // Generate a random password of a given length (optional)  
+        public string RandomPassword(int size = 0)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append(RandomString(4, true));
+            builder.Append(RandomNumber(1000, 9999));
+            builder.Append(RandomString(2, false));
+            return builder.ToString();
         }
 
 

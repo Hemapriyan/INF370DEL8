@@ -11,11 +11,13 @@
 
         @using (@Html.BeginForm("Index", "AuditLog", FormMethod.Get))
         {
-            <div style="margin-right:70px;">
-                <b>Search By:</b>
-                @Html.RadioButton("searchBy", "UserID", true) <text>Useremail</text>
-                @Html.RadioButton("searchBy", "Audit Log Type") <text>Audit Log Type</text><br /><br />
-            </div>
+        <div style="margin-right:70px;">
+            <b>Search By:</b>
+            @Html.RadioButton("searchBy", "UserID", true) <text>User Email</text>
+            @Html.RadioButton("searchBy", "Audit Log Type") <text>Audit Log Type</text>
+            @Html.RadioButton("searchBy", "Changes Made") <text>Changes Made</text><br /><br />
+
+        </div>
             @Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
             <a href="@Url.Action("Index","AuditLog")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
         }

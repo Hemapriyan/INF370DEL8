@@ -44,11 +44,9 @@
                 @Html.DisplayNameFor(model => model.IDNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HouseAddress)
+                @Html.DisplayNameFor(model => model.PhysicalAddress)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Certification)
             </th>
@@ -87,11 +85,9 @@
         @Html.DisplayFor(modelItem => item.IDNumber)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.HouseAddress)
+        @Html.DisplayFor(modelItem => item.PhysicalAddress)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Picture)
-    </td>
+  
     <td>
         @Html.DisplayFor(modelItem => item.Certification)
     </td>
@@ -105,8 +101,8 @@
     </td>
 
     <td>
-        <a href="@Url.Action("AddorEdit", "Employees", new { id = item.EmployeeID })" class="btn btn-warning"><i class="fa fa-pencil"></i>Edit</a>
-        <a onclick="Delete(@item.EmployeeID)" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+        <a href="@Url.Action("AddorEdit", "Employees", new { id = item.EmployeeID })" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+        <a onclick="Delete(@item.EmployeeID)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
 
     </td>
 </tr>

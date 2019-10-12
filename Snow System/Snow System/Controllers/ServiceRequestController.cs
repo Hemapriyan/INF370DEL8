@@ -15,8 +15,8 @@ namespace Snow_System.Controllers
         public ActionResult Index(string searchBy, string search)
         {
 
-            //return View(db.ServiceRequests.Where(x => x.BusinessName.StartsWith(search) || search == null).ToList());
-            return View();
+            return View(db.ServiceRequests.Where(x => x.Comment.StartsWith(search) || search == null).ToList());
+            //return View();
         }
 
         public ActionResult AddorEdit(int id = 0)

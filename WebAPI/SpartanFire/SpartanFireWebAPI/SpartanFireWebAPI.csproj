@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AssignDeliveryController.cs" />
     <Compile Include="Controllers\AuditLogController.cs" />
     <Compile Include="Controllers\AuditLogTypeController.cs" />
+    <Compile Include="Controllers\BankingDetailController.cs" />
     <Compile Include="Controllers\CheckEquipmentController.cs" />
     <Compile Include="Controllers\CheckEquipmentLineController.cs" />
     <Compile Include="Controllers\CheckEquipmentStatusController.cs" />

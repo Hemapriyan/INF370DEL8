@@ -26,14 +26,16 @@ namespace Snow_System.Controllers
             //var account = db.Users.Where(a => a.UserID == id).FirstOrDefault();
             if (searchBy == "UserID")
             {
-                return View(db.AuditLogs.Where(x => x.User.UserEmail== search || search == null).ToList());
+                return View(db.AuditLogs.Where(x => x.User.UserEmail.StartsWith(search) || search == null).ToList());
             }
             else if (searchBy == "Audit Log Type") {
-                return View(db.AuditLogs.Where(x => x.AuditLogType.Description == search || search == null).ToList());
+                //return View(db.AuditLogs.Where(x => x.AuditLogType.Description == search || search == null).ToList());
+                return View(db.AuditLogs.Where(x => x.AuditLogType.Description.StartsWith(search) || search == null).ToList());
+
             }
             else
             {
-                return View(db.AuditLogs.Where(x => x.DateAccessed.ToString().StartsWith(search) || search == null).ToList());
+                return View(db.AuditLogs.Where(x => x.ChangesMade.StartsWith(search) || search == null).ToList());
             }
         }
 

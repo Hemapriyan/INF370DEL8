@@ -1,10 +1,9 @@
-﻿@model Snow_System.Models.mvcVehicleModel
+﻿@model Snow_System.Vehicle
 
 @{
     ViewBag.Title = "AddorEdit";
 }
 
-<h2>Vehicle</h2>
 
 
 @using (Html.BeginForm())
@@ -12,12 +11,12 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        
-        <hr />
         <div class="CenteringContainer">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <h4>Vehicle</h4>
+            <hr />
             @Html.HiddenFor(model => model.VehicleID)
 
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
                 <div class="col-md-12">
@@ -37,17 +36,34 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label " })
                 <div class="col-md-12">
-                    @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control", id = "datepicker" } })
                     @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.VehicleTypeID, htmlAttributes: new { @class = "control-label " })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.VehicleTypeID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.VehicleTypeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
             <div class="form-group">
-                @Html.LabelFor(model => model.VehicleTypeID, htmlAttributes: new { @class = "control-label " })
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.VehicleTypeID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.VehicleTypeID, "", new { @class = "text-danger" })
-                </div>
+                <label>Vehicle Type</label><br />
+                <select name="VehicleTypeID" class="custom-select" style="color:black;">
+                    <option>Select</option>
+                    @foreach (var item in Model.VehicleTypeList)
+                    {
+                        if (item.VehicleTypeID == Model.VehicleTypeID)
+                        {
+                            <option selected="selected" value="@item.VehicleTypeID">@item.Description</option>
+                        }
+                        else
+                        {
+                            <option value="@item.VehicleTypeID">@item.Description</option>
+                        }
+                    }
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -55,20 +71,10 @@
             <button onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Submit</button>
             <a href="@Url.Action("Index","Vehicle")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
         </div>
-
-        
-
-
     </div>
-
-
 }
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval");
-
-
-
-
 
 }

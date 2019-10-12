@@ -11,7 +11,9 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +26,13 @@ namespace Snow_System
         }
     
         public int UserID { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.EmailAddress)]
+        [DisplayName("User Email")]
         public string UserEmail { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Password)]
+        [DisplayName("User Password")]
         public string UserPassword { get; set; }
         public int UserRoleID { get; set; }
     

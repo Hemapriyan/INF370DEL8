@@ -1,19 +1,22 @@
-﻿@model Snow_System.Models.mvcEquipmentModel
+﻿@model Snow_System.Equipment
+
+@{
+    ViewBag.Title = "AddorEdit";
+}
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h2 class="pageHeading">Add new Equipment</h2>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="CenteringContainer">
-
             @Html.HiddenFor(model => model.EquipmentID)
-
+            <h4>Equipment</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " }):
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -21,7 +24,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label " }):
+                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label " })
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
@@ -29,31 +32,22 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label " }):
-                <br /><br />
-                @Html.EditorFor(m => m.PurchaseDate, new { @class = "form-control datepicker", @id = "datepicker" })
+                @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label " })
                 <div class="col-md-12">
-
+                    @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control " } })
+                    @*@Html.TextBoxFor(model => model.PurchaseDate, new { type = "date" })*@
                     @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-
-
         </div>
+
 
         <div class="form-group">
 
             <button onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</button>
             <a href="@Url.Action("Index","Equipment")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
         </div>
-
-        
-
-
     </div>
-
-
 }
 
 @section scripts{
@@ -61,6 +55,6 @@
 
 
 
-
+    
 
 }

@@ -11,7 +11,9 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Delivery
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +24,14 @@ namespace Snow_System
         }
     
         public int DeliveryID { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Date)]
+        [DisplayName("Date of Delivery")]
         public System.DateTime DateOfDelivery { get; set; }
         public int DeliveryStatusID { get; set; }
         public int ProductOrderID { get; set; }
+        
+        [DisplayName(" Client Signature")]
         public byte[] DeliverySignature { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

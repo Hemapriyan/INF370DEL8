@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
    
-<a href="@Url.Action("AddorEdit","VAT")" class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Add New</a>
+<a href="@Url.Action("AddorEdit","VAT")" class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"> <span ></span>Update VAT</a>
 
 <table class="table table-hover">
     <tr class="table-primary">
@@ -17,7 +17,7 @@
         <th>
             @Html.DisplayNameFor(model => model.EffectiveDate)
         </th>
-        <th>Actions</th>
+        @*<th>Actions</th>*@
     </tr>
 
     @foreach (var item in Model)
@@ -32,10 +32,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EffectiveDate)
             </td>
-            <td>
+            @*<td>
                 <a href="@Url.Action("AddorEdit","VAT", new { id =item.VATID})" class="btn btn-warning"><i class="fa fa-pencil"></i>Edit</a>
                 <a onclick="Delete(@item.VATID)" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
-            </td>
+
+            </td>*@
         </tr>
     }
 

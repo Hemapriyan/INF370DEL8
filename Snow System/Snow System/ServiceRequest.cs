@@ -11,7 +11,9 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ServiceRequest
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,10 +26,28 @@ namespace Snow_System
         }
     
         public int ServiceRequestID { get; set; }
+        [DisplayName("Service Request Status")]
         public int ServiceRequestStatusID { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Date)]
+        [DisplayName("Service Request Date")]
+      
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        
         public System.DateTime ServiceRequestDate { get; set; }
+        
+        [DataType(DataType.Date)]
+        [DisplayName("Service Booked Date")]
+        
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+      
         public System.DateTime ServiceBookedDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [DisplayName("Service Booked End Date")]
         public Nullable<System.DateTime> ServiceBookedEndDate { get; set; }
+        
+        [DisplayName("Comment")]
         public string Comment { get; set; }
         public int LocationID { get; set; }
         public Nullable<bool> IsFullDay { get; set; }

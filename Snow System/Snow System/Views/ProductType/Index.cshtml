@@ -50,8 +50,8 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <a href="@Url.Action("AddorEdit", "ProductType", new { id = item.ProductTypeID })" class="btn btn-warning"><i class="fa fa-pencil"></i>Edit</a>
-                    <a onclick="Delete(@item.ProductTypeID)" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                    <a href="@Url.Action("AddorEdit", "ProductType", new { id = item.ProductTypeID })" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <a onclick="Delete(@item.ProductTypeID)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
                 </td>
             </tr>
         }

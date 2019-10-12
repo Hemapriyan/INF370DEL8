@@ -37,18 +37,18 @@ namespace Snow_System.Controllers
         public ActionResult AddorEdit(int id = 0)
         {
             if (id == 0)
-                return View(new mvcSupplierModel());
+                return View(new Supplier());
             else
             {
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Supplier/" + id.ToString()).Result;
-                return View(response.Content.ReadAsAsync<mvcSupplierModel>().Result);
+                return View(response.Content.ReadAsAsync<Supplier>().Result);
             }
         }
 
 
         [HttpPost]
 
-        public ActionResult AddorEdit(mvcSupplierModel sup)
+        public ActionResult AddorEdit(Supplier sup)
         {
             if (sup.SupplierID == 0)
             {

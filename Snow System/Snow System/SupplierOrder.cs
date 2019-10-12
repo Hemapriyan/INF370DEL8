@@ -11,7 +11,9 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SupplierOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +23,9 @@ namespace Snow_System
         }
     
         public int SupplierOrderID { get; set; }
+        
+        [DataType(DataType.Date)]
+        [DisplayName("Order Date")]
         public System.DateTime OrderDate { get; set; }
         public int SupplierStatusID { get; set; }
         public int SupplierID { get; set; }

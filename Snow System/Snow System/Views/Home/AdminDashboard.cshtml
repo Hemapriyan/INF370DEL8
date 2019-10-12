@@ -1,13 +1,34 @@
-﻿
+﻿@model IEnumerable<Snow_System.BankingDetail>
 <h2 class="pageHeading">Administration</h2>
 <hr />
 
 <div class="jumbotron">
-    <div class="btn-admin btn btn-primary" ><span class="glyphicon glyphicon-import"></span> <br />Import Data</div>
+    @*<div class="btn-admin btn btn-primary" ><span class="glyphicon glyphicon-import"></span> <br />Import Data</div>*@
     <a href="@Url.Action("ExportData","Export")"><button class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-export"></span> <br />Export Data</button></a>
-    <a href="@Url.Action("Index","EmployeeType")"><button class="btn-admin btn btn-primary" ><span class="glyphicon glyphicon-user"></span> <br />Employee Type</button></a>
-    <a href="@Url.Action("Index","ProductType")"><button class="btn-admin btn btn-primary" ><span class="glyphicon glyphicon-asterisk"></span> <br />Product Type</button></a>
-    <a href="@Url.Action("Index","VAT")"><button class="btn-admin btn btn-primary" ><span class="glyphicon glyphicon-certificate"></span> <br />VAT</button></a>
-    
-    <div class="btn-admin btn btn-primary" ><span class="glyphicon glyphicon-file"></span> <br />Generate And Email Certificate</div>
+    <a href="@Url.Action("Index","EmployeeType")"><button class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-user"></span> <br />Employee Type</button></a>
+    <a href="@Url.Action("Index","ProductType")"><button class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-asterisk"></span> <br />Product Type</button></a>
+    <a href="@Url.Action("Index","VAT")"><button class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-certificate"></span> <br />VAT</button></a>
+    <a href="@Url.Action("AddorEdit","BankingDetail")"><button class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <br />Update Banking Details</button></a>
+
+
+
+    <div class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-file"></span> <br />Generate And Email Certificate</div>
 </div>
+
+
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Web API CRUD', 'Are you sure you want to delete this record?',function () {
+                window.location.href = '@Url.Action("Delete","BankingDetail")/' + id;
+            }, null);
+        }
+    </script>
+}
