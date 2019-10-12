@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bcc5c85871c849999de03cd2263bf1ea" Name="Diagram1">
+      <Diagram DiagramId="ccc0aabf25cd4f79b8da5e00ced5c96e" Name="Diagram1">
         <EntityTypeShape EntityType="SpartanFireDBModel.AssignDelivery" Width="1.5" PointX="19.5" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="SpartanFireDBModel.AuditLog" Width="1.5" PointX="7.5" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SpartanFireDBModel.AuditLogType" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
@@ -48,10 +48,9 @@
         <EntityTypeShape EntityType="SpartanFireDBModel.SupplierOrderReturn" Width="1.5" PointX="22.25" PointY="28.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SpartanFireDBModel.SupplierOrderReturnLine" Width="1.5" PointX="24.5" PointY="25.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SpartanFireDBModel.SupplierStatu" Width="1.5" PointX="17.75" PointY="37.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SpartanFireDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SpartanFireDBModel.User" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SpartanFireDBModel.UserRole" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SpartanFireDBModel.VAT" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpartanFireDBModel.VAT" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SpartanFireDBModel.Vehicle" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SpartanFireDBModel.VehicleType" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SpartanFireDBModel.WorkDone" Width="1.5" PointX="18.75" PointY="11" IsExpanded="true" />

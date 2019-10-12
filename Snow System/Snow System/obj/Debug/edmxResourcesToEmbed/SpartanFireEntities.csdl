@@ -1,0 +1,1413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SpartanFireBBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AssignDelivery">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="DeliveryID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="DeliveryID" Type="Int32" Nullable="false" />
+    <Property Name="DateAssigned" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Delivery" Relationship="Self.FK_AssignDelivery_Delivery" FromRole="AssignDelivery" ToRole="Delivery" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_AssignDelivery_Employee" FromRole="AssignDelivery" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="AuditLog">
+    <Key>
+      <PropertyRef Name="AuditLogID" />
+    </Key>
+    <Property Name="AuditLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateAccessed" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TableAccessed" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ChangesMade" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AuditLogTypeID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AuditLogType" Relationship="Self.FK_AuditLog_AuditLogType" FromRole="AuditLog" ToRole="AuditLogType" />
+    <NavigationProperty Name="User" Relationship="Self.FK_AuditLog_User" FromRole="AuditLog" ToRole="User" />
+  </EntityType>
+  <EntityType Name="AuditLogType">
+    <Key>
+      <PropertyRef Name="AuditLogTypeID" />
+    </Key>
+    <Property Name="AuditLogTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AuditLogs" Relationship="Self.FK_AuditLog_AuditLogType" FromRole="AuditLogType" ToRole="AuditLog" />
+  </EntityType>
+  <EntityType Name="BankingDetail">
+    <Key>
+      <PropertyRef Name="BankingID" />
+    </Key>
+    <Property Name="BankingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankAccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BranchCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="AccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CheckEquipment">
+    <Key>
+      <PropertyRef Name="CheckEquipmentID" />
+    </Key>
+    <Property Name="CheckEquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateChecked" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="VehicleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Vehicle" Relationship="Self.FK_CheckEquipment_Vehicle" FromRole="CheckEquipment" ToRole="Vehicle" />
+    <NavigationProperty Name="CheckEquipmentLines" Relationship="Self.FK_CheckEquipmentLine_CheckEquipment" FromRole="CheckEquipment" ToRole="CheckEquipmentLine" />
+  </EntityType>
+  <EntityType Name="CheckEquipmentLine">
+    <Key>
+      <PropertyRef Name="EquipmentID" />
+      <PropertyRef Name="CheckEquipmentID" />
+    </Key>
+    <Property Name="EquipmentID" Type="Int32" Nullable="false" />
+    <Property Name="CheckEquipmetStatusID" Type="Int32" Nullable="false" />
+    <Property Name="CheckEquipmentID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CheckEquipment" Relationship="Self.FK_CheckEquipmentLine_CheckEquipment" FromRole="CheckEquipmentLine" ToRole="CheckEquipment" />
+    <NavigationProperty Name="CheckEquipmentStatu" Relationship="Self.FK_CheckEquipmentLine_CheckEquipmentStatus" FromRole="CheckEquipmentLine" ToRole="CheckEquipmentStatus" />
+    <NavigationProperty Name="Equipment" Relationship="Self.FK_CheckEquipmentLine_Equipment" FromRole="CheckEquipmentLine" ToRole="Equipment" />
+  </EntityType>
+  <EntityType Name="CheckEquipmentStatu">
+    <Key>
+      <PropertyRef Name="CheckEquipmentStatusID" />
+    </Key>
+    <Property Name="CheckEquipmentStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CheckEquipmentLines" Relationship="Self.FK_CheckEquipmentLine_CheckEquipmentStatus" FromRole="CheckEquipmentStatus" ToRole="CheckEquipmentLine" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ClientSurname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ClientTypeID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Client_ClientType" FromRole="Client" ToRole="User" />
+    <NavigationProperty Name="CompanyInfoes" Relationship="Self.FK_CompanyInfo_Client" FromRole="Client" ToRole="CompanyInfo" />
+    <NavigationProperty Name="Complaints" Relationship="Self.FK_Complaint_Client" FromRole="Client" ToRole="Complaint" />
+    <NavigationProperty Name="Locations" Relationship="Self.FK_Location_Client" FromRole="Client" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="ClientFeedback">
+    <Key>
+      <PropertyRef Name="ClientFeedBackID" />
+    </Key>
+    <Property Name="ClientFeedBackID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Profesionalism" Type="Int32" Nullable="false" />
+    <Property Name="Cleanliness" Type="Int32" Nullable="false" />
+    <Property Name="Friendliness" Type="Int32" />
+    <Property Name="Punctuality" Type="Int32" />
+    <Property Name="ServiceQuality" Type="Int32" />
+    <Property Name="ClientID" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ServiceRequestID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ServiceRequest" Relationship="Self.FK_ClientFeedback_Client" FromRole="ClientFeedback" ToRole="ServiceRequest" />
+  </EntityType>
+  <EntityType Name="CompanyInfo">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompanyAddress" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompanyEmailAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TelephoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ClientID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_CompanyInfo_Client" FromRole="CompanyInfo" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Complaint">
+    <Key>
+      <PropertyRef Name="ComplaintID" />
+    </Key>
+    <Property Name="ComplaintID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ClientID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceRequestID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Complaint_Client" FromRole="Complaint" ToRole="Client" />
+    <NavigationProperty Name="ServiceRequest" Relationship="Self.FK_Complaint_ServiceRequest" FromRole="Complaint" ToRole="ServiceRequest" />
+  </EntityType>
+  <EntityType Name="Delivery">
+    <Key>
+      <PropertyRef Name="DeliveryID" />
+    </Key>
+    <Property Name="DeliveryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateOfDelivery" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DeliveryStatusID" Type="Int32" Nullable="false" />
+    <Property Name="ProductOrderID" Type="Int32" Nullable="false" />
+    <Property Name="DeliverySignature" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="AssignDeliveries" Relationship="Self.FK_AssignDelivery_Delivery" FromRole="Delivery" ToRole="AssignDelivery" />
+    <NavigationProperty Name="DeliveryStatu" Relationship="Self.FK_Delivery_DeliveryStatus" FromRole="Delivery" ToRole="DeliveryStatus" />
+    <NavigationProperty Name="ProductOrder" Relationship="Self.FK_Delivery_ProductOrder" FromRole="Delivery" ToRole="ProductOrder" />
+    <NavigationProperty Name="DeliveryLines" Relationship="Self.FK_DeliveryLine_Delivery" FromRole="Delivery" ToRole="DeliveryLine" />
+  </EntityType>
+  <EntityType Name="DeliveryLine">
+    <Key>
+      <PropertyRef Name="DeliveryID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ProductOrderID" />
+    </Key>
+    <Property Name="DeliveryID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuantitySent" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Delivery" Relationship="Self.FK_DeliveryLine_Delivery" FromRole="DeliveryLine" ToRole="Delivery" />
+  </EntityType>
+  <EntityType Name="DeliveryStatu">
+    <Key>
+      <PropertyRef Name="DeliveryStatusID" />
+    </Key>
+    <Property Name="DeliveryStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Deliveries" Relationship="Self.FK_Delivery_DeliveryStatus" FromRole="DeliveryStatus" ToRole="Delivery" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IDNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhysicalAddress" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Certification" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmployeeTypeID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AssignDeliveries" Relationship="Self.FK_AssignDelivery_Employee" FromRole="Employee" ToRole="AssignDelivery" />
+    <NavigationProperty Name="EmployeeType" Relationship="Self.FK_Employee_EmployeeType" FromRole="Employee" ToRole="EmployeeType" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Employee_User" FromRole="Employee" ToRole="User" />
+    <NavigationProperty Name="EmployeeRequests" Relationship="Self.FK_EmployeeRequest_Employee" FromRole="Employee" ToRole="EmployeeRequest" />
+  </EntityType>
+  <EntityType Name="EmployeeRequest">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="ServiceRequestID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceRequestID" Type="Int32" Nullable="false" />
+    <Property Name="DateAssigned" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeRequest_Employee" FromRole="EmployeeRequest" ToRole="Employee" />
+    <NavigationProperty Name="ServiceRequest" Relationship="Self.FK_EmployeeRequest_ServiceRequest" FromRole="EmployeeRequest" ToRole="ServiceRequest" />
+  </EntityType>
+  <EntityType Name="EmployeeType">
+    <Key>
+      <PropertyRef Name="EmployeeTypeID" />
+    </Key>
+    <Property Name="EmployeeTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_EmployeeType" FromRole="EmployeeType" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="EquipmentID" />
+    </Key>
+    <Property Name="EquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="CheckEquipmentLines" Relationship="Self.FK_CheckEquipmentLine_Equipment" FromRole="Equipment" ToRole="CheckEquipmentLine" />
+  </EntityType>
+  <EntityType Name="Functionality">
+    <Key>
+      <PropertyRef Name="FunctionalityID" />
+    </Key>
+    <Property Name="FunctionalityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FunctionalityAccess" FromRole="Functionality" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StreetAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Suburb" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PostalCode" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactPersonName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactPersonNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LocationTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ClientID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Location_Client" FromRole="Location" ToRole="Client" />
+    <NavigationProperty Name="LocationType" Relationship="Self.FK_Location_LocationType" FromRole="Location" ToRole="LocationType" />
+    <NavigationProperty Name="ProductOrders" Relationship="Self.FK_ProductOrder_ProductOrderStatus" FromRole="Location" ToRole="ProductOrder" />
+    <NavigationProperty Name="ServiceRequests" Relationship="Self.FK_ServiceRequest_Location" FromRole="Location" ToRole="ServiceRequest" />
+  </EntityType>
+  <EntityType Name="LocationType">
+    <Key>
+      <PropertyRef Name="LocationTypeID" />
+    </Key>
+    <Property Name="LocationTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Locations" Relationship="Self.FK_Location_LocationType" FromRole="LocationType" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="LoginID" />
+    </Key>
+    <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="LoginDate" Type="DateTime" Precision="0" />
+    <Property Name="LoginTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Login_User" FromRole="Login" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="QuantityOnHand" Type="Int32" Nullable="false" />
+    <Property Name="SellingPrice" Type="Double" Nullable="false" />
+    <Property Name="ProductStatusID" Type="Int32" Nullable="false" />
+    <Property Name="ProductTypeID" Type="Int32" Nullable="false" />
+    <Property Name="MinimumQuantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ProductStatu" Relationship="Self.FK_Product_ProductStatus" FromRole="Product" ToRole="ProductStatus" />
+    <NavigationProperty Name="ProductType" Relationship="Self.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
+    <NavigationProperty Name="ProductOrderLines" Relationship="Self.FK_ProductOrderLine_Product" FromRole="Product" ToRole="ProductOrderLine" />
+    <NavigationProperty Name="ServiceLines" Relationship="Self.FK_ServiceLine_Product" FromRole="Product" ToRole="ServiceLine" />
+    <NavigationProperty Name="SupplierOrderLines" Relationship="Self.FK_SupplierOrderLine_Product" FromRole="Product" ToRole="SupplierOrderLine" />
+    <NavigationProperty Name="WriteOfProducts" Relationship="Self.FK_WriteOfProduct_Product" FromRole="Product" ToRole="WriteOfProduct" />
+  </EntityType>
+  <EntityType Name="ProductOrder">
+    <Key>
+      <PropertyRef Name="ProductOrderID" />
+    </Key>
+    <Property Name="ProductOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateOfOrder" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ProductOrderStatusID" Type="Int32" Nullable="false" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="Client_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Deliveries" Relationship="Self.FK_Delivery_ProductOrder" FromRole="ProductOrder" ToRole="Delivery" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_ProductOrder_ProductOrderStatus" FromRole="ProductOrder" ToRole="Location" />
+    <NavigationProperty Name="ProductOrderStatu" Relationship="Self.FK_ProductOrder_ProductOrderStatus1" FromRole="ProductOrder" ToRole="ProductOrderStatus" />
+    <NavigationProperty Name="ProductOrderLines" Relationship="Self.FK_ProductOrderLine_ProductOrder" FromRole="ProductOrder" ToRole="ProductOrderLine" />
+  </EntityType>
+  <EntityType Name="ProductOrderLine">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ProductOrderID" />
+    </Key>
+    <Property Name="Selling_Price" Type="Double" Nullable="false" />
+    <Property Name="QuantityOrdered" Type="Int32" Nullable="false" />
+    <Property Name="QuantityDelivered" Type="Int32" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductOrderID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_ProductOrderLine_Product" FromRole="ProductOrderLine" ToRole="Product" />
+    <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductOrderLine_ProductOrder" FromRole="ProductOrderLine" ToRole="ProductOrder" />
+    <NavigationProperty Name="ProductOrderReturnLines" Relationship="Self.FK_ProductOrderReturnLine_ProductOrderLine" FromRole="ProductOrderLine" ToRole="ProductOrderReturnLine" />
+  </EntityType>
+  <EntityType Name="ProductOrderReturn">
+    <Key>
+      <PropertyRef Name="ProductOrderReturnID" />
+    </Key>
+    <Property Name="ProductOrderReturnID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="ProductOrderReturnLines" Relationship="Self.FK_ProductOrderReturnLine_ProductOrderReturn" FromRole="ProductOrderReturn" ToRole="ProductOrderReturnLine" />
+  </EntityType>
+  <EntityType Name="ProductOrderReturnLine">
+    <Key>
+      <PropertyRef Name="ProductOrderReturnID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductOrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProductOrderReturnID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="ReasonForReturn" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ProductOrderLine" Relationship="Self.FK_ProductOrderReturnLine_ProductOrderLine" FromRole="ProductOrderReturnLine" ToRole="ProductOrderLine" />
+    <NavigationProperty Name="ProductOrderReturn" Relationship="Self.FK_ProductOrderReturnLine_ProductOrderReturn" FromRole="ProductOrderReturnLine" ToRole="ProductOrderReturn" />
+  </EntityType>
+  <EntityType Name="ProductOrderStatu">
+    <Key>
+      <PropertyRef Name="ProductOrderStatusID" />
+    </Key>
+    <Property Name="ProductOrderStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ProductOrders" Relationship="Self.FK_ProductOrder_ProductOrderStatus1" FromRole="ProductOrderStatus" ToRole="ProductOrder" />
+  </EntityType>
+  <EntityType Name="ProductStatu">
+    <Key>
+      <PropertyRef Name="ProductStatusID" />
+    </Key>
+    <Property Name="ProductStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductStatus" FromRole="ProductStatus" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="ProductTypeID" />
+    </Key>
+    <Property Name="ProductTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductType" FromRole="ProductType" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ServiceRequestID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceItemID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ServiceItem" Relationship="Self.FK_Service_ServiceItem" FromRole="Service" ToRole="ServiceItem" />
+    <NavigationProperty Name="ServiceRequest" Relationship="Self.FK_Service_ServiceRequest" FromRole="Service" ToRole="ServiceRequest" />
+    <NavigationProperty Name="ServiceLines" Relationship="Self.FK_ServiceLine_Service" FromRole="Service" ToRole="ServiceLine" />
+  </EntityType>
+  <EntityType Name="ServiceItem">
+    <Key>
+      <PropertyRef Name="ServiceItemID" />
+    </Key>
+    <Property Name="ServiceItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="itemNumber" Type="Int32" Nullable="false" />
+    <Property Name="WorkDoneID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceItemTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Services" Relationship="Self.FK_Service_ServiceItem" FromRole="ServiceItem" ToRole="Service" />
+    <NavigationProperty Name="ServiceItemType" Relationship="Self.FK_ServiceItem_ServiceItemType" FromRole="ServiceItem" ToRole="ServiceItemType" />
+    <NavigationProperty Name="WorkDone" Relationship="Self.FK_ServiceItem_WorkDone" FromRole="ServiceItem" ToRole="WorkDone" />
+  </EntityType>
+  <EntityType Name="ServiceItemSize">
+    <Key>
+      <PropertyRef Name="ServiceItemSizeID" />
+    </Key>
+    <Property Name="ServiceItemSizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceItemTypeID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ServiceItemType" Relationship="Self.FK_ServiceItemSize_ServiceItemType" FromRole="ServiceItemSize" ToRole="ServiceItemType" />
+  </EntityType>
+  <EntityType Name="ServiceItemType">
+    <Key>
+      <PropertyRef Name="ServiceItemTypeID" />
+    </Key>
+    <Property Name="ServiceItemTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ServiceItems" Relationship="Self.FK_ServiceItem_ServiceItemType" FromRole="ServiceItemType" ToRole="ServiceItem" />
+    <NavigationProperty Name="ServiceItemSizes" Relationship="Self.FK_ServiceItemSize_ServiceItemType" FromRole="ServiceItemType" ToRole="ServiceItemSize" />
+  </EntityType>
+  <EntityType Name="ServiceLine">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="ProductQuantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_ServiceLine_Product" FromRole="ServiceLine" ToRole="Product" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_ServiceLine_Service" FromRole="ServiceLine" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="ServiceRequest">
+    <Key>
+      <PropertyRef Name="ServiceRequestID" />
+    </Key>
+    <Property Name="ServiceRequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceRequestStatusID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceRequestDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ServiceBookedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ServiceBookedEndDate" Type="DateTime" Precision="3" />
+    <Property Name="Comment" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <Property Name="IsFullDay" Type="Boolean" />
+    <NavigationProperty Name="ClientFeedbacks" Relationship="Self.FK_ClientFeedback_Client" FromRole="ServiceRequest" ToRole="ClientFeedback" />
+    <NavigationProperty Name="Complaints" Relationship="Self.FK_Complaint_ServiceRequest" FromRole="ServiceRequest" ToRole="Complaint" />
+    <NavigationProperty Name="EmployeeRequests" Relationship="Self.FK_EmployeeRequest_ServiceRequest" FromRole="ServiceRequest" ToRole="EmployeeRequest" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_ServiceRequest_Location" FromRole="ServiceRequest" ToRole="Location" />
+    <NavigationProperty Name="Services" Relationship="Self.FK_Service_ServiceRequest" FromRole="ServiceRequest" ToRole="Service" />
+    <NavigationProperty Name="ServiceRequestStatu" Relationship="Self.FK_ServiceRequest_ServiceRequestStatus" FromRole="ServiceRequest" ToRole="ServiceRequestStatus" />
+  </EntityType>
+  <EntityType Name="ServiceRequestStatu">
+    <Key>
+      <PropertyRef Name="ServiceRequestStatusID" />
+    </Key>
+    <Property Name="ServiceRequestStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ServiceRequests" Relationship="Self.FK_ServiceRequest_ServiceRequestStatus" FromRole="ServiceRequestStatus" ToRole="ServiceRequest" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContactNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RegistrationNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreditBalance" Type="Double" Nullable="false" />
+    <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SupplierOrders" Relationship="Self.FK_SupplierOrder_Supplier" FromRole="Supplier" ToRole="SupplierOrder" />
+  </EntityType>
+  <EntityType Name="SupplierOrder">
+    <Key>
+      <PropertyRef Name="SupplierOrderID" />
+    </Key>
+    <Property Name="SupplierOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SupplierStatusID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_SupplierOrder_Supplier" FromRole="SupplierOrder" ToRole="Supplier" />
+    <NavigationProperty Name="SupplierStatu" Relationship="Self.FK_SupplierOrder_SupplierStatus" FromRole="SupplierOrder" ToRole="SupplierStatus" />
+    <NavigationProperty Name="SupplierOrderLines" Relationship="Self.FK_SupplierOrderLine_SupplierOrder" FromRole="SupplierOrder" ToRole="SupplierOrderLine" />
+  </EntityType>
+  <EntityType Name="SupplierOrderLine">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="SupplierOrderID" />
+    </Key>
+    <Property Name="QuantityOrdered" Type="Int32" Nullable="false" />
+    <Property Name="QuantityReceived" Type="Int32" Nullable="false" />
+    <Property Name="ProductPrice" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierOrderID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_SupplierOrderLine_Product" FromRole="SupplierOrderLine" ToRole="Product" />
+    <NavigationProperty Name="SupplierOrder" Relationship="Self.FK_SupplierOrderLine_SupplierOrder" FromRole="SupplierOrderLine" ToRole="SupplierOrder" />
+    <NavigationProperty Name="SupplierOrderReturnLines" Relationship="Self.FK_SupplierOrderReturnLine_SupplierOrderLine" FromRole="SupplierOrderLine" ToRole="SupplierOrderReturnLine" />
+  </EntityType>
+  <EntityType Name="SupplierOrderReturn">
+    <Key>
+      <PropertyRef Name="ReturnID" />
+    </Key>
+    <Property Name="ReturnID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="SupplierOrderReturnLines" Relationship="Self.FK_SupplierOrderReturnLine_SupplierOrderReturn1" FromRole="SupplierOrderReturn" ToRole="SupplierOrderReturnLine" />
+  </EntityType>
+  <EntityType Name="SupplierOrderReturnLine">
+    <Key>
+      <PropertyRef Name="ReturnID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ReturnID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierOrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="QuantityReceived" Type="Int32" Nullable="false" />
+    <Property Name="ReasonForReturn" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="QuantityOrdered" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SupplierOrderLine" Relationship="Self.FK_SupplierOrderReturnLine_SupplierOrderLine" FromRole="SupplierOrderReturnLine" ToRole="SupplierOrderLine" />
+    <NavigationProperty Name="SupplierOrderReturn" Relationship="Self.FK_SupplierOrderReturnLine_SupplierOrderReturn1" FromRole="SupplierOrderReturnLine" ToRole="SupplierOrderReturn" />
+  </EntityType>
+  <EntityType Name="SupplierStatu">
+    <Key>
+      <PropertyRef Name="SupplierStatusID" />
+    </Key>
+    <Property Name="SupplierStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SupplierOrders" Relationship="Self.FK_SupplierOrder_SupplierStatus" FromRole="SupplierStatus" ToRole="SupplierOrder" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserEmail" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AuditLogs" Relationship="Self.FK_AuditLog_User" FromRole="User" ToRole="AuditLog" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_Client_ClientType" FromRole="User" ToRole="Client" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_User" FromRole="User" ToRole="Employee" />
+    <NavigationProperty Name="Logins" Relationship="Self.FK_Login_User" FromRole="User" ToRole="Login" />
+    <NavigationProperty Name="UserRole" Relationship="Self.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
+    <NavigationProperty Name="Functionalities" Relationship="Self.FunctionalityAccess" FromRole="UserRole" ToRole="Functionality" />
+  </EntityType>
+  <EntityType Name="VAT">
+    <Key>
+      <PropertyRef Name="VATID" />
+    </Key>
+    <Property Name="VATID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VATRate" Type="Double" Nullable="false" />
+    <Property Name="EffectiveDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Vehicle">
+    <Key>
+      <PropertyRef Name="VehicleID" />
+    </Key>
+    <Property Name="VehicleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LicenseNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="VehicleTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CheckEquipments" Relationship="Self.FK_CheckEquipment_Vehicle" FromRole="Vehicle" ToRole="CheckEquipment" />
+    <NavigationProperty Name="VehicleType" Relationship="Self.FK_Vehicle_VehicleType" FromRole="Vehicle" ToRole="VehicleType" />
+  </EntityType>
+  <EntityType Name="VehicleType">
+    <Key>
+      <PropertyRef Name="VehicleTypeID" />
+    </Key>
+    <Property Name="VehicleTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Vehicles" Relationship="Self.FK_Vehicle_VehicleType" FromRole="VehicleType" ToRole="Vehicle" />
+  </EntityType>
+  <EntityType Name="WorkDone">
+    <Key>
+      <PropertyRef Name="WorkDoneID" />
+    </Key>
+    <Property Name="WorkDoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ServiceItems" Relationship="Self.FK_ServiceItem_WorkDone" FromRole="WorkDone" ToRole="ServiceItem" />
+  </EntityType>
+  <EntityType Name="WriteOfProduct">
+    <Key>
+      <PropertyRef Name="WriteOfID" />
+    </Key>
+    <Property Name="WriteOfID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AmountWrittenOff" Type="Int32" Nullable="false" />
+    <Property Name="DateOfReturn" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ReasonForWriteOff" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_WriteOfProduct_Product" FromRole="WriteOfProduct" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_AssignDelivery_Delivery">
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="1" />
+    <End Role="AssignDelivery" Type="Self.AssignDelivery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Delivery">
+        <PropertyRef Name="DeliveryID" />
+      </Principal>
+      <Dependent Role="AssignDelivery">
+        <PropertyRef Name="DeliveryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssignDelivery_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="AssignDelivery" Type="Self.AssignDelivery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="AssignDelivery">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AuditLog_AuditLogType">
+    <End Role="AuditLogType" Type="Self.AuditLogType" Multiplicity="1" />
+    <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuditLogType">
+        <PropertyRef Name="AuditLogTypeID" />
+      </Principal>
+      <Dependent Role="AuditLog">
+        <PropertyRef Name="AuditLogTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AuditLog_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="AuditLog">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckEquipment_Vehicle">
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+    <End Role="CheckEquipment" Type="Self.CheckEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="VehicleID" />
+      </Principal>
+      <Dependent Role="CheckEquipment">
+        <PropertyRef Name="VehicleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckEquipmentLine_CheckEquipment">
+    <End Role="CheckEquipment" Type="Self.CheckEquipment" Multiplicity="1" />
+    <End Role="CheckEquipmentLine" Type="Self.CheckEquipmentLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CheckEquipment">
+        <PropertyRef Name="CheckEquipmentID" />
+      </Principal>
+      <Dependent Role="CheckEquipmentLine">
+        <PropertyRef Name="CheckEquipmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckEquipmentLine_CheckEquipmentStatus">
+    <End Role="CheckEquipmentStatus" Type="Self.CheckEquipmentStatu" Multiplicity="1" />
+    <End Role="CheckEquipmentLine" Type="Self.CheckEquipmentLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CheckEquipmentStatus">
+        <PropertyRef Name="CheckEquipmentStatusID" />
+      </Principal>
+      <Dependent Role="CheckEquipmentLine">
+        <PropertyRef Name="CheckEquipmetStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckEquipmentLine_Equipment">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+    <End Role="CheckEquipmentLine" Type="Self.CheckEquipmentLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="EquipmentID" />
+      </Principal>
+      <Dependent Role="CheckEquipmentLine">
+        <PropertyRef Name="EquipmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_ClientType">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyInfo_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="CompanyInfo" Type="Self.CompanyInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="CompanyInfo">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Complaint_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Complaint" Type="Self.Complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Complaint">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Location" Type="Self.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientFeedback_Client">
+    <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="1" />
+    <End Role="ClientFeedback" Type="Self.ClientFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceRequest">
+        <PropertyRef Name="ServiceRequestID" />
+      </Principal>
+      <Dependent Role="ClientFeedback">
+        <PropertyRef Name="ServiceRequestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Complaint_ServiceRequest">
+    <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="1" />
+    <End Role="Complaint" Type="Self.Complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceRequest">
+        <PropertyRef Name="ServiceRequestID" />
+      </Principal>
+      <Dependent Role="Complaint">
+        <PropertyRef Name="ServiceRequestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Delivery_DeliveryStatus">
+    <End Role="DeliveryStatus" Type="Self.DeliveryStatu" Multiplicity="1" />
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryStatus">
+        <PropertyRef Name="DeliveryStatusID" />
+      </Principal>
+      <Dependent Role="Delivery">
+        <PropertyRef Name="DeliveryStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Delivery_ProductOrder">
+    <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="1" />
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductOrder">
+        <PropertyRef Name="ProductOrderID" />
+      </Principal>
+      <Dependent Role="Delivery">
+        <PropertyRef Name="ProductOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeliveryLine_Delivery">
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="1" />
+    <End Role="DeliveryLine" Type="Self.DeliveryLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Delivery">
+        <PropertyRef Name="DeliveryID" />
+      </Principal>
+      <Dependent Role="DeliveryLine">
+        <PropertyRef Name="DeliveryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_EmployeeType">
+    <End Role="EmployeeType" Type="Self.EmployeeType" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeType">
+        <PropertyRef Name="EmployeeTypeID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="EmployeeTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeRequest_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeRequest" Type="Self.EmployeeRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="EmployeeRequest">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeRequest_ServiceRequest">
+    <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="1" />
+    <End Role="EmployeeRequest" Type="Self.EmployeeRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceRequest">
+        <PropertyRef Name="ServiceRequestID" />
+      </Principal>
+      <Dependent Role="EmployeeRequest">
+        <PropertyRef Name="ServiceRequestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_LocationType">
+    <End Role="LocationType" Type="Self.LocationType" Multiplicity="1" />
+    <End Role="Location" Type="Self.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LocationType">
+        <PropertyRef Name="LocationTypeID" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="LocationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrder_ProductOrderStatus">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="ProductOrder">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceRequest_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="ServiceRequest">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Login_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Login" Type="Self.Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductStatus">
+    <End Role="ProductStatus" Type="Self.ProductStatu" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductStatus">
+        <PropertyRef Name="ProductStatusID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ProductStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductType">
+    <End Role="ProductType" Type="Self.ProductType" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductType">
+        <PropertyRef Name="ProductTypeID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ProductTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrderLine_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductOrderLine" Type="Self.ProductOrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductOrderLine">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceLine_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ServiceLine" Type="Self.ServiceLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ServiceLine">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplierOrderLine_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="SupplierOrderLine" Type="Self.SupplierOrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="SupplierOrderLine">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WriteOfProduct_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="WriteOfProduct" Type="Self.WriteOfProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="WriteOfProduct">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrder_ProductOrderStatus1">
+    <End Role="ProductOrderStatus" Type="Self.ProductOrderStatu" Multiplicity="1" />
+    <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductOrderStatus">
+        <PropertyRef Name="ProductOrderStatusID" />
+      </Principal>
+      <Dependent Role="ProductOrder">
+        <PropertyRef Name="ProductOrderStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrderLine_ProductOrder">
+    <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="1" />
+    <End Role="ProductOrderLine" Type="Self.ProductOrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductOrder">
+        <PropertyRef Name="ProductOrderID" />
+      </Principal>
+      <Dependent Role="ProductOrderLine">
+        <PropertyRef Name="ProductOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrderReturnLine_ProductOrderLine">
+    <End Role="ProductOrderLine" Type="Self.ProductOrderLine" Multiplicity="1" />
+    <End Role="ProductOrderReturnLine" Type="Self.ProductOrderReturnLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductOrderLine">
+        <PropertyRef Name="ProductID" />
+        <PropertyRef Name="ProductOrderID" />
+      </Principal>
+      <Dependent Role="ProductOrderReturnLine">
+        <PropertyRef Name="ProductID" />
+        <PropertyRef Name="ProductOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrderReturnLine_ProductOrderReturn">
+    <End Role="ProductOrderReturn" Type="Self.ProductOrderReturn" Multiplicity="1" />
+    <End Role="ProductOrderReturnLine" Type="Self.ProductOrderReturnLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductOrderReturn">
+        <PropertyRef Name="ProductOrderReturnID" />
+      </Principal>
+      <Dependent Role="ProductOrderReturnLine">
+        <PropertyRef Name="ProductOrderReturnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_ServiceItem">
+    <End Role="ServiceItem" Type="Self.ServiceItem" Multiplicity="1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceItem">
+        <PropertyRef Name="ServiceItemID" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="ServiceItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_ServiceRequest">
+    <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceRequest">
+        <PropertyRef Name="ServiceRequestID" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="ServiceRequestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceLine_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="ServiceLine" Type="Self.ServiceLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="ServiceLine">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceItem_ServiceItemType">
+    <End Role="ServiceItemType" Type="Self.ServiceItemType" Multiplicity="1" />
+    <End Role="ServiceItem" Type="Self.ServiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceItemType">
+        <PropertyRef Name="ServiceItemTypeID" />
+      </Principal>
+      <Dependent Role="ServiceItem">
+        <PropertyRef Name="ServiceItemTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceItem_WorkDone">
+    <End Role="WorkDone" Type="Self.WorkDone" Multiplicity="1" />
+    <End Role="ServiceItem" Type="Self.ServiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkDone">
+        <PropertyRef Name="WorkDoneID" />
+      </Principal>
+      <Dependent Role="ServiceItem">
+        <PropertyRef Name="WorkDoneID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceItemSize_ServiceItemType">
+    <End Role="ServiceItemType" Type="Self.ServiceItemType" Multiplicity="0..1" />
+    <End Role="ServiceItemSize" Type="Self.ServiceItemSize" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceItemType">
+        <PropertyRef Name="ServiceItemTypeID" />
+      </Principal>
+      <Dependent Role="ServiceItemSize">
+        <PropertyRef Name="ServiceItemTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceRequest_ServiceRequestStatus">
+    <End Role="ServiceRequestStatus" Type="Self.ServiceRequestStatu" Multiplicity="1" />
+    <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceRequestStatus">
+        <PropertyRef Name="ServiceRequestStatusID" />
+      </Principal>
+      <Dependent Role="ServiceRequest">
+        <PropertyRef Name="ServiceRequestStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplierOrder_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="SupplierOrder" Type="Self.SupplierOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="SupplierOrder">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplierOrder_SupplierStatus">
+    <End Role="SupplierStatus" Type="Self.SupplierStatu" Multiplicity="1" />
+    <End Role="SupplierOrder" Type="Self.SupplierOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupplierStatus">
+        <PropertyRef Name="SupplierStatusID" />
+      </Principal>
+      <Dependent Role="SupplierOrder">
+        <PropertyRef Name="SupplierStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplierOrderLine_SupplierOrder">
+    <End Role="SupplierOrder" Type="Self.SupplierOrder" Multiplicity="1" />
+    <End Role="SupplierOrderLine" Type="Self.SupplierOrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupplierOrder">
+        <PropertyRef Name="SupplierOrderID" />
+      </Principal>
+      <Dependent Role="SupplierOrderLine">
+        <PropertyRef Name="SupplierOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplierOrderReturnLine_SupplierOrderLine">
+    <End Role="SupplierOrderLine" Type="Self.SupplierOrderLine" Multiplicity="1" />
+    <End Role="SupplierOrderReturnLine" Type="Self.SupplierOrderReturnLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupplierOrderLine">
+        <PropertyRef Name="ProductID" />
+        <PropertyRef Name="SupplierOrderID" />
+      </Principal>
+      <Dependent Role="SupplierOrderReturnLine">
+        <PropertyRef Name="ProductID" />
+        <PropertyRef Name="SupplierOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplierOrderReturnLine_SupplierOrderReturn1">
+    <End Role="SupplierOrderReturn" Type="Self.SupplierOrderReturn" Multiplicity="1" />
+    <End Role="SupplierOrderReturnLine" Type="Self.SupplierOrderReturnLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupplierOrderReturn">
+        <PropertyRef Name="ReturnID" />
+      </Principal>
+      <Dependent Role="SupplierOrderReturnLine">
+        <PropertyRef Name="ReturnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserRole">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="UserRoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicle_VehicleType">
+    <End Role="VehicleType" Type="Self.VehicleType" Multiplicity="1" />
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleType">
+        <PropertyRef Name="VehicleTypeID" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="VehicleTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FunctionalityAccess">
+    <End Role="Functionality" Type="Self.Functionality" Multiplicity="*" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="SpartanFireBBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AssignDeliveries" EntityType="Self.AssignDelivery" />
+    <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
+    <EntitySet Name="AuditLogTypes" EntityType="Self.AuditLogType" />
+    <EntitySet Name="BankingDetails" EntityType="Self.BankingDetail" />
+    <EntitySet Name="CheckEquipments" EntityType="Self.CheckEquipment" />
+    <EntitySet Name="CheckEquipmentLines" EntityType="Self.CheckEquipmentLine" />
+    <EntitySet Name="CheckEquipmentStatus" EntityType="Self.CheckEquipmentStatu" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="ClientFeedbacks" EntityType="Self.ClientFeedback" />
+    <EntitySet Name="CompanyInfoes" EntityType="Self.CompanyInfo" />
+    <EntitySet Name="Complaints" EntityType="Self.Complaint" />
+    <EntitySet Name="Deliveries" EntityType="Self.Delivery" />
+    <EntitySet Name="DeliveryLines" EntityType="Self.DeliveryLine" />
+    <EntitySet Name="DeliveryStatus" EntityType="Self.DeliveryStatu" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="EmployeeRequests" EntityType="Self.EmployeeRequest" />
+    <EntitySet Name="EmployeeTypes" EntityType="Self.EmployeeType" />
+    <EntitySet Name="Equipments" EntityType="Self.Equipment" />
+    <EntitySet Name="Functionalities" EntityType="Self.Functionality" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="LocationTypes" EntityType="Self.LocationType" />
+    <EntitySet Name="Logins" EntityType="Self.Login" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductOrders" EntityType="Self.ProductOrder" />
+    <EntitySet Name="ProductOrderLines" EntityType="Self.ProductOrderLine" />
+    <EntitySet Name="ProductOrderReturns" EntityType="Self.ProductOrderReturn" />
+    <EntitySet Name="ProductOrderReturnLines" EntityType="Self.ProductOrderReturnLine" />
+    <EntitySet Name="ProductOrderStatus" EntityType="Self.ProductOrderStatu" />
+    <EntitySet Name="ProductStatus" EntityType="Self.ProductStatu" />
+    <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+    <EntitySet Name="Services" EntityType="Self.Service" />
+    <EntitySet Name="ServiceItems" EntityType="Self.ServiceItem" />
+    <EntitySet Name="ServiceItemSizes" EntityType="Self.ServiceItemSize" />
+    <EntitySet Name="ServiceItemTypes" EntityType="Self.ServiceItemType" />
+    <EntitySet Name="ServiceLines" EntityType="Self.ServiceLine" />
+    <EntitySet Name="ServiceRequests" EntityType="Self.ServiceRequest" />
+    <EntitySet Name="ServiceRequestStatus" EntityType="Self.ServiceRequestStatu" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="SupplierOrders" EntityType="Self.SupplierOrder" />
+    <EntitySet Name="SupplierOrderLines" EntityType="Self.SupplierOrderLine" />
+    <EntitySet Name="SupplierOrderReturns" EntityType="Self.SupplierOrderReturn" />
+    <EntitySet Name="SupplierOrderReturnLines" EntityType="Self.SupplierOrderReturnLine" />
+    <EntitySet Name="SupplierStatus" EntityType="Self.SupplierStatu" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <EntitySet Name="VATs" EntityType="Self.VAT" />
+    <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
+    <EntitySet Name="VehicleTypes" EntityType="Self.VehicleType" />
+    <EntitySet Name="WorkDones" EntityType="Self.WorkDone" />
+    <EntitySet Name="WriteOfProducts" EntityType="Self.WriteOfProduct" />
+    <AssociationSet Name="FK_AssignDelivery_Delivery" Association="Self.FK_AssignDelivery_Delivery">
+      <End Role="Delivery" EntitySet="Deliveries" />
+      <End Role="AssignDelivery" EntitySet="AssignDeliveries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssignDelivery_Employee" Association="Self.FK_AssignDelivery_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="AssignDelivery" EntitySet="AssignDeliveries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AuditLog_AuditLogType" Association="Self.FK_AuditLog_AuditLogType">
+      <End Role="AuditLogType" EntitySet="AuditLogTypes" />
+      <End Role="AuditLog" EntitySet="AuditLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AuditLog_User" Association="Self.FK_AuditLog_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AuditLog" EntitySet="AuditLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckEquipment_Vehicle" Association="Self.FK_CheckEquipment_Vehicle">
+      <End Role="Vehicle" EntitySet="Vehicles" />
+      <End Role="CheckEquipment" EntitySet="CheckEquipments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckEquipmentLine_CheckEquipment" Association="Self.FK_CheckEquipmentLine_CheckEquipment">
+      <End Role="CheckEquipment" EntitySet="CheckEquipments" />
+      <End Role="CheckEquipmentLine" EntitySet="CheckEquipmentLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckEquipmentLine_CheckEquipmentStatus" Association="Self.FK_CheckEquipmentLine_CheckEquipmentStatus">
+      <End Role="CheckEquipmentStatus" EntitySet="CheckEquipmentStatus" />
+      <End Role="CheckEquipmentLine" EntitySet="CheckEquipmentLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckEquipmentLine_Equipment" Association="Self.FK_CheckEquipmentLine_Equipment">
+      <End Role="Equipment" EntitySet="Equipments" />
+      <End Role="CheckEquipmentLine" EntitySet="CheckEquipmentLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_ClientType" Association="Self.FK_Client_ClientType">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyInfo_Client" Association="Self.FK_CompanyInfo_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="CompanyInfo" EntitySet="CompanyInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Complaint_Client" Association="Self.FK_Complaint_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Complaint" EntitySet="Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_Client" Association="Self.FK_Location_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Location" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientFeedback_Client" Association="Self.FK_ClientFeedback_Client">
+      <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+      <End Role="ClientFeedback" EntitySet="ClientFeedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Complaint_ServiceRequest" Association="Self.FK_Complaint_ServiceRequest">
+      <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+      <End Role="Complaint" EntitySet="Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Delivery_DeliveryStatus" Association="Self.FK_Delivery_DeliveryStatus">
+      <End Role="DeliveryStatus" EntitySet="DeliveryStatus" />
+      <End Role="Delivery" EntitySet="Deliveries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Delivery_ProductOrder" Association="Self.FK_Delivery_ProductOrder">
+      <End Role="ProductOrder" EntitySet="ProductOrders" />
+      <End Role="Delivery" EntitySet="Deliveries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeliveryLine_Delivery" Association="Self.FK_DeliveryLine_Delivery">
+      <End Role="Delivery" EntitySet="Deliveries" />
+      <End Role="DeliveryLine" EntitySet="DeliveryLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_EmployeeType" Association="Self.FK_Employee_EmployeeType">
+      <End Role="EmployeeType" EntitySet="EmployeeTypes" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeRequest_Employee" Association="Self.FK_EmployeeRequest_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeRequest" EntitySet="EmployeeRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeRequest_ServiceRequest" Association="Self.FK_EmployeeRequest_ServiceRequest">
+      <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+      <End Role="EmployeeRequest" EntitySet="EmployeeRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_LocationType" Association="Self.FK_Location_LocationType">
+      <End Role="LocationType" EntitySet="LocationTypes" />
+      <End Role="Location" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrder_ProductOrderStatus" Association="Self.FK_ProductOrder_ProductOrderStatus">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="ProductOrder" EntitySet="ProductOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceRequest_Location" Association="Self.FK_ServiceRequest_Location">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_User" Association="Self.FK_Login_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Login" EntitySet="Logins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductStatus" Association="Self.FK_Product_ProductStatus">
+      <End Role="ProductStatus" EntitySet="ProductStatus" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductType" Association="Self.FK_Product_ProductType">
+      <End Role="ProductType" EntitySet="ProductTypes" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrderLine_Product" Association="Self.FK_ProductOrderLine_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductOrderLine" EntitySet="ProductOrderLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceLine_Product" Association="Self.FK_ServiceLine_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ServiceLine" EntitySet="ServiceLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplierOrderLine_Product" Association="Self.FK_SupplierOrderLine_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="SupplierOrderLine" EntitySet="SupplierOrderLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WriteOfProduct_Product" Association="Self.FK_WriteOfProduct_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="WriteOfProduct" EntitySet="WriteOfProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrder_ProductOrderStatus1" Association="Self.FK_ProductOrder_ProductOrderStatus1">
+      <End Role="ProductOrderStatus" EntitySet="ProductOrderStatus" />
+      <End Role="ProductOrder" EntitySet="ProductOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrderLine_ProductOrder" Association="Self.FK_ProductOrderLine_ProductOrder">
+      <End Role="ProductOrder" EntitySet="ProductOrders" />
+      <End Role="ProductOrderLine" EntitySet="ProductOrderLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrderReturnLine_ProductOrderLine" Association="Self.FK_ProductOrderReturnLine_ProductOrderLine">
+      <End Role="ProductOrderLine" EntitySet="ProductOrderLines" />
+      <End Role="ProductOrderReturnLine" EntitySet="ProductOrderReturnLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrderReturnLine_ProductOrderReturn" Association="Self.FK_ProductOrderReturnLine_ProductOrderReturn">
+      <End Role="ProductOrderReturn" EntitySet="ProductOrderReturns" />
+      <End Role="ProductOrderReturnLine" EntitySet="ProductOrderReturnLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_ServiceItem" Association="Self.FK_Service_ServiceItem">
+      <End Role="ServiceItem" EntitySet="ServiceItems" />
+      <End Role="Service" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_ServiceRequest" Association="Self.FK_Service_ServiceRequest">
+      <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+      <End Role="Service" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceLine_Service" Association="Self.FK_ServiceLine_Service">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="ServiceLine" EntitySet="ServiceLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceItem_ServiceItemType" Association="Self.FK_ServiceItem_ServiceItemType">
+      <End Role="ServiceItemType" EntitySet="ServiceItemTypes" />
+      <End Role="ServiceItem" EntitySet="ServiceItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceItem_WorkDone" Association="Self.FK_ServiceItem_WorkDone">
+      <End Role="WorkDone" EntitySet="WorkDones" />
+      <End Role="ServiceItem" EntitySet="ServiceItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceItemSize_ServiceItemType" Association="Self.FK_ServiceItemSize_ServiceItemType">
+      <End Role="ServiceItemType" EntitySet="ServiceItemTypes" />
+      <End Role="ServiceItemSize" EntitySet="ServiceItemSizes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceRequest_ServiceRequestStatus" Association="Self.FK_ServiceRequest_ServiceRequestStatus">
+      <End Role="ServiceRequestStatus" EntitySet="ServiceRequestStatus" />
+      <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplierOrder_Supplier" Association="Self.FK_SupplierOrder_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="SupplierOrder" EntitySet="SupplierOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplierOrder_SupplierStatus" Association="Self.FK_SupplierOrder_SupplierStatus">
+      <End Role="SupplierStatus" EntitySet="SupplierStatus" />
+      <End Role="SupplierOrder" EntitySet="SupplierOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplierOrderLine_SupplierOrder" Association="Self.FK_SupplierOrderLine_SupplierOrder">
+      <End Role="SupplierOrder" EntitySet="SupplierOrders" />
+      <End Role="SupplierOrderLine" EntitySet="SupplierOrderLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplierOrderReturnLine_SupplierOrderLine" Association="Self.FK_SupplierOrderReturnLine_SupplierOrderLine">
+      <End Role="SupplierOrderLine" EntitySet="SupplierOrderLines" />
+      <End Role="SupplierOrderReturnLine" EntitySet="SupplierOrderReturnLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplierOrderReturnLine_SupplierOrderReturn1" Association="Self.FK_SupplierOrderReturnLine_SupplierOrderReturn1">
+      <End Role="SupplierOrderReturn" EntitySet="SupplierOrderReturns" />
+      <End Role="SupplierOrderReturnLine" EntitySet="SupplierOrderReturnLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
+      <End Role="UserRole" EntitySet="UserRoles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicle_VehicleType" Association="Self.FK_Vehicle_VehicleType">
+      <End Role="VehicleType" EntitySet="VehicleTypes" />
+      <End Role="Vehicle" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FunctionalityAccess" Association="Self.FunctionalityAccess">
+      <End Role="Functionality" EntitySet="Functionalities" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

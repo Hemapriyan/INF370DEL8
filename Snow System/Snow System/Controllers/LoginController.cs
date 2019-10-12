@@ -18,8 +18,6 @@ namespace Snow_System.Controllers
         [HttpPost]
         public ActionResult Authorise(Snow_System.Models.mvcUserModel userModel)
         {
-            
-
             using (SpartanFireDBEntities1 db =new SpartanFireDBEntities1())
             {
                 var userDetails = db.Users.Where(x => x.UserEmail == userModel.UserEmail && x.UserPassword == userModel.UserPassword).FirstOrDefault();
@@ -34,13 +32,12 @@ namespace Snow_System.Controllers
                     Session["UserID"] = userDetails.UserID;
                     Session["UserEmail"] = userDetails.UserEmail;
                     Session["UserRoleID"] = userDetails.UserRoleID;
-                    int temp =0;
+                    int temp = 0;
                     if((int)Session["UserRoleID"] == 1)
                     {
                         temp = db.Clients.Where(c => c.UserID == userDetails.UserID).Select(c=>c.ClientID).FirstOrDefault();
+                        Session["ClientID"] = temp;
                     }
-                    Session["ClientID"] = temp;
-
                     Globals.Username = userModel.UserEmail;
                     Globals.Password = userModel.UserPassword;
                     if (userDetails.UserRoleID == 1)
@@ -48,16 +45,16 @@ namespace Snow_System.Controllers
                         Location l = db.Locations.Where(m=>m.ClientID == userDetails.UserID).FirstOrDefault();
                         if(l == null)
                         {
-                            return RedirectToAction("AddOrEdit", "Location", new { cid = userDetails.UserID }) ;
+                            Session["ActionID"] = 1;
+                            TempData["Title"] = "Please add a location before you start";
+                            return RedirectToAction("AddOrEdit", "Location", new { cid = temp }) ;
                         }
                         else
                         {
                             return RedirectToAction("Home", "Home");
                         }
                     }else{
-                        return RedirectToAction("Home", "Home");
-
-                        //return RedirectToAction("Index", "Dashboard");
+                        return RedirectToAction("Index", "Dashboard");
                     }
                 }
 

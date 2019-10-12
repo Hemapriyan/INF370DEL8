@@ -16,6 +16,7 @@
     <div class="form-group">
         <div class="CenteringContainer">
             @Html.HiddenFor(model => model.LocationID)
+            @Html.HiddenFor(model => model.ClientID)
 
 
             <div class="form-group">
@@ -96,17 +97,9 @@
         <div class="form-group">
 
             <button onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</button>
-            @if (ViewBag.Action == 3)
+            @if (ViewBag.Action > 1)
             {
-                <a href="@Url.Action("Index","Location")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
-            }
-            else if (ViewBag.Action == 1)
-            {
-                <a href="@Url.Action("Product","ProductOrder")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
-            }
-            else if (ViewBag.Action == 2)
-            {
-                <a href="@Url.Action("Product","")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
+                <a href="@Url.Action("GoBack","Location")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
             }
         </div>
     </div>

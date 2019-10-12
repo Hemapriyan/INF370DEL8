@@ -68,7 +68,6 @@ namespace SpartanFireWebAPI.Models
         public virtual DbSet<SupplierOrderReturn> SupplierOrderReturns { get; set; }
         public virtual DbSet<SupplierOrderReturnLine> SupplierOrderReturnLines { get; set; }
         public virtual DbSet<SupplierStatu> SupplierStatus { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<VAT> VATs { get; set; }

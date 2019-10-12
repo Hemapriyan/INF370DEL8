@@ -42,11 +42,17 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ContactNumber)
                 </th>
+<<<<<<< HEAD
               <th>
                   @Html.DisplayNameFor(model=>model.UserName)
               </th>
               
                
+=======
+                <th>
+                    Client Type
+                </th>
+>>>>>>> cdd4fe8d9f290f831b38d3b5c0b2ed7a81de8251
                 <th>Actions</th>
             </tr>
         </thead>
@@ -73,13 +79,19 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ContactNumber)
                     </td>
+
                     <td>
+<<<<<<< HEAD
                         @Html.DisplayFor(modelItem=> item.User.UserEmail)
                     </td>
                     
                     
                     <td>
                         <a href="@Url.Action("AddorEdit", "Location", new { cid = item.ClientID })" class="btn btn-info">Add Location</a>
+=======
+                        <a href="@Url.Action("AddorEdit", "Location", new { cid = item.ClientID })" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span></a>
+                        <a href="@Url.Action("Index", "Location", new { searchBy = "ClientID", search = item.ClientID })" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></a>
+>>>>>>> cdd4fe8d9f290f831b38d3b5c0b2ed7a81de8251
                         <a href="@Url.Action("MakeClientOrder", "ProductOrder", new { id = item.ClientID })" class="btn btn-warning">Make Order</a>
                         <a href="@Url.Action("AddorEdit", "Client", new { id = item.ClientID })" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a onclick="Delete(@item.ClientID)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>

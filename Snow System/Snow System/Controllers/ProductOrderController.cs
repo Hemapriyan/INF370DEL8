@@ -14,9 +14,9 @@ namespace Snow_System.Controllers
         // GET: ProductOrder
         public ActionResult Index()
         {
-            ViewBag.roleID = Convert.ToInt32(Session["UserRoleID"]);
-            IEnumerable <ProductOrder> orders;
             int userRole = Convert.ToInt32(Session["UserRoleID"]);
+            ViewBag.roleID = userRole;
+            IEnumerable <ProductOrder> orders;
             if (userRole >= 3)
             {
                 orders = db.ProductOrders.Include(po=>po.Location)

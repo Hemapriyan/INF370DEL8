@@ -614,9 +614,6 @@
     <Compile Include="SupplierStatu.cs">
       <DependentUpon>Spartan.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>Spartan.tt</DependentUpon>
-    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>Spartan.tt</DependentUpon>
     </Compile>

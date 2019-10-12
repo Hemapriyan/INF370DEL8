@@ -412,16 +412,6 @@
     <Property Name="SupplierStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="40" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserID" />
@@ -1141,7 +1131,6 @@
     <EntitySet Name="SupplierOrderReturn" EntityType="Self.SupplierOrderReturn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplierOrderReturnLine" EntityType="Self.SupplierOrderReturnLine" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplierStatus" EntityType="Self.SupplierStatus" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VAT" EntityType="Self.VAT" Schema="dbo" store:Type="Tables" />
