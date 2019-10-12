@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
 }
 
+
 <h1 class="page-header pageHeading" style="text-align:center;">Vehicles</h1>
 
 <div style="text-align:center;">
@@ -31,8 +32,7 @@
 <a href="@Url.Action("Index","TreeView")" class="ActionButton ContinueBtn btn btn-success" style="float:left; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Tree view</a>
 
 <table class="table table-hover">
-    <tr class="table-primary">
-
+    <tr class="table-primary table-heading">
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
@@ -60,7 +60,6 @@
         foreach (var item in Model)
         {
             <tr class="table-dark">
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
@@ -70,28 +69,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PurchaseDate)
                 </td>
-                @if (item.VehicleTypeID == 1)
-                {
-                    <td>
-                        Workshop
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        Standard
-                    </td>
-                }
                 <td>
-                    <a href="@Url.Action("AddorEdit", "Vehicle", new { id = item.VehicleID })" class="btn btn-warning"><i class="fa fa-pencil"></i>Edit</a>
-                    <a onclick="Delete(@item.VehicleID)" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                    @item.VehicleType.Description
+                </td>
+                <td>
+                    <a href="@Url.Action("AddorEdit", "Vehicle", new { id = item.VehicleID })" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <a onclick="Delete(@item.VehicleID)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+
                 </td>
             </tr>
         }
     }
 
 </table>
-
 @section scripts{
     <script>
         $(function () {

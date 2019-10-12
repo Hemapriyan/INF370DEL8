@@ -28,20 +28,23 @@ namespace SpartanFireWebAPI.Controllers
         [ResponseType(typeof(Employee))]
         public IHttpActionResult GetEmployee(int id)
         {
-            EmployeeModelGlobal model = new EmployeeModelGlobal();
             db.Configuration.ProxyCreationEnabled = false;
+
+            Employee employee = db.Employees.Find(id);
+
+            EmployeeModelGlobal model = new EmployeeModelGlobal();
             model.emp = db.Employees.Find(id);
             model.user = db.Users.Find(model.emp.UserID);
 
             //model.emp.UserName = model.user.UserEmail;
-            //model.emp.Password = model.user.UserPassword;
+          // model.emp.Password = model.user.UserPassword;
 
-            if (model == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return Ok(model);
+            return Ok(employee);
         }
 
         // PUT: api/Employees/5
@@ -83,7 +86,7 @@ namespace SpartanFireWebAPI.Controllers
 
         // POST: api/Employees
         [ResponseType(typeof(Employee))]
-        public IHttpActionResult PostEmployee(EmployeeModelGlobal employee)
+        public IHttpActionResult PostEmployee(Employee employee)
         {
             try
             {
@@ -93,15 +96,15 @@ namespace SpartanFireWebAPI.Controllers
                     return BadRequest(ModelState);
                 }
 
-                db.Users.Add(employee.user);
+                db.Users.Add(employee.User);
                 db.SaveChanges();
-                employee.emp.UserID = (db.Users
+                employee.UserID = (db.Users
                             .OrderByDescending(p => p.UserID)
                             .First().UserID);
-                db.Employees.Add(employee.emp);
+                db.Employees.Add(employee);
                 db.SaveChanges();
 
-                return CreatedAtRoute("DefaultApi", new { id = employee.emp.EmployeeID }, employee);
+                return CreatedAtRoute("DefaultApi", new { id = employee.EmployeeID }, employee);
             }
             catch (Exception exc)
             {

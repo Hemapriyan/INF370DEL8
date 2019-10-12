@@ -11,7 +11,9 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ProductOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +24,9 @@ namespace Snow_System
         }
     
         public int ProductOrderID { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Date)]
+        [DisplayName("Date of Order")]
         public System.DateTime DateOfOrder { get; set; }
         public int ProductOrderStatusID { get; set; }
         public Nullable<int> LocationID { get; set; }

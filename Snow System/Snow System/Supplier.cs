@@ -11,7 +11,9 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Supplier
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +23,32 @@ namespace Snow_System
         }
     
         public int SupplierID { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Contact Number")]
+        [MaxLength(10)]
+        [MinLength(10)]
         public string ContactNumber { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.EmailAddress)]
+        [DisplayName("Email Address")]
         public string EmailAddress { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Registration Number")]
         public string RegistrationNumber { get; set; }
+
+        
+        [DataType(DataType.Currency)]
+        [DisplayName("Credit Balance")]
         public double CreditBalance { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Supplier Name")]
         public string SupplierName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

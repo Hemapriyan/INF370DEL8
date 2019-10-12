@@ -11,7 +11,9 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +24,28 @@ namespace Snow_System
         }
     
         public int EmployeeID { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Employee Name")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Employee Surname")]
         public string Surname { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Employee ID Number")]
+        [MinLength(13)]
         public string IDNumber { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Physical Address")]
         public string PhysicalAddress { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Certification/Qualification")]
         public string Certification { get; set; }
+        [DisplayName("Employee Type")]
         public int EmployeeTypeID { get; set; }
         public int UserID { get; set; }
     
@@ -36,5 +55,23 @@ namespace Snow_System
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeRequest> EmployeeRequests { get; set; }
+
+        public List<EmployeeType> EmployeeTypeList { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "This field is required")]
+        [DisplayName("User Email")]
+        public string UserName { get; set; }
+
+
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Password)]
+        [DisplayName("Password")]
+        public string Password { get; set; }
+
+       
+        
+        //public string UserName { get; set; }
+        //public string Password { get; set; }
     }
 }

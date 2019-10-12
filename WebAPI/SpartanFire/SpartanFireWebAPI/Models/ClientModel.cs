@@ -9,5 +9,6 @@ namespace SpartanFireWebAPI.Models
     {
         public Client emp { get; set; }
         public User user { get; set; }
+       
     }
 }

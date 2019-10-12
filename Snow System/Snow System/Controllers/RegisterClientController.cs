@@ -34,7 +34,7 @@ namespace Snow_System.Controllers
             if (id == 0)
             {
                 ClientModelGlobal cust = new ClientModelGlobal();
-                cust.emp = new mvcClientModel();
+                cust.emp = new Client();
                 //cust.ClientTypeList = db.ClientTypes.ToList();
                 return View(cust);
             }
@@ -43,23 +43,23 @@ namespace Snow_System.Controllers
             {
                 ClientModelGlobal cust = new ClientModelGlobal();
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Client/" + id.ToString()).Result;
-                cust.emp = new mvcClientModel();
+                cust.emp = new Client();
                 //cust.ClientTypeList = db.ClientTypes.ToList();
-                cust.emp = response.Content.ReadAsAsync<mvcClientModel>().Result;
+                cust.emp = response.Content.ReadAsAsync<Client>().Result;
                 return View(cust);
             }
         }
         [HttpPost]
 
-        public ActionResult AddorEdit(mvcClientModel emp, int ClientTypeID)
+        public ActionResult AddorEdit(Client emp, int ClientTypeID)
         {
             ClientModelGlobal model_ = new ClientModelGlobal();
-            model_.emp = new mvcClientModel();
-            model_.emp = emp;
-            emp.ClientTypeID = ClientTypeID;
-
+            model_.emp = new Client();
             model_.user = new User();
-            model_.UserEmail = emp.EmailAddress;
+
+            model_.emp = emp;
+            model_.emp.ClientTypeID = ClientTypeID;
+
             model_.user.UserID = emp.UserID;
             model_.user.UserPassword = emp.Password;
             model_.user.UserEmail = emp.UserName;

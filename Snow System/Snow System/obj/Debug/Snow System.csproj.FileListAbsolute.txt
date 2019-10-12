@@ -1253,9 +1253,8 @@ C:\Users\Amma\Desktop\DELIVERABL% FINAL\Snow System\Snow System\obj\Debug\Snow S
 C:\Users\Amma\Desktop\DELIVERABL% FINAL\Snow System\Snow System\obj\Debug\Snow System.dll
 C:\Users\Amma\Desktop\DELIVERABL% FINAL\Snow System\Snow System\obj\Debug\Snow System.pdb
 C:\Users\Amma\Desktop\DELIVERABL% FINAL\Snow System\Snow System\obj\Debug\Snow System.csprojAssemblyReference.cache
-C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.dll
-C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.pdb
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Web.Helpers.xml
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Twilio.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Snow System.dll.config
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Snow System.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Snow System.pdb
@@ -1315,6 +1314,11 @@ C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\DHTMLX.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\EntityFramework.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\EntityFramework.SqlServer.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\EPPlus.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.Auth.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.Auth.PlatformServices.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.Core.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.PlatformServices.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -1408,6 +1412,12 @@ C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\DHTMLX.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\EntityFramework.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\EntityFramework.SqlServer.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\EPPlus.xml
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.pdb
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.xml
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.Auth.pdb
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.Auth.xml
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.Core.pdb
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.Apis.Core.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Microsoft.AspNet.Identity.Owin.xml
@@ -1458,7 +1468,6 @@ C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Net.Ht
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Numerics.Vectors.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Text.Encodings.Web.xml
-C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Web.Helpers.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Web.Mvc.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Web.Optimization.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Web.Razor.xml
@@ -1466,10 +1475,15 @@ C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Web.We
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Web.WebPages.Deployment.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\System.Web.WebPages.Razor.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Newtonsoft.Json.xml
-C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Twilio.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Antlr3.Runtime.pdb
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.csproj.CopyComplete
+<<<<<<< HEAD
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.pdb
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.csprojAssemblyReference.cache
+=======
 C:\Users\justi\Documents\University\INF 370\Del 8\Snow System\Snow System\bin\Snow System.dll.config
 C:\Users\justi\Documents\University\INF 370\Del 8\Snow System\Snow System\bin\Snow System.dll
 C:\Users\justi\Documents\University\INF 370\Del 8\Snow System\Snow System\bin\Snow System.pdb
@@ -1900,3 +1914,4 @@ C:\Users\justi\Documents\University\INF 370\Sel 8 Reexam\Snow System\Snow System
 C:\Users\justi\Documents\University\INF 370\Sel 8 Reexam\Snow System\Snow System\obj\Debug\Snow System.csproj.CopyComplete
 C:\Users\justi\Documents\University\INF 370\Sel 8 Reexam\Snow System\Snow System\obj\Debug\Snow System.dll
 C:\Users\justi\Documents\University\INF 370\Sel 8 Reexam\Snow System\Snow System\obj\Debug\Snow System.pdb
+>>>>>>> cdd4fe8d9f290f831b38d3b5c0b2ed7a81de8251

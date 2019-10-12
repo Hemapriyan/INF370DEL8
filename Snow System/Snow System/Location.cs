@@ -11,7 +11,9 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Location
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +24,31 @@ namespace Snow_System
         }
     
         public int LocationID { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Street Address")]
         public string StreetAddress { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Suburb")]
         public string Suburb { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("City")]
         public string City { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Postal Code")]
         public string PostalCode { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Contact Person Name")]
         public string ContactPersonName { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Contact Person Number")]
+        [MaxLength(10)]
+        [MinLength(10)]
         public string ContactPersonNumber { get; set; }
         public int LocationTypeID { get; set; }
         public int ClientID { get; set; }

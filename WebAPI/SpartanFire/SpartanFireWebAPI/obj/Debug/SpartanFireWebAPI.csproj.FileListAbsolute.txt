@@ -256,9 +256,6 @@ C:\Users\Amma\Desktop\DELIVERABL% FINAL\WebAPI\SpartanFire\SpartanFireWebAPI\obj
 C:\Users\Amma\Desktop\DELIVERABL% FINAL\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.dll
 C:\Users\Amma\Desktop\DELIVERABL% FINAL\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.pdb
 C:\Users\Amma\Desktop\DELIVERABL% FINAL\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.csprojAssemblyReference.cache
-C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.dll
-C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.pdb
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\bin\SpartanFireWebAPI.dll.config
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\bin\SpartanFireWebAPI.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\bin\SpartanFireWebAPI.pdb
@@ -340,7 +337,10 @@ C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\bin\
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\bin\System.Web.WebPages.Razor.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\bin\Antlr3.Runtime.pdb
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.csproj.CopyComplete
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.pdb
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\obj\Debug\SpartanFireWebAPI.csprojAssemblyReference.cache
 C:\Users\justi\Documents\University\INF 370\Sel 8 Reexam\WebAPI\SpartanFire\SpartanFireWebAPI\bin\SpartanFireWebAPI.dll.config
 C:\Users\justi\Documents\University\INF 370\Sel 8 Reexam\WebAPI\SpartanFire\SpartanFireWebAPI\bin\SpartanFireWebAPI.dll
