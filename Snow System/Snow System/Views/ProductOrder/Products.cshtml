@@ -21,6 +21,7 @@
         -->
 </div>
 
+
 <br />
 <br />
 <!--
@@ -70,7 +71,7 @@
                 <div class="productinfo">
                     <span> <b> @Html.DisplayFor(modelItem => item.Name) </b> </span>
                     <br />
-                    <span>@Html.DisplayFor(modelItem => item.Dscription) </span><br />
+                    <span>@Html.DisplayFor(modelItem => item.ProductDescription) </span><br />
                     <br />
                 </div>
                 <div class="productbutton">
@@ -81,40 +82,43 @@
     }
 </div>
 
-    <script>
-            function priceToCart(e) {
-                e.innerHTML = "<span class='glyphicon glyphicon-shopping-cart'></span> Add to cart";
-            }
-
-            function cartToPrice(e, i) {
-                e.innerHTML = i;
-            }
-
-            function openNavb() {
-                document.getElementById("sidenavb").style.width = "250px";
-            }
-
-            function closeNavb() {
-                document.getElementById("sidenavb").style.width = "0";
-            }
-
-            var slider = document.getElementById("minamountslider");
-            var output = document.getElementById("minamount");
-            output.innerHTML = "R" + slider.value; // Display the default slider value
-
-            // Update the current slider value (each time you drag the slider handle)
-            slider.oninput = function () {
-                output.innerHTML = "R" + this.value;
-            }
+<p style="text-align: center" class="text-info">For large orders please call 084 652 3556 or email <a href = "mailto:spartanfireadmin@spartanfire.co.za?subject=New Order">spartanfireadmin@spartanfire.co.za</a></p>
 
 
-            var slider2 = document.getElementById("maxamountslider");
-            var output2 = document.getElementById("maxamount");
-            output2.innerHTML = "R5000"; // Display the default slider value
+<script>
+    function priceToCart(e) {
+        e.innerHTML = "<span class='glyphicon glyphicon-shopping-cart'></span> Add to cart";
+    }
 
-            // Update the current slider value (each time you drag the slider handle)
-            slider2.oninput = function () {
-                output2.innerHTML = "R" + this.value;
-            }
+    function cartToPrice(e, i) {
+        e.innerHTML = i;
+    }
 
-    </script>
+    function openNavb() {
+        document.getElementById("sidenavb").style.width = "250px";
+    }
+
+    function closeNavb() {
+        document.getElementById("sidenavb").style.width = "0";
+    }
+
+    var slider = document.getElementById("minamountslider");
+    var output = document.getElementById("minamount");
+    output.innerHTML = "R" + slider.value; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function () {
+        output.innerHTML = "R" + this.value;
+    }
+
+
+    var slider2 = document.getElementById("maxamountslider");
+    var output2 = document.getElementById("maxamount");
+    output2.innerHTML = "R5000"; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider2.oninput = function () {
+        output2.innerHTML = "R" + this.value;
+    }
+
+</script>

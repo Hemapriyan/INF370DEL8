@@ -1325,6 +1325,7 @@
     <Content Include="Views\Product\AddorEdit.cshtml" />
     <Content Include="Views\BankingDetail\Index.cshtml" />
     <Content Include="Views\BankingDetail\AddorEdit.cshtml" />
+    <Content Include="Views\Location\EmployeeChooseOrderLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
