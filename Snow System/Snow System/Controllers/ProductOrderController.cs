@@ -70,7 +70,6 @@ namespace Snow_System.Controllers
         {
             db.Configuration.ProxyCreationEnabled = false;
             BankingDetail bd = db.BankingDetails.FirstOrDefault();
-            ViewBag.OrderNumber = Session["OrderID"];
             return View(bd);
         }
 
@@ -120,7 +119,6 @@ namespace Snow_System.Controllers
         {
             if (Session["UserID"] == null)
             {
-                TempData["message"] = "Please login to place an order order";
                 return RedirectToAction("Index", "Login");
             }
             int user = Convert.ToInt32(Session["UserID"]);
@@ -142,13 +140,12 @@ namespace Snow_System.Controllers
                 pl.QuantityOrdered = 1;
                 pl.QuantityDelivered = 0;
                 productorder.ProductOrderStatusID = 1;
-                productorder.LocationID = db.Locations.Where(l => l.Client.UserID == user)
-                    .Select(l=>l.LocationID).FirstOrDefault();
-                productorder.Client_ID = db.Clients.Where(c => c.UserID == user)
-                   .Select(c => c.ClientID).FirstOrDefault();
+                productorder.LocationID = db.Locations.Where(l => l.ClientID == user).Select(l=>l.LocationID).FirstOrDefault();
                 db.ProductOrders.Add(productorder);
+                productorder.Client_ID = db.Clients.Where(c=>c.UserID == user)
+                    .Select(c=>c.ClientID).FirstOrDefault();
                 db.SaveChanges();
-                List<int> orderIDs = db.ProductOrders.Where(po=>po.ProductOrderStatusID == 1).Select(po => po.ProductOrderID).ToList();
+                List<int> orderIDs = db.ProductOrders.Select(po => po.ProductOrderID).ToList();
                 pl.ProductOrderID = orderIDs.Last();
                 db.ProductOrderLines.Add(pl);
                 db.SaveChanges();
@@ -203,55 +200,40 @@ namespace Snow_System.Controllers
 
         public ActionResult MakeClientOrder(int? id)
         {
-            Session["ClientID"] = id;
-
+            TempData["ClientID"] = id;
             db.Configuration.ProxyCreationEnabled = false;
             ViewBag.products = db.Products.ToList();
             Client cnt = db.Clients.Where(c => c.ClientID == id).FirstOrDefault();
+            ViewBag.ClientName = cnt.ClientName + " " + cnt.ClientSurname;
+            ViewBag.ClientNumber = cnt.ContactNumber;
             //ViewBag.ClientEmail = cnt.EmailAddress;
             ProductOrder po = db.ProductOrders.Include(order => order.ProductOrderLines)
                                                 .Include(order => order.ProductOrderStatu)
-                                                .Include(order=>order.Location.Client)
                                                 .Include(order=>order.ProductOrderLines.Select(pol=>pol.Product.ProductType))
                                                 .Where(order => order.Client_ID == id)
                                                 .Where(order => order.ProductOrderStatusID == 1).FirstOrDefault();
             if (po != null)
             {
-                //po.LocationID = db.Locations.Where(l => l.ClientID == po.Client_ID).Select(l => l.LocationID).FirstOrDefault();
-                db.SaveChanges();
 
             }
             else
             {
                 po = new ProductOrder();
                 po.Client_ID = Convert.ToInt32(id);
-                po.LocationID = db.Locations.Where(l => l.ClientID == id)
-                    .Select(l => l.LocationID)
-                    .FirstOrDefault();
+
                 po.ProductOrderStatusID = 1;
                 db.ProductOrders.Add(po);
                 db.SaveChanges();
-                po = db.ProductOrders.Include(order => order.ProductOrderLines)
-                                .Include(order => order.ProductOrderStatu)
-                                .Include(order => order.Location.Client)
-                                .Include(order => order.ProductOrderLines.Select(pol => pol.Product.ProductType))
-                                .Where(order => order.Client_ID == id)
-                                .Where(order => order.ProductOrderStatusID == 1).FirstOrDefault();
             }
-            Session["ProdOrdID"] = po.ProductOrderID;
+            TempData["ProdOrdID"] = po.ProductOrderID;
             return View(po);
         }
 
-        public ActionResult AddProduct(int Product, int Quantity = 0)
+        public ActionResult AddProduct(int Product, int Quantity)
         {
-            if(Quantity < 1)
-            {
-                TempData["ErrorMessage"] = "Connot have a quantity less than 1";
-                return RedirectToAction("MakeClientOrder", "ProductOrder", new { id = Session["ClientID"] });
-            }
             bool inList = false;
             db.Configuration.ProxyCreationEnabled = false;
-            int temp = Convert.ToInt32(Session["ProdOrdID"]);
+            int temp = Convert.ToInt32( TempData["ProdOrdID"]);
             ProductOrder po = db.ProductOrders.Include(order => order.ProductOrderLines)
                                     .Include(order => order.ProductOrderStatu)
                                     .Where(order => order.ProductOrderID == temp)
@@ -274,13 +256,13 @@ namespace Snow_System.Controllers
                 po.ProductOrderLines.Add(pol);
             }
             db.SaveChanges();
-            return RedirectToAction("MakeClientOrder", "ProductOrder", new { id = Session["ClientID"] });
+            return RedirectToAction("MakeClientOrder", "ProductOrder", new { id = TempData["ClientID"] });
         }
 
         public ActionResult RemoveFromList(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            int temp = Convert.ToInt32(Session["ProdOrdID"]);
+            int temp = Convert.ToInt32(TempData["ProdOrdID"]);
             int prod = Convert.ToInt32(id);
             ProductOrder po = db.ProductOrders.Include(order => order.ProductOrderLines)
                         .Include(order => order.ProductOrderStatu)
@@ -289,48 +271,37 @@ namespace Snow_System.Controllers
             ProductOrderLine pol = po.ProductOrderLines.Where(p=>p.ProductID== prod).FirstOrDefault();
             po.ProductOrderLines.Remove(pol);
             db.SaveChanges();
-            return RedirectToAction("MakeClientOrder", "ProductOrder", new { id = Session["ClientID"] });
+            return RedirectToAction("MakeClientOrder", "ProductOrder", new { id = TempData["ClientID"] });
 
         }
 
         public ActionResult RemoveAllFromList()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            int temp = Convert.ToInt32(Session["ProdOrdID"]);
+            int temp = Convert.ToInt32(TempData["ProdOrdID"]);
             ProductOrder po = db.ProductOrders
                 .Include(order => order.ProductOrderLines)
             .Include(order => order.ProductOrderStatu)
             .Where(order => order.ProductOrderID == temp)
             .FirstOrDefault();
-            List<ProductOrderLine> poll = po.ProductOrderLines.ToList();
-            foreach (ProductOrderLine line in poll)
+            foreach (ProductOrderLine line in po.ProductOrderLines)
             {
                 po.ProductOrderLines.Remove(line);
             }
             db.SaveChanges();
-            return RedirectToAction("MakeClientOrder", "ProductOrder", new { id = Session["ClientID"] });
+            return RedirectToAction("MakeClientOrder", "ProductOrder", new { id = TempData["ClientID"] });
 
         }
 
         public ActionResult ChooseLocation(int id)
         {
-            int ordID = Convert.ToInt32(Session["OrderID"]) ;
+            int ordID = Convert.ToInt32(TempData["OrderID"]) ;
             ProductOrder por = db.ProductOrders.Where(po => po.ProductOrderID == ordID).FirstOrDefault();
             por.LocationID = id;
-            por.ProductOrderStatusID = 2;
             por.DateOfOrder = DateTime.Now;
             db.SaveChanges();
-            SendEmailController se = new SendEmailController();
-            se.OrderConfrimed(por);
-            if (Convert.ToInt32( Session["UserRoleID"] )== 1)
-            {
-                return RedirectToAction("MakePayment");
-            }
-            else
-            {
-                TempData["SuccessMessage"] = "Order placed!";
-                return RedirectToAction("Index","Client");
-            }
+            return RedirectToAction("MakePayment");
         }
+
     }
 }
