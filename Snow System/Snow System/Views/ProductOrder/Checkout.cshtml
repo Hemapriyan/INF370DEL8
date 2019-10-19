@@ -39,7 +39,7 @@
                 <img height="75" alt="@item.Product.Name" src="~/Resources/Product/@item.Product.Name .jpg" />
             </div>
             <div class="cartitempiece cartiteminfo">
-                <p>@Html.DisplayFor(modelItem => item.Product.Name) @Html.DisplayFor(modelItem => item.Product.Dscription)</p>
+                <p>@Html.DisplayFor(modelItem => item.Product.Name) @Html.DisplayFor(modelItem => item.Product.ProductDescription)</p>
                 <p>@item.Product.SellingPrice.ToString("C2")</p>
 
             </div>
@@ -98,8 +98,8 @@ else
         </div>
         <hr style="margin:0;" />
         <footer class="" style="">
-            <a href="" onclick="document.getElemeproductorderntById('MakeOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
-            <a href="@Url.Action("ChooseLocationDelivery", "ProductOrder" , new { id = @Model.ProductOrderID, sid = 2})" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+            <div onclick="document.getElemeproductorderntById('MakeOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
+            <a href="@Url.Action("ChooseLocationDelivery", "Location" , new { id = @Model.ProductOrderID})" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
         </footer>
     </div>
 </div>
