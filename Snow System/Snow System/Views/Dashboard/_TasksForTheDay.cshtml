@@ -36,18 +36,18 @@
                         <div class="task-list">
                             @foreach (Delivery del in ViewBag.Deliveries)
                             {
-                            <div class="task-list-item" id="@del.DeliveryID" onclick="Selectdelivery(this, '@del.DeliveryID', '@del.Location.StreetAddress', '@srv.Location.Suburb', '@srv.Location.City', '@srv.Location.ContactPersonName', '@srv.Location.LocationType.Description', '@srv.Location.ContactPersonNumber', '@srv.Location.Client.ClientName', '@srv.Location.Client.ClientSurname', '@srv.Location.Client.EmailAddress')">
+                            <div class="task-list-item" id="@del.DeliveryID" onclick="SelectDelivery(this, '@del.DeliveryID', '@del.ProductOrder.Location.StreetAddress', '@del.ProductOrder.Location.Suburb', '@del.ProductOrder.Location.City', '@del.ProductOrder.Location.ContactPersonName', '@del.ProductOrder.Location.LocationType.Description', '@del.ProductOrder.Location.ContactPersonNumber', '@del.ProductOrder.Location.Client.ClientName', '@del.ProductOrder.Location.Client.ClientSurname', '@del.ProductOrder.Location.Client.EmailAddress')">
                                 <span class="task-item">
-                                    Client: @srv.Location.Client.ClientName @srv.Location.Client.ClientSurname
+                                    Client: @del.ProductOrder.Location.Client.ClientName @del.ProductOrder.Location.Client.ClientSurname
                                 </span>
                                 <br />
                                 <span class="task-item">
-                                    Location: @srv.Location.StreetAddress, @srv.Location.Suburb
+                                    Location: @del.ProductOrder.Location.StreetAddress, @del.ProductOrder.Location.Suburb
                                 </span>
                             </div>
                             }
                         </div>
-                        <div class="task-info">
+                        <div id="task-info">
                             <p class="dash-none"> No item selected </p>
                         </div>
                     }
@@ -66,9 +66,9 @@
                     @if (serCount != 0)
                     {
                         <div class="task-list">
-                            @foreach (var srv in ViewBag.Services)
+                            @foreach (ServiceRequest srv in ViewBag.Services)
                             {
-                                <div class="task-list-item" id="@srv.ServiceRequestID" onclick="SelectService(this, '@srv.ServiceRequestID', '@srv.Location.StreetAddress', '@srv.Location.Suburb', '@srv.Location.City', '@srv.Location.ContactPersonName', '@srv.Location.LocationType.Description', '@srv.Location.ContactPersonNumber', '@srv.Location.Client.ClientName', '@srv.Location.Client.ClientSurname', '@srv.Location.Client.EmailAddress')">
+                                <div class="task-list-item" id="@srv.ServiceRequestID" onclick="SelectService(this, '@srv.ServiceRequestID', '@srv.Location.StreetAddress', '@srv.Location.Suburb', '@srv.Location.City', '@srv.Location.ContactPersonName', '@srv.Location.LocationType.Description', '@srv.Location.ContactPersonNumber', '@srv.Location.Client.ClientName', '@srv.Location.Client.ClientSurname', '@srv.Location.Client.User.UserEmail')">
                                     <span class="task-item">
                                         Client: @srv.Location.Client.ClientName @srv.Location.Client.ClientSurname
                                     </span>
@@ -126,6 +126,62 @@
     }
     
     function SelectService(e, SID, StrAdd, Sub, Cit, ContPerName, Type, ContPersNum, CliName, CliSur, CliEmail ) {
+        var selectedItems = document.getElementsByClassName("Selected-Service");
+        if (selectedItems != null) {
+            for (i = 0; i < selectedItems.length; i++) {
+                selectedItems[i].classList.add("task-list-item");
+                selectedItems[i].classList.remove("Selected-Service");
+            }
+        }
+        
+        e.classList.add("Selected-Service");
+        e.classList.remove("task-list-item");
+        var InfoContainer = document.getElementById("ServiceInfo");
+        InfoContainer.innerHTML = "";
+
+        var node = document.createElement("p");
+        var textnode = document.createTextNode("#" + SID);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Service Type: " + Type);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Client: " + CliName + " " + CliSur);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        
+        var email = document.createElement("a");
+        var mail = document.createTextNode(CliEmail)
+        email.setAttribute('href', 'mailto:' + CliEmail);
+        email.appendChild(mail);
+        node = document.createElement("p");
+        textnode = document.createTextNode("Client Email: ");
+        node.appendChild(textnode);
+        node.appendChild(email);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Address: " + StrAdd + ", " + Sub + ", " + Cit);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Contact Person: " + ContPerName);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+
+        node = document.createElement("p");
+        textnode = document.createTextNode("Contact Person Number: " + ContPersNum);
+        node.appendChild(textnode);
+        InfoContainer.appendChild(node);
+    }
+
+    function SelectDelivery(e, SID, StrAdd, Sub, Cit, ContPerName, Type, ContPersNum, CliName, CliSur, CliEmail ) {
         var selectedItems = document.getElementsByClassName("Selected-Service");
         if (selectedItems != null) {
             for (i = 0; i < selectedItems.length; i++) {

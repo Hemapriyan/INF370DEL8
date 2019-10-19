@@ -15,7 +15,7 @@ namespace Snow_System.Controllers
         public ActionResult Index(string searchBy, string search)
         {
 
-            return View(db.ServiceRequests.Where(x => x.Comment.StartsWith(search) || search == null).ToList());
+            return View(db.ServiceRequests.Where(x => x.Location.Client.ClientName.StartsWith(search) || search == null).ToList());
             //return View();
         }
 
