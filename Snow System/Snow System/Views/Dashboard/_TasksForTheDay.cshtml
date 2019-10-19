@@ -23,8 +23,14 @@
             Tasks For the Day
         </h3>
         <div class="card-subheading" style="background-color:#1f303f;">
-            <button id="delbutton" class="btn btn-primary" onclick="DelClicked()">Deliveries</button>
-            <button id="serbutton" class="btn btn-outline-primary" onclick="SerClick()">Services</button>
+            <button id="delbutton" class="btn btn-primary" onclick="DelClicked()">
+                Deliveries @if (delCount > 0)
+                {<span class="badge badge-pill badge-info">@delCount</span>}
+            </button>
+            <button id="serbutton" class="btn btn-outline-primary" onclick="SerClick()">
+                Services @if (serCount > 0)
+                {<span class="badge badge-pill badge-info">@serCount</span>}
+            </button>
         </div>
         <div class="card-body card-body-large">
             <div id="deliveries" style="background-color: #0f2b45;">
@@ -36,7 +42,7 @@
                         <div class="task-list">
                             @foreach (Delivery del in ViewBag.Deliveries)
                             {
-                            <div class="task-list-item" id="@del.DeliveryID" onclick="SelectDelivery(this, '@del.DeliveryID', '@del.ProductOrder.Location.StreetAddress', '@del.ProductOrder.Location.Suburb', '@del.ProductOrder.Location.City', '@del.ProductOrder.Location.ContactPersonName', '@del.ProductOrder.Location.LocationType.Description', '@del.ProductOrder.Location.ContactPersonNumber', '@del.ProductOrder.Location.Client.ClientName', '@del.ProductOrder.Location.Client.ClientSurname', '@del.ProductOrder.Location.Client.EmailAddress')">
+                            <div class="task-list-item" id="@del.DeliveryID" onclick="SelectDelivery(this, '@del.DeliveryID', '@del.ProductOrder.Location.StreetAddress', '@del.ProductOrder.Location.Suburb', '@del.ProductOrder.Location.City', '@del.ProductOrder.Location.ContactPersonName', '@del.ProductOrder.Location.LocationType.Description', '@del.ProductOrder.Location.ContactPersonNumber', '@del.ProductOrder.Location.Client.ClientName', '@del.ProductOrder.Location.Client.ClientSurname', '@del.ProductOrder.Location.Client.User.UserEmail')">
                                 <span class="task-item">
                                     Client: @del.ProductOrder.Location.Client.ClientName @del.ProductOrder.Location.Client.ClientSurname
                                 </span>
@@ -47,8 +53,8 @@
                             </div>
                             }
                         </div>
-                        <div id="task-info">
-                            <p class="dash-none"> No item selected </p>
+                        <div id="DeliveryInfo">
+                            <p class="task-info"> No item selected </p>
                         </div>
                     }
                     else
@@ -192,7 +198,7 @@
         
         e.classList.add("Selected-Service");
         e.classList.remove("task-list-item");
-        var InfoContainer = document.getElementById("ServiceInfo");
+        var InfoContainer = document.getElementById("DeliveryInfo");
         InfoContainer.innerHTML = "";
 
         var node = document.createElement("p");
@@ -201,7 +207,7 @@
         InfoContainer.appendChild(node);
 
         node = document.createElement("p");
-        textnode = document.createTextNode("Service Type: " + Type);
+        textnode = document.createTextNode("Delivery Type: " + Type);
         node.appendChild(textnode);
         InfoContainer.appendChild(node);
 

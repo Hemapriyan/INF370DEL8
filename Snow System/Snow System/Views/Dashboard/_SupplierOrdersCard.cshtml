@@ -59,8 +59,13 @@
     </div>
     <div class="card-footer text-muted">
         <p>
-            <button type="button" class="btn btn-primary card-btn">Create New</button>
-            <button type="button" class="btn btn-info card-btn">View All</button>
+            <a href="@Url.Action("Index","Supplier")"> 
+            <div class="btn btn-primary card-btn">Create New</div>
+            </a>
+            
+            <a href="@Url.Action("Index","SupplierOrders")">
+            <div> class="btn btn-info card-btn">View All</div>
+            </a>
         </p>
     </div>
 </div>
