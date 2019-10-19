@@ -1,6 +1,7 @@
 ﻿using Snow_System.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -190,7 +191,9 @@ namespace Snow_System.Controllers
         public ActionResult ChooseLocationDelivery(int id)//Takes in Product Order ID
         {
             db.Configuration.ProxyCreationEnabled = false;
-            ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id).FirstOrDefault();
+            ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id)
+                .Include(p=>p.Location.Client)
+                .FirstOrDefault();
             List<Location> l = po.Location.Client.Locations.ToList();
             Session["ActionID"] = 3;
             Session["OrderID"] = id;
@@ -253,7 +256,9 @@ namespace Snow_System.Controllers
         public ActionResult EmployeeChooseOrderLocation(int id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id).FirstOrDefault();
+            ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id)
+                .Include(p => p.Location.Client)
+                .FirstOrDefault();
             List<Location> l = po.Location.Client.Locations.ToList();
             Session["ActionID"] = 1;
             Session["OrderID"] = id;
