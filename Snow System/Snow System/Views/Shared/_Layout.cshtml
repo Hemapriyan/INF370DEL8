@@ -18,6 +18,8 @@
     <script src="~/Scripts/moment.js"></script>
     <script src="~/Scripts/fullcalendar.min.js"></script>
     <script src="~/Scripts/fullcalendar.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body>
     <!----->
@@ -91,10 +93,12 @@
         @Html.ActionLink("Supplier Orders", "Index", "Supplier")
         @Html.ActionLink("Product Orders", "Index", "ProductOrder")
         @Html.ActionLink("Services", "Index", "Service")<!--("Display name on page side nav","name of html page","name of controller")-->
+        @Html.ActionLink("Service Requests", "Index", "ServiceRequest")
+
         @Html.ActionLink("Suppliers", "Index", "Supplier")
         @Html.ActionLink("Products", "Index", "Product")
         @Html.ActionLink("Product Types", "Index", "ProductType")<!--("Display name on page side nav","name of html page","name of controller")-->
-        @Html.ActionLink("Bookings", "Index", "Calendar")<!--("Display name on page side nav","name of html page","name of controller")-->
+        @Html.ActionLink("Bookings", "Index", "ServiceRequest")<!--("Display name on page side nav","name of html page","name of controller")-->
         @Html.ActionLink("Clients", "Index", "Client")<!--("Display name on page side nav","name of html page","name of controller")-->
 
         @Html.ActionLink("Employees", "Index", "Employees")

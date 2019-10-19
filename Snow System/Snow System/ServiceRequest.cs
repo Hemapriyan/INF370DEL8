@@ -49,7 +49,10 @@ namespace Snow_System
         
         [DisplayName("Comment")]
         public string Comment { get; set; }
+        [DisplayName("Location")]
         public int LocationID { get; set; }
+
+        [DisplayName("Full Day Service")]
         public Nullable<bool> IsFullDay { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -62,5 +65,6 @@ namespace Snow_System
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Service> Services { get; set; }
         public virtual ServiceRequestStatu ServiceRequestStatu { get; set; }
+        public List<Location> ListOfLocations { get; set; }
     }
 }

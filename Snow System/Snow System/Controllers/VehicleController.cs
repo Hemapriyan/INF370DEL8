@@ -86,6 +86,7 @@ namespace Snow_System.Controllers
 
             model_ = veh;
             veh.VehicleTypeID = VehicleTypeID;
+            model_.LicenseNumber = veh.LicenseNumber.ToUpper();
             
 
             if (veh.VehicleID == 0)

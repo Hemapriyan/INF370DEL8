@@ -25,16 +25,10 @@ namespace SpartanFireWebAPI.Controllers
 
         // GET: api/EmployeeRequest/5
         [ResponseType(typeof(EmployeeRequest))]
-        public IHttpActionResult GetEmployeeRequest(int id)
+        public IQueryable<EmployeeRequest> GetEmployeeRequest(int id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            EmployeeRequest employeeRequest = db.EmployeeRequests.Find(id);
-            if (employeeRequest == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(employeeRequest);
+            return db.EmployeeRequests.Where(x => x.ServiceRequestID == id);
         }
 
         // PUT: api/EmployeeRequest/5
@@ -83,6 +77,10 @@ namespace SpartanFireWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            var temp = db.ServiceRequests.Find(employeeRequest.ServiceRequestID);
+
+            temp.ServiceRequestStatusID = 3;
+            db.Entry(temp).State = EntityState.Modified;
             db.EmployeeRequests.Add(employeeRequest);
 
             try

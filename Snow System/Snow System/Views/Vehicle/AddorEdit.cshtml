@@ -5,6 +5,21 @@
 }
 
 
+@*<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $("#PurchaseDate").datepicker({
+            dateFormat: "dd-mm-yy",
+            minDate: -0,
+            maxDate: "+0M +5D"
+
+        });
+    });
+</script>*@
+
 
 @using (Html.BeginForm())
 {
@@ -36,7 +51,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label " })
                 <div class="col-md-12">
-                    @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control", id = "datepicker" } })
+                    @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control", id = "PurchaseDate" } })
                     @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
                 </div>
             </div>

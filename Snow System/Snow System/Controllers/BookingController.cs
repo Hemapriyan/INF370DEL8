@@ -10,15 +10,32 @@ namespace Snow_System.Controllers
 {
     public class BookingController : Controller
     {
+        SpartanFireDBEntities1 db = new SpartanFireDBEntities1();
+        static List<ServiceRequest> dates;
         // GET: Booking
-        public ActionResult Index()
+        public ActionResult Index(string searchBy,string search)
         {
-            IEnumerable<mvcClientModel> clientList;
-            HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Client").Result;
+            return View(db.ServiceRequests.Where(x => x.ServiceRequestDate.ToString().StartsWith(search) || search == null).ToList());
 
-            clientList = response.Content.ReadAsAsync<IEnumerable<mvcClientModel>>().Result;
 
-            return View(clientList);
+        }
+        public JsonResult getDates()
+        {
+            using(SpartanFireDBEntities1 dc = new SpartanFireDBEntities1())
+            {
+                 dates = dc.ServiceRequests.ToList();
+                return new JsonResult { Data = dates, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+            }
+        }
+        public ActionResult ServiceRequest()
+        {
+            return View(db.ServiceRequests.ToList());
+        }
+        public ActionResult BookDate()
+        {
+            return View("BookDate",db.ServiceRequests.ToList());
         }
     }
+    
 }

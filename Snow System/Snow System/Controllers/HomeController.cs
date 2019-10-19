@@ -62,7 +62,7 @@ namespace Snow_System.Controllers
         {
             return View();
         }
-        public ActionResult Services()
+        public ActionResult Service()
         {
             return View();
         }

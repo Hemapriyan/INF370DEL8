@@ -1,0 +1,215 @@
+﻿@model IEnumerable<Snow_System.ServiceRequest>
+
+@{
+    ViewBag.Title = "ServiceRequest";
+}
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+<h2>ServiceRequest</h2>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />*@
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="month month--feb" style="--color:#db7a7a;">February</div>
+        <div class="date" style="--color:#db7f7a;">1</div>
+        <div class="date" style="--color:#db847a;">2</div>
+        <div class="date" style="--color:#db8d7a;">3</div>
+        <div class="date" style="--color:#db8d7a;">4</div>
+        <div class="date" style="--color:#db917a;">5</div>
+        <div class="date" style="--color:#db967a;">6</div>
+        <div class="date" style="--color:#db9a7a;">7</div>
+        <div class="date" style="--color:#db9a7a;">8</div>
+        <div class="date" style="--color:#db9f7a;">9</div>
+        <div class="date" style="--color:#dba37a;">10</div>
+        <div class="date" style="--color:#dba87a;">11</div>
+        <div class="date" style="--color:#dbac7a;">12</div>
+        <div class="date" style="--color:#dbb07a;">13</div>
+        <div class="date" style="--color:#dbb57a;">14</div>
+        <div class="date" style="--color:#dbbe7a;">15</div>
+        <div class="date" style="--color:#dbc27a;">16</div>
+        <div class="date" style="--color:#dbc77a;">17</div>
+        <div class="date" style="--color:#dbd07a;">18</div>
+        <div class="date" style="--color:#dbd47a;">19</div>
+        <div class="date" style="--color:#dbd97a;">20</div>
+        <div class="date" style="--color:#d9db7a;">21</div>
+        <div class="date" style="--color:#d0db7a;">22</div>
+        <div class="date" style="--color:#cbdb7a;">23</div>
+        <div class="date" style="--color:#c7db7a;">24</div>
+        <div class="date" style="--color:#c2db7a;">25</div>
+        <div class="date" style="--color:#bedb7a;">26</div>
+        <div class="date" style="--color:#b9db7a;">27</div>
+        <div class="date" style="--color:#b5db7a;">28</div>
+        <div class="month month--mar" style="--color:#b0db7a;">March</div>
+        <div class="date" style="--color:#acdb7a;">1</div>
+        <div class="date" style="--color:#a7db7a;">2</div>
+        <div class="date" style="--color:#a3db7a;">3</div>
+        <div class="date" style="--color:#9adb7a;">4</div>
+        <div class="date" style="--color:#96db7a;">5</div>
+        <div class="date" style="--color:#91db7a;">6</div>
+        <div class="date" style="--color:#8ddb7a;">7</div>
+        <div class="date" style="--color:#88db7a;">8</div>
+        <div class="date" style="--color:#7fdb7a;">9</div>
+        <div class="date" style="--color:#7bdb7a;">10</div>
+        <div class="date" style="--color:#7adb7e;">11</div>
+        <div class="date" style="--color:#7adb82;">12</div>
+        <div class="date" style="--color:#7adb87;">13</div>
+        <div class="date" style="--color:#7adb90;">14</div>
+        <div class="date" style="--color:#7adb9d;">15</div>
+        <div class="date" style="--color:#7adba6;">16</div>
+        <div class="date" style="--color:#7adbaf;">17</div>
+        <div class="date" style="--color:#7adbb3;">18</div>
+        <div class="date" style="--color:#7adbb8;">19</div>
+        <div class="date" style="--color:#7adbc1;">20</div>
+        <div class="date" style="--color:#7adbce;">21</div>
+        <div class="date" style="--color:#7adbd3;">22</div>
+        <div class="date" style="--color:#7adbd7;">23</div>
+        <div class="date" style="--color:#7adadb;">24</div>
+        <div class="date" style="--color:#7ad6db;">25</div>
+        <div class="date" style="--color:#7ad1db;">26</div>
+        <div class="date" style="--color:#7acddb;">27</div>
+        <div class="date" style="--color:#7ac8db;">28</div>
+        <div class="date" style="--color:#7ac4db;">29</div>
+        <div class="date" style="--color:#7abfdb;">30</div>
+        <div class="date" style="--color:#7ab6db;">31</div>
+        <div class="month month--title" style="--color:#7ab6db;">you've got plans</div>
+        <div class="explanation" style="--color:#7ab2db;">Part of the <a href="https://codepen.io/collection/DQvYpQ/" target="_blank">CSS Grid collection here</a>.</div>
+        <footer style="--color:#7ab2db;"><a href="https://twitter.com/meowlivia_" target="_blank"><i class="icon-social-twitter icons"></i></a><a href="https://github.com/oliviale" target="_blank"><i class="icon-social-github icons"></i></a><a href="https://dribbble.com/oliviale" target="_blank"><i class="icon-social-dribbble icons"></i></a></footer>
+        <!--more colors: '#7aaddb', '#7aa9db','#7aa5db', '#7a9cdb', '#7a97db', '#7a8edb', '#7a81db', '#7c7adb', '#817adb', '#8a7adb', '#8e7adb', '#977adb', '#9c7adb', '#a57adb', '#a97adb', '#ae7adb', '#b27adb', '#b67adb', '#bb7adb', '#bf7adb', '#c47adb', '#c87adb', '#cd7adb', '#d17adb', '#d67adb', '#da7adb', '#db7ac5', '#db7ac1','#db7ab8','#db7ab3', '#db7aaf', '#db7aaa', '#db7aa6', '#db7aa2', '#db7a9d', '#db7a99', '#db7a94', '#db7a90', '#db7a87', '#db7a82', '#db7a82', '#db7a7a']-->
+        <div class="event event--1">
+            <div class="event__name">Valentines party with Ames ❤️</div>
+        </div>
+        <div class="event event--2">
+            <div class="event__name">😎 Die Hard binge weekend 😎</div>
+        </div>
+        <div class="event event--3">
+            <div class="event__name">Dinner w/ Gina 💯</div>
+        </div>
+        <div class="event event--4a">
+            <div class="event__name">Charles' Taco...</div>
+        </div>
+        <div class="event event--4b">
+            <div class="event__name">... Food Truck Opening 🌯</div>
+        </div>
+        <div class="event event--5">
+            <div class="event__name">Run-through 🎃</div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+
+        @try
+        {
+            RenderBody();
+        }
+        catch (Exception) { }
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @try
+    {
+        RenderSection("Scripts", false);
+    }
+    catch (Exception e) { }
+
+</body>
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceRequestStatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceRequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceBookedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceBookedEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFullDay)
+        </th>
+        <th></th>
+    </tr>
+
+    @try
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceRequestStatusID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceRequestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceBookedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceBookedEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsFullDay)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ServiceRequestID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ServiceRequestID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ServiceRequestID })
+                </td>
+            </tr>
+        }
+    }
+    catch (Exception e)
+    { }
+
+
+</table>

@@ -49,7 +49,7 @@ namespace SpartanFireWebAPI.Controllers
 
         // PUT: api/Employees/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEmployee(int id, EmployeeModelGlobal employee)
+        public IHttpActionResult PutEmployee(int id, Employee employee)
         {
             db.Configuration.ProxyCreationEnabled = false;
             if (!ModelState.IsValid)
@@ -57,13 +57,12 @@ namespace SpartanFireWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != employee.emp.EmployeeID)
+            if (id != employee.EmployeeID)
             {
                 return BadRequest();
             }
 
-            db.Entry(employee.emp).State = EntityState.Modified;
-            db.Entry(employee.user).State = EntityState.Modified;
+            db.Entry(employee).State = EntityState.Modified;
 
             try
             {
@@ -124,6 +123,8 @@ namespace SpartanFireWebAPI.Controllers
             }
 
             db.Employees.Remove(employee);
+            var user = db.Users.Find(employee.UserID);
+            db.Users.Remove(user);
             db.SaveChanges();
 
             return Ok(employee);

@@ -25,5 +25,10 @@ namespace Snow_System
     
         public virtual Employee Employee { get; set; }
         public virtual ServiceRequest ServiceRequest { get; set; }
+
+        public List<EmployeeRequest> EmployeeRequestList { get; set; }
+        public List<Employee> EmployeeList { get; set; }
+        public virtual int UserID { get; set; }
+
     }
 }

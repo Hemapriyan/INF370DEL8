@@ -3,10 +3,10 @@
     ViewBag.Title = "Services";
 }
 <div id="Aboutustitle">
-    <p style="width:100%"><span style="font-size:35px;"><b>Services</b></span></p>
+    <p style="width:100%;"><span style="font-size:35px;"><b>Services</b></span></p>
 </div>
 
-<div style="text-align:center;">
+@*<div style="text-align:center;">
     <div class="serviceinfo">
         <img />
         <br />
@@ -31,3 +31,10 @@
 <div style="margin-top:15px; width:100%;">
     <button class="btn btn-primary" style="width:100%;">Book a Service</button>
 </div>
+<br />*@
+
+<div class="CenteringContainer">
+    <a href="@Url.Action("ExportData","Export")" class="btn-admin btn btn-outline-primary"><span class="glyphicon glyphicon-export"></span> <br />Make a Service Request</a>
+    <a href="@Url.Action("Index","EmployeeType")" class="btn-admin btn btn-outline-primary"><span class="glyphicon glyphicon-user"></span> <br />asdaqw</a>
+
+   </div>

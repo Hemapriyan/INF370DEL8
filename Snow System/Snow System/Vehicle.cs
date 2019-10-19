@@ -27,18 +27,21 @@ namespace Snow_System
         [DataType(DataType.Text)]
         [DisplayName("Vehicle Description")]
         public string Description { get; set; }
+
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Text)]
         [DisplayName("License Number")]
         [MaxLength(8)]
         [MinLength(8)]
+
         public string LicenseNumber { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [DisplayName("Purhase Date")]
         public System.DateTime PurchaseDate { get; set; }
+
         [Required(ErrorMessage = "This field is required")]
-        
         [DisplayName("Vehicle Type")]
         public int VehicleTypeID { get; set; }
     

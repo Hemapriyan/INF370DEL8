@@ -59,5 +59,7 @@ namespace Snow_System
         public virtual ICollection<ProductOrder> ProductOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
+
+        public List<LocationType> LocationTypeList { get; set; }
     }
 }

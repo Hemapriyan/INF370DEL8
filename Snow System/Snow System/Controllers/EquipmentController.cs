@@ -56,7 +56,7 @@ namespace Snow_System.Controllers
             n.TableAccessed = "Equipment";
             n.ChangesMade = "Created New Equipment";
             n.AuditLogTypeID = 2;
-            //n.UserID = eqp.user.UserID;
+           // n.UserID = eqp.user.UserID;
             db.AuditLogs.Add(n);
             db.SaveChanges();
 

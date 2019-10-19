@@ -4,7 +4,7 @@
     ViewBag.Title = "AddorEdit";
 }
 
-
+    @*<script src="~/Scripts/alertify/alertify.min.js"></script>*@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -74,12 +74,12 @@
                 @Html.ValidationMessageFor(model => model.emp.LocationTypeID, "", new { @class = "text-danger" })
             </div>
         </div>*@
-            @*<div class="form-group">
+           <div class="form-group">
                 <select name="LocationTypeID" class="custom-select" style="color:black;">
                     <option>Select</option>
                     @foreach (var item in Model.LocationTypeList)
                     {
-                        if (item.LocationTypeID == Model.emp.LocationTypeID)
+                        if (item.LocationTypeID == Model.LocationTypeID)
                         {
                             <option selected="selected" value="@item.LocationTypeID">@item.Description</option>
                         }
@@ -89,9 +89,9 @@
                         }
                     }
                 </select>
-            </div>*@
+            </div>
 
-            @Html.HiddenFor(Model=>Model.LocationTypeID)
+            @*@Html.HiddenFor(Model=>Model.LocationTypeID)*@
 
         </div>
         <div class="form-group">

@@ -74,8 +74,9 @@
                         <a href="@Url.Action("AddorEdit", "Location", new { id = item.LocationID })" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
                         @if (Model.Count() > 1)
                         {
-                        <a onclick="Delete(@item.LocationID)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a onclick="Delete(@item.LocationID)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                         }
+                        <a href="@Url.Action("Makeservicerequest", "ServiceRequest", new { id = item.LocationID })" class="btn btn-danger"><span class="glyphicon glyphicon-wrench"></span></a>
 
                     </td>
                 </tr>
