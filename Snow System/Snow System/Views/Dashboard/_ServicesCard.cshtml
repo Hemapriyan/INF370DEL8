@@ -52,9 +52,11 @@
         }
     </div>
     <div class="card-footer text-muted">
-        <p>
-            <button type="button" class="btn btn-primary card-btn">Create New</button>
-            <button type="button" class="btn btn-info card-btn">View All</button>
-        </p>
+        <a href="@Url.Action("Index","Client")">
+            <div class="btn btn-primary card-btn">Create New</div>
+        </a>
+        <a href="@Url.Action("Index","ServiceRequest")">
+            <div class="btn btn-info card-btn">View All</div>
+        </a>
     </div>
 </div>

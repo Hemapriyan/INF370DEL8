@@ -27,5 +27,25 @@ namespace Snow_System.Controllers
             ViewBag.OutstandingServices = db.ServiceRequests.Where(ser => ser.ServiceRequestStatusID == 1 || ser.ServiceRequestStatusID == 2).ToList();
             return View();
         }
+
+        public ActionResult CancelOrder(int id)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id).FirstOrDefault();
+            po.ProductOrderStatusID = 9;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult OrderPayed(int id)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id).FirstOrDefault();
+            po.ProductOrderStatusID = 3;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

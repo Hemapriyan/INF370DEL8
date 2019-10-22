@@ -1227,11 +1227,10 @@ ul.dropdown-account {
     width: 45%;
     margin-left: 2%;
     margin-right: 2%;
-    margin-top: 2%;
 }
 
 .card-footer{
-    padding: 0px;
+    padding: 2%;
 }
 
 .fixed_header ::-webkit-scrollbar {
@@ -1358,7 +1357,6 @@ ul.dropdown-account {
 
 .card-btn-large{
     width: 70%;
-    padding: 1% 15% 1% 15%;
 }
 
 .Selected-Service {

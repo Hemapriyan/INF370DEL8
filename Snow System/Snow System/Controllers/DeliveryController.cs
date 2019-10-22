@@ -14,17 +14,30 @@ namespace Snow_System.Controllers
         public ActionResult Index(string searchBy, string search)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            return View(db.Deliveries.Where(x => x.DeliveryStatu.Description.StartsWith(search) || search == null).ToList());
+            return View(db.Deliveries.Where(x => x.DeliveryStatu.Description.StartsWith(search) || search == null).Include(x=>x.DeliveryStatu).ToList());
         }
 
         public ActionResult AssignDelivery(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<AssignDelivery> ad = db.AssignDeliveries.Where(d => d.DeliveryID == id).Include(d=>d.Delivery.DeliveryStatu).ToList();
+            IEnumerable<AssignDelivery> ad = db.AssignDeliveries.Where(d => d.DeliveryID == id).ToList();
             TempData["DeliveryID"] = db.Deliveries.Where(d=>d.DeliveryID == id).Select(s=>s.DeliveryID).FirstOrDefault();
             ViewBag.Status = db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.DeliveryStatu.Description).FirstOrDefault();
-            ViewBag.Address = "88 Darwin";
-            ViewBag.employees = db.Employees.ToList();
+            string address = "";
+            address += db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.ProductOrder.Location.StreetAddress) + ", " + db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.ProductOrder.Location.Suburb) + ", " + db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.ProductOrder.Location.City);
+            ViewBag.Address = address;
+            List<Employee> temp = db.Employees.ToList();
+            foreach(AssignDelivery emp in ad)
+            {
+                foreach(Employee employeetemp in temp)
+                {
+                    if(emp.EmployeeID == employeetemp.EmployeeID)
+                    {
+                        temp.Remove(employeetemp);
+                    }
+                }
+            }
+            ViewBag.employees = temp;
             return View(ad);
         }
 

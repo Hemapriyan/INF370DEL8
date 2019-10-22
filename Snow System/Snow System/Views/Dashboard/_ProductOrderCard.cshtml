@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Snow_System.ProductOrder>
-@{ 
+@{
     int Count = 0;
     if (Model != null)
     {
@@ -9,65 +9,103 @@
         }
     }
 }
-    <div class="dash-card card border-primary mb-3">
-        <h3 class="card-header">
-            Placed Client Orders @if (Count >= 1)
-            {<span class="badge badge-pill badge-primary">
-                    @Count
-                </span>
-            }
-            </h3>
-        <div class="card-body">
-            @if (Count >= 1)
-            {
-                <table class="table dash-table fixed_header">
-                    <thead>
-                        <tr>
-                            <th>
-                                Order ID
-                            </th>
-                            <th>
-                                Date Placed
-                            </th>
-                            <th>
-                                Client Name
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    @foreach (var item in Model)
-                    {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductOrderID)
-                    </td>
-                    <td>
-                        @string.Format("{0:dd/MM/yyyy } ", item.DateOfOrder)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Location.Client.ClientName)
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-outline-primary"><b>R</b></button>
-                        <button type="button" class="btn btn-outline-danger"><span class="glyphicon glyphicon-remove-sign"></span></button>
 
-                    </td>
-                </tr>
-                    }
-                </table>
-            }
-            else
-            {
-                <p class="dash-none">No outstanding orders</p>
-            }
-        </div>
-        <div class="card-footer text-muted">
-            <p>
-                <button type="button" class="btn btn-primary card-btn">Create New</button>
-                <button type="button" class="btn btn-info card-btn">View All</button>
-            </p>
-        </div>
+@{
+    int selected = 0;
+}
+<div class="dash-card card border-primary mb-3">
+    <h3 class="card-header">
+        Placed Client Orders @if (Count >= 1)
+        {<span class="badge badge-pill badge-primary">
+                @Count
+            </span>
+        }
+    </h3>
+    <div class="card-body">
+        @if (Count >= 1)
+        {
+            <table class="table dash-table fixed_header">
+                <thead>
+                    <tr>
+                        <th>
+                            Order ID
+                        </th>
+                        <th>
+                            Date Placed
+                        </th>
+                        <th>
+                            Client Name
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductOrderID)
+                        </td>
+                        <td>
+                            @string.Format("{0:dd/MM/yyyy } ", item.DateOfOrder)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location.Client.ClientName)
+                        </td>
+                        <td>
+                            <button onclick="@{selected = item.ProductOrderID;} document.getElementById('MarkPayed').style.display = 'block';  console.log(@item.ProductOrderID);" class="btn btn-outline-primary"><b>R</b></button>
+                            <button onclick="@{selected = item.ProductOrderID;} document.getElementById('CancelOrder').style.display = 'block';  console.log(@item.ProductOrderID);" class="btn btn-outline-danger"><span class="glyphicon glyphicon-remove-sign"></span></button>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p class="dash-none">No outstanding orders</p>
+        }
     </div>
+    <div class="card-footer text-muted">
+        <a href="@Url.Action("Index","Client")">
+            <div class="btn btn-primary card-btn">Create New</div>
+        </a>
+        <a href="@Url.Action("Index","ProductOrder")">
+            <div class="btn btn-info card-btn">View All</div>
+        </a>
+    </div>
+</div>
 
-<script>
-</script>
+<div id="MarkPayed" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Confirm Order Has Been Payed?</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to mark this order as payed?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <button href="" onclick="document.getElementById('MarkPayed').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</button>
+            <a href="@Url.Action("OrderPayed","dashboard" , new { id = selected })" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div>
+
+<div id="CancelOrder" class="modal animate-opacity">
+    <div class="modal-content modal-background">
+        <header class="">
+            <h2>Cancel Order?</h2>
+        </header>
+        <hr style="margin:0;" />
+        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+        <div class="">
+            <p>Are you sure you want to cancel this order?</p>
+        </div>
+        <hr style="margin:0;" />
+        <footer class="" style="">
+            <button href="" onclick="document.getElementById('CancelOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</button>
+            <a href="@Url.Action("CancelOrder","dashboard" , new { id = selected })" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+        </footer>
+    </div>
+</div> 

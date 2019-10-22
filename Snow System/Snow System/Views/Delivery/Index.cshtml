@@ -13,6 +13,7 @@
         @using (@Html.BeginForm("Index", "Delivery", FormMethod.Get))
         {
             <b>Search By Status:</b>
+            <br />
             @Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
             <a href="@Url.Action("Index","Delivery")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
         }
@@ -48,22 +49,17 @@
     }
     else
     {
-        var r = new Random();
-        var randomNumber = 0;
         foreach (var item in Model)
         {
-
-
-            randomNumber = r.Next(10) + 1;
             <tr class="table-dark">
                 <td>
                     @Html.DisplayFor(modelItem => item.ProductOrderID)
                 </td>
                 <td>
-                    @randomNumber
+                    @item.DeliveryLines.Count()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DeliveryStatu.Description)
+                    @item.DeliveryStatu.Description
                 </td>
                 @if (item.DeliveryStatusID == 2)
                 {
@@ -84,12 +80,6 @@
         }
     }
 </table>
-<div style="display:none;">
-    <div class="ActionButton ContinueBtn btn btn-success" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-plus"></span><br />New</div>
-    <div class="ActionButton btn btn-info" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-edit"></span><br />Edit</div>
-    <div class="ActionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-record"></span><br />Place Order</div>
-    <div class="ActionButton ContinueBtn btn btn-warning" style="float:right; margin-right: 2%;"><span class="glyphicon glyphicon-piggy-bank"></span><br />Capture Payment</div>
-</div>
 <br />
 <br />
 <br />
