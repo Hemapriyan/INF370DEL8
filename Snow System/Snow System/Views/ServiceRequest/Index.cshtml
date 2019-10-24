@@ -13,7 +13,7 @@
         @using (@Html.BeginForm("Index", "ServiceRequest", FormMethod.Get))
         {
 
-            <b>Search By Business Name:</b>@Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
+            <b>Search By Business Name:</b> <br />@Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" /><br />
             <a href="@Url.Action("Index","ServiceRequest")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
         }
 
@@ -24,7 +24,7 @@
 <table class="table table-hover">
     <tr class="table-primary">
         <th>
-            @Html.DisplayNameFor(model => model.BusinessName)
+            Client
         </th>
         <th>
             Status
@@ -39,7 +39,7 @@
             @Html.DisplayNameFor(model => model.Comment)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LocationID)
+            Address
         </th>
         <th>Actions</th>
     </tr>
@@ -57,7 +57,7 @@
         {
             <tr class="table-dark">
                 <td>
-                    @Html.DisplayFor(modelItem => item.BusinessName)
+                    @Html.DisplayFor(modelItem => item.Location.Client.ClientName) @Html.DisplayFor(modelItem => item.Location.Client.ClientSurname)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ServiceRequestStatu.Description)
@@ -66,9 +66,13 @@
                     @Html.DisplayFor(modelItem => item.ServiceRequestDate)
                 </td>
                 <td>
-                    @if (item.ServiceBookedDate != null)
+                    @if (item.ServiceRequestStatusID != 1)
                     {
                     @Html.DisplayFor(modelItem => item.ServiceBookedDate)
+                    }
+                    else
+                    {
+                        <p>Service not booked yet</p>
                     }
                 </td>
                 <td>

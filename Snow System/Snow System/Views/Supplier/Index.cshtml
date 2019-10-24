@@ -103,10 +103,8 @@
                 }
                 <td>
                     <a href="@Url.Action("CapturePayment", "Supplier", new { id = item.SupplierID })" class="btn btn-info"> Capture Payment</a>
-                    <a href="@Url.Action("MakeSupplierOrder", "Supplier", new { id = item.SupplierID })" class="btn btn-success"> Place Order</a>
-                    <a href="@Url.Action("AddorEdit", "Supplier", new { id = item.SupplierID })" class="btn btn-warning">
-                        <span class="glyphicon glyphicon-pencil
-"></span>
+                    <a href="@Url.Action("MakeSupplierOrder", "Supplier", new { id = item.SupplierID })" class="btn btn-primary"> Place Order</a>
+                    <a href="@Url.Action("AddorEdit", "Supplier", new { id = item.SupplierID })" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                     </a>
                     <a onclick="Delete(@item.SupplierID)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
