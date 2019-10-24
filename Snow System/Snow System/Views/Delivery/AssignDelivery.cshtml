@@ -22,7 +22,7 @@
     using (Html.BeginForm("Assign", "Delivery"))
     {
         @Html.Hidden("DelID", Convert.ToInt32(TempData["DeliveryID"]));
-        <div style=" text-align:center;">
+        <div style=" text-align:center; border: solid 2px #DF691A; padding: 2%;">
             <select class="custom-select btn-primary" name="employee">
                 @foreach (var emp in ViewBag.employees)
                 {
@@ -55,7 +55,7 @@
     </tr>
     @if (Model == null)
     {
-        <td>No Employees assigned</td>
+        <p> No Employees assigned</p>
     }
     else
     {

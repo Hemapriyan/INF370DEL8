@@ -74,7 +74,7 @@
                     </td>
                 }
                 <td>
-                    <a style="text-decoration: none; color:greenyellow;" href="@Url.Action("AssignDelivery", "Delivery", new {id = item.DeliveryID })" class="glyphicon glyphicon glyphicon-flag">Assign</a>
+                    <a class="btn btn-primary" href="@Url.Action("AssignDelivery", "Delivery", new {id = item.DeliveryID })"> <span class="glyphicon glyphicon glyphicon-user"></span></a>
                 </td>
             </tr>
         }

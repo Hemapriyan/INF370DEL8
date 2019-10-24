@@ -20,24 +20,27 @@ namespace Snow_System.Controllers
         public ActionResult AssignDelivery(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<AssignDelivery> ad = db.AssignDeliveries.Where(d => d.DeliveryID == id).ToList();
+            IEnumerable<AssignDelivery> ad = db.AssignDeliveries.Where(d => d.DeliveryID == id).Include(d=>d.Delivery).ToList();
             TempData["DeliveryID"] = db.Deliveries.Where(d=>d.DeliveryID == id).Select(s=>s.DeliveryID).FirstOrDefault();
             ViewBag.Status = db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.DeliveryStatu.Description).FirstOrDefault();
             string address = "";
-            address += db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.ProductOrder.Location.StreetAddress) + ", " + db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.ProductOrder.Location.Suburb) + ", " + db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.ProductOrder.Location.City);
+            address += db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.ProductOrder.Location.StreetAddress) + ", ";
+            address += db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.ProductOrder.Location.Suburb) + ", ";
+            address += db.Deliveries.Where(d => d.DeliveryID == id).Select(s => s.ProductOrder.Location.City);
             ViewBag.Address = address;
-            List<Employee> temp = db.Employees.ToList();
+            List<Employee> temp = db.Employees.ToList(); //to run through foreach
+            List<Employee> EmployeeList = db.Employees.ToList(); //to actually display
             foreach(AssignDelivery emp in ad)
             {
                 foreach(Employee employeetemp in temp)
                 {
                     if(emp.EmployeeID == employeetemp.EmployeeID)
                     {
-                        temp.Remove(employeetemp);
+                        EmployeeList.Remove(employeetemp);
                     }
                 }
             }
-            ViewBag.employees = temp;
+            ViewBag.employees = EmployeeList;
             return View(ad);
         }
 

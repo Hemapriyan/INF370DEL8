@@ -34,11 +34,14 @@
                         <td>
                             @if (item.ServiceRequestStatusID == 1)
                             {
-                                <button type="button" class="btn btn-outline-primary"><span class="glyphicon glyphicon-calendar"></span></button>
+                                <p>Link heres</p>
+                                <a href="@Url.Action("","", new { id = item.ServiceRequestID })" class="btn btn-outline-primary"><span class="glyphicon glyphicon-calendar"></span></a>
                             }
                             else if (item.ServiceRequestStatusID == 2)
                             {
-                                <button type="button" class="btn btn-outline-primary"><span class="glyphicon glyphicon-user"></span></button>
+
+                                <p>link this button</p>
+                                <a href="@Url.Action("","", new {id = item.ServiceRequestID } )" class="btn btn-outline-primary"><span class="glyphicon glyphicon-user"></span></a>
                             }
                         </td>
                     </tr>

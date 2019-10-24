@@ -14,43 +14,61 @@
     <div class="card-body">
         @if (Count >= 1)
         {
-            <table class="table dash-table fixed_header">
-                <thead>
-                    <tr>
-                        <th>
-                            Order ID
-                        </th>
-                        <th>
-                            Date Placed
-                        </th>
-                        <th>
-                            Supplier Name
-                        </th>
-                        <th>
+        <table class="table dash-table fixed_header">
+            <thead>
+                <tr>
+                    <th>
+                        Order ID
+                    </th>
+                    <th>
+                        Date Placed
+                    </th>
+                    <th>
+                        Supplier Name
+                    </th>
+                    <th>
 
-                        </th>
-                    </tr>
-                </thead>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SupplierOrderID)
-                        </td>
-                        <td>
-                            @string.Format("{0:dd/MM/yyyy } ", item.OrderDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary"><span class="glyphicon glyphicon-ok-circle"></span></button>
-                            <button type="button" class="btn btn-outline-danger"><span class="glyphicon glyphicon-remove-sign"></span></button>
+                    </th>
+                </tr>
+            </thead>
+            @foreach (SupplierOrder item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SupplierOrderID)
+                    </td>
+                    <td>
+                        @string.Format("{0:dd/MM/yyyy } ", item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary"><span class="glyphicon glyphicon-ok-circle"></span></button>
+                        <button onclick="document.getElementById('@item.SupplierOrderID').style.display='block'" class="btn btn-outline-danger"><span class="glyphicon glyphicon-remove-sign"></span></button>
 
-                        </td>
-                    </tr>
-                }
-            </table>
+                    </td>
+                </tr>
+                <div id="@item.SupplierOrderID" class="modal animate-opacity">
+                    <div class="modal-content modal-background">
+                        <header class="">
+                            <h2>Cancel Order?</h2>
+                        </header>
+                        <hr style="margin:0;" />
+                        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+                        <div class="">
+                            <p>Are you sure you want to cancel this order?</p>
+                        </div>
+                        <hr style="margin:0;" />
+                        <footer class="" style="">
+                            <button href="" onclick="document.getElementById('@item.SupplierOrderID').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</button>
+                            <a href="@Url.Action("CancelOrder","dashboard" , new { id = item.SupplierOrderID})" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+                        </footer>
+                    </div>
+                </div>
+            }
+
+        </table>
         }
         else
         {

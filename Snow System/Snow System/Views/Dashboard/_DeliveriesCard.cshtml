@@ -18,23 +18,23 @@
                 <table class="table dash-table fixed_header">
                     <thead>
                         <tr>
-                            <th style="width: 20%">Order ID</th>
-                            <th style="width: 20%">Delivery ID</th>
-                            <th style="width: 20%">Delivery Status</th>
-                            <th style="width: 20%">Products Qty</th>
-                            <th style="width: 20%"></th>
+                            <th>Order ID</th>
+                            <th >Delivery ID</th>
+                            <th>Delivery Status</th>
+                            <th>Products Qty</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td style="width: 20%">@item.ProductOrderID</td>
-                                <td style="width: 20%">@item.DeliveryID</td>
-                                <td style="width: 20%">@item.DeliveryStatu.Description</td>
-                                <td style="width: 20%">Amount placeholder</td>
-                                <td style="width: 20%">
-                                    <button class="btn btn-outline-primary"><span class="glyphicon glyphicon-user"></span></button>
+                                <td >@item.ProductOrderID</td>
+                                <td >@item.DeliveryID</td>
+                                <td >@item.DeliveryStatu.Description</td>
+                                <td > @item.DeliveryLines.Count() </td>
+                                <td>
+                                    <a href="@Url.Action("AssignDelivery","Delivery", new { id = item.DeliveryID })" class="btn btn-outline-primary"><span class="glyphicon glyphicon-user"></span></a>
                                 </td>
                             </tr>
                         }
