@@ -321,7 +321,6 @@ namespace Snow_System.Controllers
             por.DateOfOrder = DateTime.Now;
             db.SaveChanges();
             SendEmailController se = new SendEmailController();
-            se.OrderConfrimed(por);
             if (Convert.ToInt32( Session["UserRoleID"] )== 1)
             {
                 return RedirectToAction("MakePayment");
