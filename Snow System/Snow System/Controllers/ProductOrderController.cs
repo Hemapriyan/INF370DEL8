@@ -315,12 +315,13 @@ namespace Snow_System.Controllers
         public ActionResult ChooseLocation(int id)
         {
             int ordID = Convert.ToInt32(Session["OrderID"]) ;
-            ProductOrder por = db.ProductOrders.Where(po => po.ProductOrderID == ordID).FirstOrDefault();
+            ProductOrder por = db.ProductOrders.Where(po => po.ProductOrderID == ordID).Include(po=>po.Location.Client.User).FirstOrDefault();
             por.LocationID = id;
             por.ProductOrderStatusID = 2;
             por.DateOfOrder = DateTime.Now;
             db.SaveChanges();
             SendEmailController se = new SendEmailController();
+            se.OrderConfrimed(por);
             if (Convert.ToInt32( Session["UserRoleID"] )== 1)
             {
                 return RedirectToAction("MakePayment");
