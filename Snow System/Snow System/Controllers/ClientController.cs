@@ -10,15 +10,14 @@ using System.Web.Mvc;
 
 namespace Snow_System.Controllers
 {
-   
+
     public class ClientController : Controller
     {
-       
+
         // GET: Client
         private SpartanFireDBEntities1 db = new SpartanFireDBEntities1();
         AuditLog n = new AuditLog();
         AuditLog v = new AuditLog();
-
         public ActionResult Index(string searchBy, string search)
         {
             //int d=ConvertTo...
@@ -29,8 +28,7 @@ namespace Snow_System.Controllers
             //v.UserID = eqp.user.UserID;
             db.AuditLogs.Add(v);
             db.SaveChanges();
-            Client cust = new Client();
-            
+
             if (searchBy == "Contact Number")
             {
                 return View(db.Clients.Where(x => x.ContactNumber == search || search == null).ToList());
@@ -53,25 +51,45 @@ namespace Snow_System.Controllers
 
             if (id == 0)
             {
+                //    Client cust = new Client();
+
+                //    return View(cust);
                 Client cust = new Client();
-               // cust.emp = new Client();
-                
+
+
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("LocationType").Result;
+
+                cust.LocationTypeList = response.Content.ReadAsAsync<List<LocationType>>().Result;
                 return View(cust);
-            }                
-            
+            }
             else
             {
                 Client cust = new Client();
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Client/" + id.ToString()).Result;
-                
-                
+
                 cust = response.Content.ReadAsAsync<Client>().Result;
+                cust.UserName = cust.User.UserEmail;
+                cust.Password = cust.User.UserPassword;
+                cust.LocationID = cust.ClientLocation.LocationID;
+                cust.StreetAddress = cust.ClientLocation.StreetAddress;
+                cust.Suburb = cust.ClientLocation.Suburb;
+                cust.City = cust.ClientLocation.City;
+                cust.PostalCode = cust.ClientLocation.PostalCode;
+                cust.ContactPersonName = cust.ClientLocation.ContactPersonName;
+                cust.ContactPersonNumber = cust.ClientLocation.ContactPersonNumber;
+                cust.LocationTypeID = cust.ClientLocation.LocationTypeID;
+                cust.LocationTypeList = db.LocationTypes.ToList();
                 return View(cust);
             }
-        }
-        [HttpPost]
 
-        public ActionResult AddorEdit(Client emp)
+
+        }
+
+
+
+
+        [HttpPost]
+        public ActionResult AddorEdit(Client emp, int LocationTypeID)
         {
             //Location loc = new Location();
 
@@ -80,26 +98,27 @@ namespace Snow_System.Controllers
             model_ = new Client();
             model_ = emp;
             model_.ClientTypeID = 1;
+            emp.LocationTypeID = LocationTypeID;
 
             model_.User = new User();
-            model_.User.UserPassword = RandomPassword(7);
             model_.User.UserID = emp.UserID;
             model_.User.UserEmail = emp.UserName;
             model_.User.UserRoleID = 1;
 
             //added by me 11-0ct 17h00 below code. testing of adding location at the same time as adding client
 
-            //model_.location = new Location();
-            //model_.location.LocationID = emp.LocationID;
-            //model_.location.StreetAddress = emp.StreetAddress;
-            //model_.location.Suburb = emp.Suburb;
-            //model_.location.City = emp.City;
-            //model_.location.PostalCode = emp.PostalCode;
-            //model_.location.ContactPersonName = emp.ContactPersonName;
-            //model_.location.ContactPersonNumber = emp.ContactPersonNumber;
-            //model_.location.LocationTypeID = emp.LocationTypeID;
+            model_.ClientLocation = new Location();
+            model_.ClientLocation.ClientID = emp.ClientID;
+            model_.ClientLocation.LocationID = emp.LocationID;
+            model_.ClientLocation.StreetAddress = emp.StreetAddress;
+            model_.ClientLocation.Suburb = emp.Suburb;
+            model_.ClientLocation.City = emp.City;
+            model_.ClientLocation.PostalCode = emp.PostalCode;
+            model_.ClientLocation.ContactPersonName = emp.ContactPersonName;
+            model_.ClientLocation.ContactPersonNumber = emp.ContactPersonNumber;
+            model_.ClientLocation.LocationTypeID = emp.LocationTypeID;
 
-            
+
 
 
 
@@ -111,9 +130,10 @@ namespace Snow_System.Controllers
             {
                 try
                 {
+                    model_.User.UserPassword = RandomPassword(7);
 
                     HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("Client", model_).Result;
-                   
+
                     TempData["SuccessMessage"] = "Saved Successfully";
 
                     n.DateAccessed = DateTime.Now;
@@ -144,7 +164,7 @@ namespace Snow_System.Controllers
             }
             else
             {
-                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Client/"+ model_.ClientID, model_).Result;
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Client/" + model_.ClientID, model_).Result;
                 TempData["SuccessMessage"] = "Updated Successfully";
                 n.DateAccessed = DateTime.Now;
                 n.TableAccessed = "Client";
@@ -152,8 +172,6 @@ namespace Snow_System.Controllers
                 n.AuditLogTypeID = 3;
                 n.UserID = emp.User.UserID;
                 db.AuditLogs.Add(n);
-
-                
             }
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -179,9 +197,9 @@ namespace Snow_System.Controllers
 
             db.SaveChanges();
 
-            HttpResponseMessage response = GlobalVariables.WebAPIClient.DeleteAsync("Client/"+id.ToString()).Result;
+            HttpResponseMessage response = GlobalVariables.WebAPIClient.DeleteAsync("Client/" + id.ToString()).Result;
             TempData["SuccessMessage"] = "Deleted Successfully";
-                       
+
 
             return RedirectToAction("Index");
 

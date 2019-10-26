@@ -22,7 +22,7 @@ namespace Snow_System
             this.Deliveries = new HashSet<Delivery>();
             this.ProductOrderLines = new HashSet<ProductOrderLine>();
         }
-    
+
         public int ProductOrderID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Date)]
@@ -31,7 +31,7 @@ namespace Snow_System
         public int ProductOrderStatusID { get; set; }
         public Nullable<int> LocationID { get; set; }
         public int Client_ID { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Delivery> Deliveries { get; set; }
         public virtual Location Location { get; set; }

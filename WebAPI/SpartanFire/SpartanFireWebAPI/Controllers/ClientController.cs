@@ -29,13 +29,12 @@ namespace SpartanFireWebAPI.Controllers
         {
             db.Configuration.ProxyCreationEnabled = false;
             Client client = db.Clients.Find(id);
-            ClientModel model = new ClientModel();
             db.Configuration.ProxyCreationEnabled = false;
-            model.emp = db.Clients.Find(id);
-            model.user = db.Users.Find(model.emp.UserID);
-           
+            client = db.Clients.Find(id);
+            client.User = db.Users.Find(client.UserID);
+            //client.ClientLocation = db.Locations.Where(x => x.ClientID == id).FirstOrDefault();
 
-           // model.emp.UserName = model.user.UserEmail;
+            // model.emp.UserName = model.user.UserEmail;
             //model.emp.Password = model.user.UserPassword;
 
             if (client == null)
@@ -48,7 +47,7 @@ namespace SpartanFireWebAPI.Controllers
 
         // PUT: api/Client/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutClient(int id, ClientModel client)
+        public IHttpActionResult PutClient(int id, Client client)
         {
             db.Configuration.ProxyCreationEnabled = false;
             if (!ModelState.IsValid)
@@ -56,14 +55,13 @@ namespace SpartanFireWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != client.emp.ClientID)
+            if (id != client.ClientID)
             {
                 return BadRequest();
             }
 
-            db.Entry(client.emp).State = EntityState.Modified;
-            db.Entry(client.user).State = EntityState.Modified;
-            
+            db.Entry(client).State = EntityState.Modified;
+            //db.Entry(client.ClientLocation).State = EntityState.Modified;
 
             try
             {
@@ -103,10 +101,12 @@ namespace SpartanFireWebAPI.Controllers
                 db.Clients.Add(client);
                 db.SaveChanges();
 
-                
+                //client.ClientLocation.ClientID = (db.Clients
+                //            .OrderByDescending(p => p.ClientID)
+                //            .First().ClientID);
+                //db.Locations.Add(client.ClientLocation);
+                db.SaveChanges();
 
-                //db.Clients.Add(client);
-                //db.SaveChanges();
                 return CreatedAtRoute("DefaultApi", new { id = client.ClientID }, client);
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
@@ -158,5 +158,13 @@ namespace SpartanFireWebAPI.Controllers
         {
             return db.Clients.Count(e => e.ClientID == id) > 0;
         }
+        private string GetPassword(int id)
+        {
+            List<User> temp = db.Users.ToList();
+            var password = temp.Where(x => x.UserID == id).ToList();
+            var string1 = "";
+            return string1;
+        }
+
     }
 }

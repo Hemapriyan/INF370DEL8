@@ -24,7 +24,7 @@ namespace Snow_System
             this.Employees = new HashSet<Employee>();
             this.Logins = new HashSet<Login>();
         }
-    
+
         public int UserID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.EmailAddress)]
@@ -35,7 +35,7 @@ namespace Snow_System
         [DisplayName("User Password")]
         public string UserPassword { get; set; }
         public int UserRoleID { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AuditLog> AuditLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -23,7 +23,6 @@ namespace Snow_System
         }
     
         public int ServiceItemID { get; set; }
-       
         [DataType(DataType.Text)]
         [DisplayName("Item Number")]
         public int itemNumber { get; set; }

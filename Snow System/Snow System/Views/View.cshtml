@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Snow_System.ServiceRequest>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceRequestStatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceRequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceBookedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceBookedEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFullDay)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceRequestStatusID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceRequestDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceBookedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceBookedEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFullDay)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ServiceRequestID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ServiceRequestID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ServiceRequestID })
+        </td>
+    </tr>
+}
+
+</table>

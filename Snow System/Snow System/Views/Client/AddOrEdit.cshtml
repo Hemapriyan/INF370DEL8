@@ -61,25 +61,15 @@
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label " })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-
-
 
         @*<div class="form-group">
         @Html.LabelFor(model => model.c.ClientTypeID, htmlAttributes: new { @class = "control-label " })
         <div class="col-md-12">
             @Html.EditorFor(model => model.c.ClientTypeID, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.c.ClientTypeID, "", new { @class = "text-danger" })
-        </div>*@
+        </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
         @Html.LabelFor(model => model.c.ClientTypeID, htmlAttributes: new { @class = "control-label " })
         <div class="col-md-12">
             <select name="ClientTypeID" class="custom-select" style="color:black;">
@@ -91,10 +81,10 @@
                 }
             </select>
             </div>
-        </div>*@
+        </div>
 
 
-        @*<div class="form-group">
+        <div class="form-group">
             <select name="ClientTypeID" class="custom-select" style="color:black;">
                 <option>Select</option>
                 @foreach (var item in Model.ClientTypeList)
@@ -109,25 +99,25 @@
                     }
                 }
             </select>
-        </div>*@
+        </div>
 
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.c.UserID, htmlAttributes: new { @class = "control-label " })
             <div class="col-md-12">
                 @Html.EditorFor(model => model.c.UserID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.c.UserID, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
-        @*@Html.HiddenFor(Model => Model.location.LocationTypeID)*@
+        @Html.HiddenFor(Model => Model.location.LocationTypeID)*@
 
 
 
 
         @*//added by me 11-0ct 17h00 below code. testing of adding location at the same time as adding client*@
 
-        @*@Html.HiddenFor(model => model.LocationID)
+        @Html.HiddenFor(model => model.LocationID)
 
 
         <div class="form-group">
@@ -178,13 +168,29 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.LocationTypeID, htmlAttributes: new { @class = "control-label" })
             <div class="col-md-12">
                 @Html.EditorFor(model => model.LocationTypeID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LocationTypeID, "", new { @class = "text-danger" })
             </div>
         </div>*@
+        <div class="form-group">
+            <select name="LocationTypeID" class="custom-select" style="color:black;">
+                <option>Select</option>
+                @foreach (var item in Model.LocationTypeList)
+                {
+                    if (item.LocationTypeID == Model.LocationTypeID)
+                    {
+                        <option selected="selected" value="@item.LocationTypeID">@item.Description</option>
+                    }
+                    else
+                    {
+                        <option value="@item.LocationTypeID">@item.Description</option>
+                    }
+                }
+            </select>
+        </div>
 
 
         @*@Html.HiddenFor(Model => Model.LocationTypeID)*@

@@ -311,6 +311,9 @@
     <Compile Include="Models\Equipment.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Event.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Functionality.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>

@@ -23,7 +23,7 @@ namespace Snow_System
             this.Complaints = new HashSet<Complaint>();
             this.Locations = new HashSet<Location>();
         }
-    
+
         public int ClientID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Text)]
@@ -40,11 +40,11 @@ namespace Snow_System
         [MinLength(10)]
         public string ContactNumber { get; set; }
         [Required(ErrorMessage = "This field is required")]
-       
+
         [DisplayName("Client Type")]
         public int ClientTypeID { get; set; }
         public int UserID { get; set; }
-    
+
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyInfo> CompanyInfoes { get; set; }
@@ -52,49 +52,48 @@ namespace Snow_System
         public virtual ICollection<Complaint> Complaints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Location> Locations { get; set; }
+
+
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "This field is required")]
         [DisplayName("User Email")]
         public string UserName { get; set; }
-        [Required(ErrorMessage = "This field is required")]
+
         [DataType(DataType.Password)]
         [DisplayName("Password")]
         public string Password { get; set; }
-        //public int LocationTypeID { get; set; }
-        //public Location location { get; set; }
-        //public List<LocationType> LocationTypeList { get; set; }
+        public int LocationTypeID { get; set; }
+        public Location ClientLocation { get; set; }
+        public List<LocationType> LocationTypeList { get; set; }
 
-            //added by me 11-0ct 17h00 below code. testing of adding location at the same time as adding client
-        //public Location location { get; set; }
-        //public int LocationID { get; set; }
-        //[Required(ErrorMessage = "This field is required")]
-        //[DataType(DataType.Text)]
-        //[DisplayName("Street Address")]
-        //public string StreetAddress { get; set; }
-        //[Required(ErrorMessage = "This field is required")]
-        //[DataType(DataType.Text)]
-        //[DisplayName("Suburb")]
-        //public string Suburb { get; set; }
-        //[Required(ErrorMessage = "This field is required")]
-        //[DataType(DataType.Text)]
-        //[DisplayName("City")]
-        //public string City { get; set; }
-        //[Required(ErrorMessage = "This field is required")]
-        //[DataType(DataType.Text)]
-        //[DisplayName("Postal Code")]
-        //public string PostalCode { get; set; }
-        //[Required(ErrorMessage = "This field is required")]
-        //[DataType(DataType.Text)]
-        //[DisplayName("Contact Person Name")]
-        //public string ContactPersonName { get; set; }
-        //[Required(ErrorMessage = "This field is required")]
-        //[DataType(DataType.Text)]
-        //[DisplayName("Contact Person Number")]
-        //[MaxLength(10)]
-        //[MinLength(10)]
-        //public string ContactPersonNumber { get; set; }
-        //public int LocationTypeID { get; set; }
-
+        //added by me 11-0ct 17h00 below code.testing of adding location at the same time as adding client
+        public int LocationID { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Street Address")]
+        public string StreetAddress { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Suburb")]
+        public string Suburb { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("City")]
+        public string City { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Postal Code")]
+        public string PostalCode { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Contact Person Name")]
+        public string ContactPersonName { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Text)]
+        [DisplayName("Contact Person Number")]
+        [MaxLength(10)]
+        [MinLength(10)]
+        public string ContactPersonNumber { get; set; }
 
     }
 }

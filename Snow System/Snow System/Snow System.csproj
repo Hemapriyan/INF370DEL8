@@ -66,6 +66,12 @@
     <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
     </Reference>
+    <Reference Include="FullCalendar.MVC4, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FullCalendar.MVC4.1.0.7\lib\net40\FullCalendar.MVC4.dll</HintPath>
+    </Reference>
+    <Reference Include="FullCalendar.MVC5, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FullCalendar.MVC5.1.0.7\lib\net45\FullCalendar.MVC5.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Apis, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.41.1\lib\net45\Google.Apis.dll</HintPath>
     </Reference>
@@ -80,6 +86,18 @@
     </Reference>
     <Reference Include="Google.Apis.PlatformServices, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.41.1\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.AccessControl, Version=2.2.0.0, Culture=neutral, PublicKeyToken=b4b8eb9a7afc8328, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.GData.AccessControl.2.2.0.0\lib\Google.GData.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Calendar, Version=2.2.0.0, Culture=neutral, PublicKeyToken=aa6748391206b888, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.GData.Calendar.2.2.0.0\lib\Google.GData.Calendar.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=04a59ca9b0273830, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.GData.Client.2.2.0.0\lib\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0b4c5df2ebf20876, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.GData.Extensions.2.2.0.0\lib\Google.GData.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -393,12 +411,14 @@
     <Compile Include="Controllers\ClientReportController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DeliveryController.cs" />
+    <Compile Include="Controllers\EmployeeRequestController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EmployeeTypeController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\LodgeComplaintController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -456,6 +476,9 @@
       <DependentUpon>Spartan.tt</DependentUpon>
     </Compile>
     <Compile Include="Equipment.cs">
+      <DependentUpon>Spartan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Event.cs">
       <DependentUpon>Spartan.tt</DependentUpon>
     </Compile>
     <Compile Include="Functionality.cs">
@@ -671,11 +694,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-superhero.css" />
+    <Content Include="Content\calendar.css" />
     <Content Include="Content\fullcalendar.css" />
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\fullcalendar.print.min.css" />
-    <Content Include="Content\bootstrap-superhero.css" />
     <Content Include="Content\Global.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
@@ -902,20 +926,18 @@
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_ro.html" />
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_ru.html" />
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_sk.html" />
-    <Content Include="Scripts\fullcalendar.js" />
-    <Content Include="Scripts\fullcalendar.min.js" />
-    <Content Include="Scripts\gcal.js" />
-    <Content Include="Scripts\gcal.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <None Include="Scripts\jquery-3.4.1-vsdoc.js" />
-    <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\fullcalendar.helper.js" />
+    <Content Include="Scripts\fullcalendar.helper.min.js" />
+    <Content Include="Scripts\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="Scripts\gcal.js" />
+    <Content Include="Scripts\gcal.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -1098,7 +1120,7 @@
     <Content Include="Scripts\locale\vi.js" />
     <Content Include="Scripts\locale\zh-cn.js" />
     <Content Include="Scripts\locale\zh-tw.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -1325,12 +1347,24 @@
     <Content Include="Views\Product\AddorEdit.cshtml" />
     <Content Include="Views\BankingDetail\Index.cshtml" />
     <Content Include="Views\BankingDetail\AddorEdit.cshtml" />
+    <Content Include="Views\ServiceRequest\LodgeComplaint.cshtml" />
+    <Content Include="Views\EmployeeRequest\Index.cshtml" />
+    <Content Include="Views\EmployeeRequest\AddorEdit.cshtml" />
+    <Content Include="Views\BookDate\BookDate.cshtml" />
+    <Content Include="Views\View.cshtml" />
+    <Content Include="Views\Booking\ServiceRequest.cshtml" />
+    <Content Include="Views\Booking\AddService.cshtml" />
+    <Content Include="Views\Booking\Index2.cshtml" />
+    <Content Include="Views\Shared\CLayout.cshtml" />
+    <Content Include="Views\Booking\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Image\" />
     <Folder Include="Resources\Products\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\CaptureService\" />
+    <Folder Include="Views\LodgeComplaint\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -24,7 +24,7 @@ namespace Snow_System
             this.SupplierOrderLines = new HashSet<SupplierOrderLine>();
             this.WriteOfProducts = new HashSet<WriteOfProduct>();
         }
-    
+
         public int ProductID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Text)]
@@ -49,10 +49,10 @@ namespace Snow_System
         [DisplayName("Product Type")]
         public int ProductTypeID { get; set; }
         [Required(ErrorMessage = "This field is required")]
-        
+
         [DisplayName("Minimum Quantity")]
         public int MinimumQuantity { get; set; }
-    
+
         public virtual ProductStatu ProductStatu { get; set; }
         public virtual ProductType ProductType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

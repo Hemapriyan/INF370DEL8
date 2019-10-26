@@ -22,7 +22,7 @@ namespace Snow_System
             this.ProductOrders = new HashSet<ProductOrder>();
             this.ServiceRequests = new HashSet<ServiceRequest>();
         }
-    
+
         public int LocationID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Text)]
@@ -52,12 +52,15 @@ namespace Snow_System
         public string ContactPersonNumber { get; set; }
         public int LocationTypeID { get; set; }
         public int ClientID { get; set; }
-    
+
         public virtual Client Client { get; set; }
         public virtual LocationType LocationType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductOrder> ProductOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
+
+        public List<LocationType> LocationTypeList { get; set; }
+        public int UserRoleId { get; set; }
     }
 }

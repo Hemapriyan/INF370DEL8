@@ -11,9 +11,7 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class ProductOrderReturn
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,9 +21,6 @@ namespace Snow_System
         }
     
         public int ProductOrderReturnID { get; set; }
-       
-        [DataType(DataType.Date)]
-        [DisplayName("Return Date")]
         public System.DateTime ReturnDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

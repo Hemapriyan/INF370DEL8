@@ -21,7 +21,7 @@ namespace Snow_System
         {
             this.SupplierOrders = new HashSet<SupplierOrder>();
         }
-    
+
         public int SupplierID { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
@@ -41,7 +41,7 @@ namespace Snow_System
         [DisplayName("Registration Number")]
         public string RegistrationNumber { get; set; }
 
-        
+
         [DataType(DataType.Currency)]
         [DisplayName("Credit Balance")]
         public double CreditBalance { get; set; }
@@ -50,7 +50,7 @@ namespace Snow_System
         [DataType(DataType.Text)]
         [DisplayName("Supplier Name")]
         public string SupplierName { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplierOrder> SupplierOrders { get; set; }
     }

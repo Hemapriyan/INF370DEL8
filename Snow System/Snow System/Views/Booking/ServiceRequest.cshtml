@@ -1,0 +1,157 @@
+﻿@model Snow_System.ServiceRequest
+
+@{
+    ViewBag.Title = "ServiceRequest";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+<h2>ServiceRequest</h2>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />*@
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container body-content">
+
+        @try
+        {
+            RenderBody();
+        }
+        catch (Exception) { }
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @try
+    {
+        RenderSection("Scripts", false);
+    }
+    catch (Exception e) { }
+
+</body>
+
+
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label " })
+    <div class="col-md-12">
+        @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ServiceBookedEndDate, htmlAttributes: new { @class = "control-label" })
+    <div class="col-md-12">
+        @Html.EditorFor(model => model.ServiceBookedEndDate, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ServiceBookedEndDate, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.IsFullDay, htmlAttributes: new { @class = "control-label " })
+    <div class="col-md-12">
+        @Html.EditorFor(model => model.IsFullDay, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.IsFullDay, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceRequestStatusID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceRequestDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceBookedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceBookedEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsFullDay)
+            </th>
+            <th></th>
+        </tr>
+
+        @try
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceRequestStatusID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceRequestDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceBookedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceBookedEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsFullDay)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ServiceRequestID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ServiceRequestID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ServiceRequestID })
+                    </td>
+                </tr>
+            }
+        }
+        catch (Exception e)
+        { }*@
+
+
+@*</table>*@

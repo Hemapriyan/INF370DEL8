@@ -21,7 +21,7 @@ namespace Snow_System
         {
             this.ServiceLines = new HashSet<ServiceLine>();
         }
-    
+
         public int ServiceID { get; set; }
         [DataType(DataType.Text)]
         [DisplayName("Name of Service")]
@@ -31,7 +31,7 @@ namespace Snow_System
         public string Description { get; set; }
         public int ServiceRequestID { get; set; }
         public int ServiceItemID { get; set; }
-    
+
         public virtual ServiceItem ServiceItem { get; set; }
         public virtual ServiceRequest ServiceRequest { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

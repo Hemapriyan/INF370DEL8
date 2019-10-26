@@ -22,7 +22,7 @@ namespace Snow_System
             this.AssignDeliveries = new HashSet<AssignDelivery>();
             this.EmployeeRequests = new HashSet<EmployeeRequest>();
         }
-    
+
         public int EmployeeID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Text)]
@@ -48,7 +48,7 @@ namespace Snow_System
         [DisplayName("Employee Type")]
         public int EmployeeTypeID { get; set; }
         public int UserID { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssignDelivery> AssignDeliveries { get; set; }
         public virtual EmployeeType EmployeeType { get; set; }
@@ -63,15 +63,9 @@ namespace Snow_System
         [DisplayName("User Email")]
         public string UserName { get; set; }
 
-
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Password)]
         [DisplayName("Password")]
         public string Password { get; set; }
-
-       
-        
-        //public string UserName { get; set; }
-        //public string Password { get; set; }
     }
 }

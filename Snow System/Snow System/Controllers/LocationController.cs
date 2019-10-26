@@ -31,6 +31,10 @@ namespace Snow_System.Controllers
         //
         public ActionResult AddorEdit( int cid, int id = 0 )
         {
+            Location cust = new Location();
+           
+
+
             int action = Convert.ToInt32(Session["Action"]);
             if (Convert.ToInt32(Session["UserRoleID"]) == 1)
             {
@@ -45,36 +49,51 @@ namespace Snow_System.Controllers
             {
                 Location lcn = new Location();
                 lcn.ClientID = Convert.ToInt32(cid);
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("LocationType").Result;
+                lcn.LocationTypeList = response.Content.ReadAsAsync<List<LocationType>>().Result;
                 return View(lcn);
             }
                 
             else
             {
+                //HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Location/" + id.ToString()).Result;
+                //return View(response.Content.ReadAsAsync<Location>().Result);
+
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Location/" + id.ToString()).Result;
-                return View(response.Content.ReadAsAsync<Location>().Result);
+                //cust.emp = new Employee();//
+                cust = response.Content.ReadAsAsync<Location>().Result;
+                cust.LocationTypeList = db.LocationTypes.ToList();
+
+                return View(cust);
+
             }
         }
 
 
         [HttpPost]
 
-        public ActionResult AddorEdit(Location eqp)
+        public ActionResult AddorEdit(Location eqp,int LocationTypeID)
         {
+            Location model_ = new Location();
+
+            model_ = eqp;
+            eqp.LocationTypeID = LocationTypeID;
+
             int action = Convert.ToInt32(Session["ActionID"]);
             if (action == 0)
             {
                 Session["ActionID"] = 3;
             }
-            eqp.LocationTypeID = 1;
+            //eqp.LocationTypeID = 1;
             if (eqp.LocationID == 0)
             {
-                HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("Location", eqp).Result;
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("Location", model_).Result;
                 TempData["SuccessMessage"] = "Saved Successfully";
 
             }
             else
             {
-                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Location/" + eqp.LocationID, eqp).Result;
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Location/" + model_.LocationID, model_).Result;
                 TempData["SuccessMessage"] = "Updated Successfully";
             }
             return RedirectToAction("GoBack");

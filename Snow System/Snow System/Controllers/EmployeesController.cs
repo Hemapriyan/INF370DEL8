@@ -40,40 +40,25 @@ namespace Snow_System.Controllers
 
         public ActionResult AddorEdit(int id = 0)
         {
-            
-            
-
             if (id == 0)
-            {
-                
+            {  
                 Employee cust = new Employee();
-               
 
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("EmployeeType").Result;
 
                 cust.EmployeeTypeList = response.Content.ReadAsAsync<List<EmployeeType>>().Result;
+                cust.User = new User();
                 return View(cust);
-
             }
             else
             {
-                //below code comment 11 Oct 2019
-
-                //Employee cust = new Employee();
-                //HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Employees/" + id.ToString()).Result;
-
-                //cust.EmployeeTypeList = db.EmployeeTypes.ToList();
-                //cust = response.Content.ReadAsAsync<Employee>().Result;//.emp add
-                ////cust.emp.UserName = cust.emp.UserName;
-                ////cust.emp.Password = cust.emp.Password;
-
-                //return View(cust);
                 Employee cust = new Employee();
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Employees/" + id.ToString()).Result;
                 cust = response.Content.ReadAsAsync<Employee>().Result;
                 cust.EmployeeTypeList = db.EmployeeTypes.ToList();
+                cust.UserName = cust.User.UserEmail;
+                cust.Password = cust.User.UserPassword;
 
-               
                 return View(cust);
             }
         }
@@ -81,7 +66,8 @@ namespace Snow_System.Controllers
         [HttpPost]
 
         public ActionResult AddorEdit(Employee emp, int EmployeeTypeID)
-        {//AUDIT LOG CODE BELOW
+        {
+            //AUDIT LOG CODE BELOW
             v.DateAccessed = DateTime.Now;
             v.TableAccessed = "Employee";
             v.ChangesMade = "Viewed Employee";
@@ -98,30 +84,6 @@ namespace Snow_System.Controllers
             db.SaveChanges();
             //AUDIT LOG CODE END
 
-            //CODE TO ADD EMPLOYEETYPE DROPDOWN AND ADD A USER RECORD AT THE SAME TIME WHEN ADDING AN EMPLOYEE
-            //EmployeeModelGlobal model_ = new EmployeeModelGlobal();
-            //model_.emp = new Employee();
-            //model_.emp = emp;
-            //emp.EmployeeTypeID = EmployeeTypeID;
-
-            //model_.user = new User();
-            //model_.user.UserID = emp.UserID;
-            ////model_.user.UserPassword = emp.Password;
-            ////model_.user.UserEmail = emp.UserName;
-            //model_.user.UserRoleID = 4;
-
-            //Employee model_ = new Employee();
-
-            //model_ = emp;
-            //emp.EmployeeTypeID = EmployeeTypeID;
-
-            //model_.User = new User();
-            //model_.User.UserID = emp.UserID;
-            //model_.User.UserPassword = emp.User.UserPassword;
-            //model_.User.UserEmail = emp.User.UserEmail;
-            //model_.User.UserRoleID = 4;
-
-
             Employee model_ = new Employee();
 
             model_ = new Employee();
@@ -131,8 +93,6 @@ namespace Snow_System.Controllers
 
             model_.User = new User();
             model_.User.UserID = emp.UserID;
-            model_.User.UserPassword = emp.Password;
-            model_.User.UserEmail = emp.UserName;
             model_.User.UserRoleID = 4;
 
             HttpResponseMessage response = new HttpResponseMessage();
@@ -140,6 +100,9 @@ namespace Snow_System.Controllers
             {
                 try
                 {
+                    model_.User.UserPassword = RandomPassword(7);
+                    model_.User.UserEmail = emp.UserName;
+
                     response = GlobalVariables.WebAPIClient.PostAsJsonAsync("Employees", model_).Result;
                     TempData["SuccessMessage"] = "Saved Successfully";
 
@@ -174,6 +137,7 @@ namespace Snow_System.Controllers
             else
             {
                 response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Employees/" + model_.EmployeeID, model_).Result;
+
                 TempData["SuccessMessage"] = "Updated Successfully";
 
                 n.DateAccessed = DateTime.Now;

@@ -4,82 +4,111 @@
     ViewBag.Title = "AddorEdit";
 }
 
-    <h2 class="pageHeading">Service Request</h2>
+<h2 class="pageHeading">Service Request</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("AddorEdit","ServiceRequest",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <div class="CenteringContainer">
+    <div class="form-horizontal">
+        <div class="CenteringContainer">
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*<div class="form-group">
             @Html.LabelFor(model => model.BusinessName, htmlAttributes: new { @class = "control-label " })
             <div class="col-md-12">
                 @Html.EditorFor(model => model.BusinessName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BusinessName, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        @Html.HiddenFor(model => model.ServiceRequestID)
-
-        <div class="form-group">
+            @Html.HiddenFor(model => model.ServiceRequestID)
+            @Html.HiddenFor(model => model.ServiceBookedDate)
+            @Html.HiddenFor(model => model.ServiceBookedEndDate)
+            @Html.HiddenFor(model => model.ServiceRequestDate)
+            @Html.HiddenFor(model => model.IsFullDay)
+            @*<div class="form-group">
             @Html.LabelFor(model => model.ServiceRequestDate, htmlAttributes: new { @class = "control-label " })
             <div class="col-md-12">
                 @Html.EditorFor(model => model.ServiceRequestDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ServiceRequestDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ServiceBookedDate, htmlAttributes: new { @class = "control-label " })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.ServiceBookedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ServiceBookedDate, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
+            @*@Html.TextBoxFor(model => model.ServiceRequestDate, "{0:dd-MM-yyyy}", new { @class = "form-control", @type = "date" })*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label " })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+            @*<div hidden class="form-group">
+                @Html.LabelFor(model => model.ServiceBookedDate, htmlAttributes: new { @class = "control-label " })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ServiceBookedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ServiceBookedDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label " })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
+            @*<div class="form-group">
             @Html.LabelFor(model => model.LocationID, htmlAttributes: new { @class = "control-label " })
             <div class="col-md-12">
                 @Html.EditorFor(model => model.LocationID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
+            @Html.HiddenFor(model => model.LocationID)
+            @*<input value="@Model.LocationID" />*@
+            @*<div class="form-group">
+            <label>Select Contact Person Name</label><br />
+            <select name="ListofLocations" class="custom-select" style="color:black;">
+                <option>Select</option>
+                @foreach (var item in Model.ListOfLocations)
+                {
+                    if (item.LocationID == Model.LocationID)
+                    {
+                        <option selected="selected" value="@item.LocationID">@item.ContactPersonName @item.ContactPersonNumber @item.StreetAddress,@item.Suburb @item.Suburb @item.City @item.PostalCode</option>
 
+                    }
+                    else
+                    {
+                        <option value="@item.LocationID">@item.ContactPersonName @item.ContactPersonNumber @item.StreetAddress,@item.Suburb @item.Suburb @item.City @item.PostalCode </option>
+                    }
+                }
+            </select>
+        </div>*@
+            @*<input id="planHours" type="text" />*@
+
+
+
+
+            @*<div hidden class="form-group">
+                @Html.LabelFor(model => model.ServiceBookedEndDate, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ServiceBookedEndDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ServiceBookedEndDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            @*<div hidden class="form-group">
+                @Html.LabelFor(model => model.IsFullDay, htmlAttributes: new { @class = "control-label " })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.IsFullDay, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IsFullDay, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.ServiceRequestEndDate, htmlAttributes: new { @class = "control-label" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.ServiceRequestEndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ServiceRequestEndDate, "", new { @class = "text-danger" })
-            </div>
+
+            <button onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</button>
+            <a href="@Url.Action("Index","ServiceRequest")" type="reset" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsFullDay, htmlAttributes: new { @class = "control-label " })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.IsFullDay, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IsFullDay, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
     </div>
-    <div class="form-group">
-
-        <button onclick="document.getElementById('lodgeModal').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right"><span class="glyphicon glyphicon-ok-circle"></span> <br />Add</button>
-        <a href="@Url.Action("Index","ServiceRequest")" type="reset" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Cancel</a>
-    </div>
-</div>
 }
 
 
@@ -87,5 +116,13 @@
 
 
 @section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("[name='ListofLocations']").change(function () {
+                $("#planHours").val($(this).val());
+               
+            });
+        });
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
 }

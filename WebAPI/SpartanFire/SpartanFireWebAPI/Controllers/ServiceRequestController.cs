@@ -51,6 +51,9 @@ namespace SpartanFireWebAPI.Controllers
             {
                 return BadRequest();
             }
+            var temp = db.ServiceRequests.Find(id);
+            serviceRequest.ServiceRequestDate = temp.ServiceRequestDate;
+            serviceRequest.ServiceRequestStatusID = temp.ServiceRequestStatusID;
 
             db.Entry(serviceRequest).State = EntityState.Modified;
 

@@ -33,37 +33,58 @@ namespace Snow_System.Controllers
 
             if (id == 0)
             {
-                ClientModelGlobal cust = new ClientModelGlobal();
-                cust.emp = new Client();
-                //cust.ClientTypeList = db.ClientTypes.ToList();
+                //ClientModelGlobal cust = new ClientModelGlobal();
+                //cust.emp = new Client();
+                ////cust.ClientTypeList = db.ClientTypes.ToList();
+                //return View(cust);
+
+                Client cust = new Client();
+              
                 return View(cust);
             }
 
             else
             {
-                ClientModelGlobal cust = new ClientModelGlobal();
+                //ClientModelGlobal cust = new ClientModelGlobal();
+                //HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Client/" + id.ToString()).Result;
+                //cust.emp = new Client();
+                ////cust.ClientTypeList = db.ClientTypes.ToList();
+                //cust.emp = response.Content.ReadAsAsync<Client>().Result;
+                //return View(cust);
+                Client cust = new Client();
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Client/" + id.ToString()).Result;
-                cust.emp = new Client();
-                //cust.ClientTypeList = db.ClientTypes.ToList();
-                cust.emp = response.Content.ReadAsAsync<Client>().Result;
+
+
+                cust = response.Content.ReadAsAsync<Client>().Result;
                 return View(cust);
             }
         }
         [HttpPost]
 
-        public ActionResult AddorEdit(Client emp, int ClientTypeID)
+        public ActionResult AddorEdit(Client emp)
         {
-            ClientModelGlobal model_ = new ClientModelGlobal();
-            model_.emp = new Client();
-            model_.user = new User();
+            //ClientModelGlobal model_ = new ClientModelGlobal();
+            //model_.emp = new Client();
+            //model_.user = new User();
 
-            model_.emp = emp;
-            model_.emp.ClientTypeID = ClientTypeID;
+            //model_.emp = emp;
+            //model_.emp.ClientTypeID = 1;
 
-            model_.user.UserID = emp.UserID;
-            model_.user.UserPassword = emp.Password;
-            model_.user.UserEmail = emp.UserName;
-            model_.user.UserRoleID = 1;
+            //model_.user.UserID = emp.UserID;
+            //model_.user.UserPassword = emp.Password;
+            //model_.user.UserEmail = emp.UserName;
+            //model_.user.UserRoleID = 1;
+            Client model_ = new Client();
+
+            model_ = new Client();
+            model_ = emp;
+            model_.ClientTypeID = 1;
+
+            model_.User = new User();
+            model_.User.UserPassword = emp.Password;
+            model_.User.UserID = emp.UserID;
+            model_.User.UserEmail = emp.UserName;
+            model_.User.UserRoleID = 1;
 
             if (emp.ClientID == 0)
             {
@@ -101,7 +122,7 @@ namespace Snow_System.Controllers
             }
             else
             {
-                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Client/" + model_.emp.ClientID, model_).Result;
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Client/" + model_.ClientID, model_).Result;
                 TempData["SuccessMessage"] = "Updated Successfully";
             }
             return RedirectToAction("Index","Login");
