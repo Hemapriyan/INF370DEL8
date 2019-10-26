@@ -6,7 +6,7 @@
 <hr />
 <div class="dash-container">
     <!--Operations-->
-    @*@{Html.RenderPartial("_TasksForTheDay");}<!--Add deliveries info-->*@
+    @{Html.RenderPartial("_TasksForTheDay");}<!--Add deliveries info-->
     @{Html.RenderPartial("_ProductOrderCard", (List<Snow_System.ProductOrder>)ViewBag.ProductOrders);}
     @{Html.RenderPartial("_SupplierOrdersCard", (List<Snow_System.SupplierOrder>)ViewBag.SupplierOrders);}
     @{Html.RenderPartial("_ServicesCard", (List<Snow_System.ServiceRequest>)ViewBag.OutstandingServices);}
@@ -16,3 +16,5 @@
     @{Html.RenderPartial("_OrderGraphCard", (List<Snow_System.ProductOrder>)ViewBag.AllProductOrders);}
     @{Html.RenderPartial("_RatingsStatCard", (List<Snow_System.ClientFeedback>)ViewBag.Ratings);}
 </div>
+
+

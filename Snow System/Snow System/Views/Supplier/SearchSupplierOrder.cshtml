@@ -9,129 +9,133 @@
             color: crimson;
         }
 </style>
-@{ 
+@{
     int temp = 0;
 }
 <h1 class="page-header pageHeading" style="text-align:center;">Supplier Orders</h1>
-<div style="margin:0 auto;">
+@if (Model.Count() >= 1)
+{
+    <div style="margin:0 auto;">
 
-    <!--
-    <div style="float: left; display:inline-block;">
-        <select class="custom-select btn-primary">
-            <option value=1>Payed</option>
-        </select>
+        <!--
+        <div style="float: left; display:inline-block;">
+            <select class="custom-select btn-primary">
+                <option value=1>Payed</option>
+            </select>
+        </div>
+            -->
+        <div style="text-align: center; display:inline-block; margin-left: 40%;">
+            <input type="search" placeholder="Search" style="width:80%;" class="form-control" />
+            <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+
+        </div>
+        <!--
+        <div style="float: right; display:inline-block;">
+            <input type="date" class="form-control" />
+        </div>-->
     </div>
-        -->
-    <div style="text-align: center; display:inline-block; margin-left: 40%;">
-        <input type="search" placeholder="Search" style="width:80%;" class="form-control" />
-        <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+}
+    <br />
+    <br />
+    <table class="table table-hover">
+        <tr class="table-primary">
+            <th>
+                Order number
+            </th>
+            <th>
+                Supplier
+            </th>
+            <th>
+                Date Placed
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
 
-    </div>
-    <!--
-    <div style="float: right; display:inline-block;">
-        <input type="date" class="form-control" />
-    </div>-->
-</div>
-<br />
-<br />
-<table class="table table-hover">
-    <tr class="table-primary">
-        <th>
-            Order number
-        </th>
-        <th>
-            Supplier
-        </th>
-        <th>
-            Date Placed
-        </th>
-        <th>
-            Status
-        </th>
-        <th>
-
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        if (item.SupplierStatusID != 1)
-        {
-        <tr class="table-dark">
-            <td>
-                @item.SupplierOrderID
-            </td>
-            <td>
-                @item.Supplier.SupplierName
-            </td>
-            <td>
-                @string.Format("{0:dd MMMM yyyy } ", item.OrderDate)
-            </td>
-            <td>
-                @item.SupplierStatu.Description
-            </td>
-            <td style="text-align:center">
-                <a class="btn btn-info" style="text-decoration: none;" href="@Url.Action("SupplierOrderInformation", "Supplier", new { id = item.SupplierOrderID })"><span class="glyphicon glyphicon-eye-open"></span></a>
-
-                @if (item.SupplierStatusID == 6)
-                {
-                    <a href="@Url.Action("TakeInSupplierOrder","Supplier", item.SupplierOrderID)" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span></a>
-
-                    <div onclick="@{temp = item.SupplierOrderID;} document.getElementById('CancelModal').style.display = 'block';" class=" btn btn-danger"><span class="glyphicon glyphicon-remove-sign"></span></div>
-                }
-                else if (item.SupplierStatusID == 3)
-                {
-                    <div onclick="document.getElementById('ReturnOrderModal').style.display = 'block'; @{temp = item.SupplierOrderID;}" class=" btn btn-warning" style="margin-right: 5px;"><span class="glyphicon glyphicon-share-alt icon-flipped"></span></div>
-                }
-            </td>
+            </th>
         </tr>
+        @if (Model.Count() >= 1)
+        {
+            foreach (var item in Model)
+            {
+                if (item.SupplierStatusID != 1)
+                {
+                    <tr class="table-dark">
+                        <td>
+                            @item.SupplierOrderID
+                        </td>
+                        <td>
+                            @item.Supplier.SupplierName
+                        </td>
+                        <td>
+                            @string.Format("{0:dd MMMM yyyy } ", item.OrderDate)
+                        </td>
+                        <td>
+                            @item.SupplierStatu.Description
+                        </td>
+                        <td style="text-align:center">
+                            <a class="btn btn-info" style="text-decoration: none;" href="@Url.Action("SupplierOrderInformation", "Supplier", new { id = item.SupplierOrderID })"><span class="glyphicon glyphicon-eye-open"></span></a>
+
+                            @if (item.SupplierStatusID == 6)
+                            {
+                                <a href="@Url.Action("TakeInSupplierOrder", "Supplier", item.SupplierOrderID)" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span></a>
+
+                                <div onclick="@{temp = item.SupplierOrderID;} document.getElementById('@item.SupplierOrderID@item.SupplierOrderID').style.display = 'block';" class=" btn btn-danger"><span class="glyphicon glyphicon-remove-sign"></span></div>
+                            }
+                            else if (item.SupplierStatusID == 3)
+                            {
+                                <div onclick="document.getElementById('@item.SupplierOrderID').style.display = 'block'; @{temp = item.SupplierOrderID;}" class=" btn btn-warning" style="margin-right: 5px;"><span class="glyphicon glyphicon-share-alt icon-flipped"></span></div>
+                            }
+                        </td>
+                    </tr>
+                }
+
+                <div id="@item.SupplierOrderID@item.SupplierOrderID" class="modal animate-opacity">
+                    <div class="modal-content modal-background">
+                        <header class="">
+                            <h2>Confirm Cancellation</h2>
+                        </header>
+                        <hr style="margin:0;" />
+                        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+                        <div class="">
+                            <p>Are you sure you want to cancel this order? <br /> Order Number: @item.SupplierOrderID</p>
+                        </div>
+                        <hr style="margin:0;" />
+                        <footer class="" style="">
+                            <div href="" onclick="document.getElementById('@item.SupplierOrderID@item.SupplierOrderID').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
+                            <a href="@Url.Action("UpdatingStatus", "Supplier" , new { id = temp, sid = 4})" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+                        </footer>
+                    </div>
+                </div>
+
+                <div id="@item.SupplierOrderID" class="modal animate-opacity">
+                    <div class="modal-content modal-background">
+                        <header class="">
+                            <h2>Confirm Return</h2>
+                        </header>
+                        <hr style="margin:0;" />
+                        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+                        <div class="">
+                            <p>Are you sure you want to return this order? <br />Order Number: @item.SupplierOrderID</p>
+                        </div>
+                        <hr style="margin:0;" />
+                        <footer class="" style="">
+                            <div href="" onclick="document.getElementById('@item.SupplierOrderID').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
+                            <a href="@Url.Action("ReturnSOrder", "Supplier" , new { id = temp, sid = 5})" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+                        </footer>
+                    </div>
+                </div>
             }
         }
+        else
+        {
+            <p>No supplier orders found</p>
+        }
 
-</table>
+    </table>
 
-<br />
-<br />
-<br />
+    <br />
+    <br />
+    <br />
 
-<div id="CancelModal" class="modal animate-opacity">
-    <div class="modal-content modal-background">
-        <header class="">
-            <h2>Confirm Cancellation</h2>
-        </header>
-        <hr style="margin:0;" />
-        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
-        <div class="">
-            <p>Are you sure you want to cancel this order?</p>
-        </div>
-        <hr style="margin:0;" />
-        <footer class="" style="">
-            <div href="" onclick="document.getElementById('CancelModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
-            <a href="@Url.Action("UpdatingStatus", "Supplier" , new { id = temp, sid = 4})" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
-        </footer>
-    </div>
-</div>
-
-<div id="ReturnOrderModal" class="modal animate-opacity">
-    <div class="modal-content modal-background">
-        <header class="">
-            <h2>Confirm Return</h2>
-        </header>
-        <hr style="margin:0;" />
-        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
-        <div class="">
-            <p>Are you sure you want to return this order?</p>
-        </div>
-        <hr style="margin:0;" />
-        <footer class="" style=""> 
-            <div href="" onclick="document.getElementById('ReturnOrderModal').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
-            <a href="@Url.Action("ReturnSOrder", "Supplier" , new { id = temp, sid = 5})" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
-        </footer>
-    </div>
-</div>
-
-<script>
-    function ShowCancelModal(e){
-
-    }
-</script>
