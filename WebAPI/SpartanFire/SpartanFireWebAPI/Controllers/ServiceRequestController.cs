@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -55,7 +56,9 @@ namespace SpartanFireWebAPI.Controllers
             serviceRequest.ServiceRequestDate = temp.ServiceRequestDate;
             serviceRequest.ServiceRequestStatusID = temp.ServiceRequestStatusID;
 
-            db.Entry(serviceRequest).State = EntityState.Modified;
+            db.Set<ServiceRequest>().AddOrUpdate(serviceRequest);
+
+            //db.Entry(serviceRequest).State = EntityState.Modified;
 
             try
             {

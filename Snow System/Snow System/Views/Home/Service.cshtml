@@ -70,7 +70,14 @@
         <br />
         <h6 style="float:right;" class="card-subtitle mb-2 text-muted">CLICK BELOW TO PLACE A REQUEST</h6>
         <br />
-        <a href="@Url.Action("ExportData","Export")" class="btn btn-info " style="float:right;"><span class="glyphicon glyphicon-wrench"></span> <br />Make a Service Request</a>
+        @if ((int)Session["UserRoleID"] == 1)
+        {
+            <a href="@Url.Action("Index","Location" , new { searchBy = "one", search = "" })" class="btn btn-info " style="float:right;"><span class="glyphicon glyphicon-wrench"></span> <br />Make a Service Request</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Index","ServiceRequest")" class="btn btn-info " style="float:right;"><span class="glyphicon glyphicon-wrench"></span> <br />Make a Service Request</a>
+        }
 
         @*<a href="#" class="card-link">Another link</a>*@
     </div>

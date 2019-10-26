@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -111,32 +113,50 @@ namespace Snow_System.Controllers
                 model_.ServiceBookedDate = new DateTime(2000, 1,1 );
                 model_.ServiceBookedEndDate = new DateTime(2000, 1, 1);
                 model_.IsFullDay = false;
-                db.ServiceRequests.Add(model_);
-                db.SaveChanges();
+                //db.ServiceRequests.Add(model_);
+                //db.SaveChanges();
 
 
-                //HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("ServiceRequest", model_).Result;
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("ServiceRequest", model_).Result;
                 TempData["SuccessMessage"] = "Saved Successfully";
-          
+                int id = (int)Session["UserRoleID"];
+                if(id == 1)
+                {
+                    return RedirectToAction("Service", "Home");
 
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+
+                }
 
             }
             else
             {
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("ServiceRequest/" + model_.ServiceRequestID, model_).Result;
                 TempData["SuccessMessage"] = "Updated Successfully";
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
 
         }
 
         public ActionResult Delete(int id)
         {
-            HttpResponseMessage response = GlobalVariables.WebAPIClient.DeleteAsync("ServiceRequest/" + id.ToString()).Result;
-            TempData["SuccessMessage"] = "Deleted Successfully";
+            var temp = db.ServiceRequests.Find(id);
 
-            return RedirectToAction("Index");
+            if(temp.ServiceRequestStatusID == 1 || temp.ServiceRequestStatusID == 2)
+            {
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.DeleteAsync("ServiceRequest/" + id.ToString()).Result;
+                TempData["SuccessMessage"] = "Deleted Successfully";
 
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["SuccessMessage"] = "Error: Cannot deleted because employee is already assigned.";
+            }
+            return null;
         }
 
         public ActionResult LodgeComplaint()

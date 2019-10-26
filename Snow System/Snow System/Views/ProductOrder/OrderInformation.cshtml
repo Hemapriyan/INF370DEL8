@@ -17,8 +17,8 @@
     </div>
     <div class="TopInfoLeft">
         <label for="orderStatus">Order Status: </label> <span name="supContactInfo">@Model.ProductOrderStatu.Description</span><br />
-        <label for="location">Delivery Address:</label> <span name="location"> @Model.Location.Client.HouseAddress</span><br />
-        <label for="clientEmail">Client Email:</label> <a href='mailto: @Model.Location.Client.EmailAddress' name="clientEmail"> @Model.Location.Client.EmailAddress</a>
+        <label for="location">Delivery Address:</label> <span name="location"> @Model.Location.StreetAddress, @Model.Location.Suburb, @Model.Location.City</span><br />
+        <label for="clientEmail">Client Email:</label> <a href='mailto: @Model.Location.Client.User.UserEmail' name="clientEmail"> @Model.Location.Client.User.UserEmail</a>
     </div>
 </div>
 
@@ -89,7 +89,9 @@
 <p style="text-align:center;"><b><span class="glyphicon glyphicon-info-sign"></span> Disclamer: </b>Please note that returning an order may only take place within 30 (thirty) days of receiving the order.<br />You may be charged a R50.00 delivery price.<br />For inquiries please contact <a href="mailto: orders@firesupplier.co.za">supplies@spartanfire.co.za</a></p>
 <br />
 <br />
-@if (Model.ProductOrderStatusID == 2)
+@if ((int)Session["UserRoleID"] != 1)
+{
+if (Model.ProductOrderStatusID == 2)
 {
     <div onclick="document.getElementById('CancelModal').style.display='block'" class="OptionButton ContinueBtn btn btn-warning" style="float:right"><span class="glyphicon glyphicon-remove-sign"></span><br />Cancel Order</div>
     <div onclick="document.getElementById('CapturePaymentModal').style.display='block'" class="OptionButton ContinueBtn btn btn-primary" style="float:right; margin-right: 5px;"><span class="glyphicon glyphicon-credit-card"></span><br />Capture Payment</div>
@@ -100,10 +102,10 @@ else if (Model.ProductOrderStatusID == 6)
 }
 else if (Model.ProductOrderStatusID == 7)
 {
-    <a href="@Url.Action("TakeInReturnedStock","ProductOrder", new { id = Model.ProductOrderID })" class="OptionButton ContinueBtn btn btn-primary" style="float:right; margin-right: 5px;"><span class="glyphicon glyphicon-share-alt"></span><br />Take in Return</a>
+    <a href="@Url.Action("TakeInReturnedStock", "ProductOrder", new { id = Model.ProductOrderID })" class="OptionButton ContinueBtn btn btn-primary" style="float:right; margin-right: 5px;"><span class="glyphicon glyphicon-share-alt"></span><br />Take in Return</a>
 
 }
-
+}
 <a href="@Url.Action("Index","ProductOrder", new { id = Model.ProductOrderID } )" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-chevron-left"></span> <br />View All Orders</a>
 
 <div id="CancelModal" class="modal animate-opacity">

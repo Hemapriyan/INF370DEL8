@@ -32,10 +32,7 @@ namespace SpartanFireWebAPI.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             client = db.Clients.Find(id);
             client.User = db.Users.Find(client.UserID);
-            //client.ClientLocation = db.Locations.Where(x => x.ClientID == id).FirstOrDefault();
-
-            // model.emp.UserName = model.user.UserEmail;
-            //model.emp.Password = model.user.UserPassword;
+            client.ClientLocation = db.Locations.Where(x => x.ClientID == id).FirstOrDefault();
 
             if (client == null)
             {
@@ -61,7 +58,7 @@ namespace SpartanFireWebAPI.Controllers
             }
 
             db.Entry(client).State = EntityState.Modified;
-            //db.Entry(client.ClientLocation).State = EntityState.Modified;
+            db.Entry(client.ClientLocation).State = EntityState.Modified;
 
             try
             {
@@ -101,10 +98,10 @@ namespace SpartanFireWebAPI.Controllers
                 db.Clients.Add(client);
                 db.SaveChanges();
 
-                //client.ClientLocation.ClientID = (db.Clients
-                //            .OrderByDescending(p => p.ClientID)
-                //            .First().ClientID);
-                //db.Locations.Add(client.ClientLocation);
+                client.ClientLocation.ClientID = (db.Clients
+                            .OrderByDescending(p => p.ClientID)
+                            .First().ClientID);
+                db.Locations.Add(client.ClientLocation);
                 db.SaveChanges();
 
                 return CreatedAtRoute("DefaultApi", new { id = client.ClientID }, client);

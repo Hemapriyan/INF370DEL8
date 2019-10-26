@@ -33,7 +33,7 @@ namespace Snow_System.Controllers
         public ActionResult AddorEdit( int cid, int id = 0 )
         {
             Location cust = new Location();
-           
+            Session["ClientID"] = cid;
 
 
             int action = Convert.ToInt32(Session["Action"]);
@@ -125,17 +125,24 @@ namespace Snow_System.Controllers
             }
             else if (searchBy == "ClientID")
             {
-                int cid = Convert.ToInt32(search);
+                int _cid = Convert.ToInt32(search);
                 ViewBag.Client = Convert.ToInt32(search);
-                string cn = db.Clients.Where(c => c.ClientID == cid).Select(c => c.ClientName).FirstOrDefault() + " " + db.Clients.Where(c => c.ClientID == cid).Select(c => c.ClientSurname).FirstOrDefault() ;
+                string cn = db.Clients.Where(c => c.ClientID == _cid).Select(c => c.ClientName).FirstOrDefault() + " " + db.Clients.Where(c => c.ClientID == _cid).Select(c => c.ClientSurname).FirstOrDefault() ;
                 ViewBag.ClientName = cn;
-                Session["ClientID"] = cid;
-                return View(db.Locations.Where(x => x.ClientID == cid).ToList());
+                Session["ClientID"] = _cid;
+                return View(db.Locations.Where(x => x.ClientID == _cid).ToList());
             }
             else
             {
-                return View(db.Locations.Where(x => x.ContactPersonNumber.StartsWith(search) || search == null).ToList());
-
+                if(searchBy == "one")
+                {
+                    int id = (int)Session["ClientID"];
+                    return View(db.Locations.Where(x => x.ClientID == id).ToList());
+                }
+                else
+                {
+                    return View(db.Locations.Where(x => x.ContactPersonNumber.StartsWith(search) || search == null).ToList());
+                }
             }
 
         }
@@ -273,8 +280,8 @@ namespace Snow_System.Controllers
         public ActionResult EmployeeChooseOrderLocation(int id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id).FirstOrDefault();
-            List<Location> l = po.Location.Client.Locations.ToList();
+            ProductOrder po = db.ProductOrders.Where(p => p.ProductOrderID == id).Include(p=>p.Location).FirstOrDefault();
+            List<Location> l = db.Locations.Where(ls=>ls.ClientID == po.Client_ID).ToList();
             Session["ActionID"] = 1;
             Session["OrderID"] = id;
             return View(l);

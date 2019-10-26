@@ -34,13 +34,50 @@ namespace Snow_System.Controllers
             EmployeeRequest model = new EmployeeRequest();
             model.Employee = new Employee();
             model.EmployeeRequestList = response.Content.ReadAsAsync<List<EmployeeRequest>>().Result;
-            foreach(var item in model.EmployeeRequestList)
+
+            var DateBooked = db.ServiceRequests.ToList().FirstOrDefault(x => x.ServiceRequestID == ServiceRequestID).ServiceBookedDate;
+
+            //var BookedAlready = (from a in db.Employees
+            //                     join b in db.EmployeeRequests.DefaultIfEmpty()
+            //                     on a.EmployeeID equals b.EmployeeID
+            //                     join c in db.ServiceRequests.Where(x => x.ServiceRequestStatusID == 3 &&
+            //                     DateTime.Compare(x.ServiceBookedDate, DateBooked) != 0).DefaultIfEmpty()
+            //                     on b.ServiceRequestID equals c.ServiceRequestID
+            //                     select new
+            //                     {
+            //                         a.EmployeeID
+            //                     }).ToList();
+
+            foreach (var item in model.EmployeeRequestList)
             {
                 item.Employee = db.Employees.Where(x => x.EmployeeID == item.EmployeeID).FirstOrDefault();
             }
             //ViewBag.Status = db.ServiceRequestStatus.Where(d => d.ServiceRequestStatusID == id).Select(s => s.Description).FirstOrDefault();
-
-            model.EmployeeList = model.EmployeeList = db.Employees.Where(x => x.EmployeeTypeID == 2).ToList();
+            model.EmployeeList = new List<Employee>();
+            //foreach(var item in BookedAlready)
+            //{
+            //    var a = new Employee();
+            //    a = db.Employees.Where(x => x.EmployeeID == item.EmployeeID).FirstOrDefault();
+            //    model.EmployeeList.Add(a);
+            //}
+            var tempList = db.Employees.Where(x => x.EmployeeTypeID == 2).ToList();
+            foreach(var item in tempList)
+            {
+                var exists = (from a in db.Employees.Where(x => x.EmployeeID == item.EmployeeID)
+                                     join b in db.EmployeeRequests
+                                     on a.EmployeeID equals b.EmployeeID
+                                     join c in db.ServiceRequests.Where(x => x.ServiceRequestStatusID == 3 &&
+                                     DateTime.Compare(x.ServiceBookedDate, DateBooked) == 0)
+                                     on b.ServiceRequestID equals c.ServiceRequestID
+                                     select new
+                                     {
+                                         a.EmployeeID
+                                     }).ToList();
+                if(exists.Count() == 0)
+                {
+                    model.EmployeeList.Add(item);
+                }
+            }
             model.DateAssigned = DateTime.Today;
             ServiceRequest obj = db.ServiceRequests.ToList().FirstOrDefault(x => x.ServiceRequestID == ServiceRequestID);
             ServiceRequestStatu stat = db.ServiceRequestStatus.ToList().FirstOrDefault(x => x.ServiceRequestStatusID == obj.ServiceRequestStatusID);

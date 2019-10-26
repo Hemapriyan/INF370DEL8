@@ -17,7 +17,7 @@ namespace Snow_System.Controllers
             int userRole = Convert.ToInt32(Session["UserRoleID"]);
             ViewBag.roleID = userRole;
             IEnumerable <ProductOrder> orders;
-            if (userRole >= 3)
+            if (userRole >= 2)
             {
                 orders = db.ProductOrders.Include(po=>po.Location)
                                         .Include(po=>po.Location.Client)
@@ -321,6 +321,7 @@ namespace Snow_System.Controllers
             por.DateOfOrder = DateTime.Now;
             db.SaveChanges();
             SendEmailController se = new SendEmailController();
+            
             if (Convert.ToInt32( Session["UserRoleID"] )== 1)
             {
                 return RedirectToAction("MakePayment");

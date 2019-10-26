@@ -63,6 +63,7 @@ namespace SpartanFireWebAPI.Controllers
             }
 
             db.Entry(employee).State = EntityState.Modified;
+            db.Entry(employee.User).State = EntityState.Modified;
 
             try
             {

@@ -18,6 +18,8 @@ namespace Snow_System.Controllers
         
         AuditLog n = new AuditLog();
         AuditLog v = new AuditLog();
+
+        static string UserPassword = "";
         public ActionResult Index(string searchBy, string search)
         {
             v.DateAccessed = DateTime.Now;
@@ -58,6 +60,7 @@ namespace Snow_System.Controllers
                 cust.EmployeeTypeList = db.EmployeeTypes.ToList();
                 cust.UserName = cust.User.UserEmail;
                 cust.Password = cust.User.UserPassword;
+                UserPassword = cust.User.UserPassword;
 
                 return View(cust);
             }
@@ -136,6 +139,16 @@ namespace Snow_System.Controllers
             }
             else
             {
+                if(emp.Password != null)
+                {
+                    model_.User.UserPassword = emp.Password;
+                }
+                else
+                {
+                    model_.User.UserPassword = UserPassword;
+                }
+                model_.User.UserEmail = emp.UserName;
+
                 response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Employees/" + model_.EmployeeID, model_).Result;
 
                 TempData["SuccessMessage"] = "Updated Successfully";
