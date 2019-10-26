@@ -331,6 +331,9 @@ namespace Snow_System.Controllers
                 TempData["SuccessMessage"] = "Order placed!";
                 return RedirectToAction("Index","Client");
             }
+
+
+            //Come the fuck on and merge already fucking hell
         }
     }
 }
