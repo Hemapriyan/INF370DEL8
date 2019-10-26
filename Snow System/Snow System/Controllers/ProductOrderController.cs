@@ -119,6 +119,7 @@ namespace Snow_System.Controllers
         {
             if (Session["UserID"] == null)
             {
+                TempData["message"] = "Please login before attempting to make an order";
                 return RedirectToAction("Index", "Login");
             }
             int user = Convert.ToInt32(Session["UserID"]);
@@ -140,10 +141,9 @@ namespace Snow_System.Controllers
                 pl.QuantityOrdered = 1;
                 pl.QuantityDelivered = 0;
                 productorder.ProductOrderStatusID = 1;
-                productorder.LocationID = db.Locations.Where(l => l.ClientID == user).Select(l=>l.LocationID).FirstOrDefault();
+                productorder.LocationID = db.Locations.Where(l => l.Client.User.UserID == user).Select(l=>l.LocationID).FirstOrDefault();
                 db.ProductOrders.Add(productorder);
-                productorder.Client_ID = db.Clients.Where(c=>c.UserID == user)
-                    .Select(c=>c.ClientID).FirstOrDefault();
+                productorder.Client_ID = db.Clients.Where(c=>c.UserID == user).Select(c=>c.ClientID).FirstOrDefault();
                 db.SaveChanges();
                 List<int> orderIDs = db.ProductOrders.Select(po => po.ProductOrderID).ToList();
                 pl.ProductOrderID = orderIDs.Last();
