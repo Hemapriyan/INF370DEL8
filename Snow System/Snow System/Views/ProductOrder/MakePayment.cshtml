@@ -4,14 +4,15 @@
 }
 
 <h2 class="pageHeading">Order processed!</h2>
+<h4>Order Number: @ViewBag.OrderNumber</h4>
+<p style="text-align:center;">Your order has been placed! Please make your payment to this account:</p>
 
-<p style="text-align:center;">Your order has been placed! Please make your payment to this account.</p>
 
 <div class="bankConatainer">
     <div class="PayentInfoLeft">
         <span>Account number:  </span><br />
         <span>Bank:  </span><br />
-        <span>Branch:  </span><br />
+        <span>Branch code:  </span><br />
         <span>Account type: </span>
     </div>
     <div class="PayentInfoRight" style="text-align:left; width: 40%; ">
@@ -23,6 +24,6 @@
 </div>
 
 <br />
-<p style="text-align:center;">Please note that your order will not be shipped untill the order has been payed for. It might take up to three more days thereafter for the order to be delivered.</p>
+<p style="text-align:center;">Please make the details of your EFT the order number. <br />Please note that your order will not be schedueled0 untill the order has been payed for. <br /> It might take up to three more days thereafter for the order to be delivered.</p>
 
-<div class="OptionButton BackBtn btn bg-success" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-home"></span> <br />Home</div>
+<a href="@Url.Action("Home","Home")" class="OptionButton BackBtn btn bg-success" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-home"></span> <br />Home</a>

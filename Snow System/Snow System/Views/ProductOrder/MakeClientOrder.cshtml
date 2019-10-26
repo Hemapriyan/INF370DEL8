@@ -3,16 +3,22 @@
 @{
     ViewBag.Title = "Make Order For Client";
 }
-<h1 class="page-header pageHeading" style="text-align:center;">Make a Supplier Order</h1>
+
+
+@{
+    double temp = 0;
+    double total = 0;
+}
+<h1 class="page-header pageHeading" style="text-align:center;">Place an Order for a Client</h1>
 <div class="TopInfoContainer">
     <h2 class="SectionHeading">Supplier Information</h2>
     <div class="TopInfoLeft" style="width:50%; float: left;">
-        <label for="supID">Client ID:</label> <span name="supID"> @Model.ProductOrderID</span><br />
-        <label for="supName">Client Name:</label> <span name="supName"> @ViewBag.ClientName</span><br />
+        <label for="supID">Client ID:</label> <span name="supID"> @Model.Client_ID</span><br />
+        <label for="supName">Client Name:</label> <span name="supName"> @Model.Location.Client.ClientName @Model.Location.Client.ClientSurname   </span><br />
     </div>
     <div>
-        <label for="supContactInfo">Client Contact Number:</label> <span name="supContactInfo"> @ViewBag.ClientNumber</span><br />
-        <label for="supEmail">Client Email:</label> <a href="mailto: @ViewBag.ClientEmail" name="supEmail">@ViewBag.ClientEmail</a>
+        @*<label for="supContactInfo">Client Contact Number:</label> <span name="supContactInfo"> @Model.Location.Client.ContactNumber</span><br />*@
+        @*<label for="supEmail">Client Email:</label> <a href="mailto: @Model.Location.Client.User.UserEmail" name="supEmail">@Model.Location.Client.User.UserEmail</a>*@
     </div>
 </div>
 <br />
@@ -44,79 +50,127 @@
     }
 }
 <br />
-<h2 class="SectionHeading">Products list</h2>
 
-<table class="table">
-    <tr class="table-primary">
-        <th>
-            Product Name
-        </th>
-        <th>
-            Product Description
-        </th>
-        <th>
-            Product Type
-        </th>
-        <th>
-            Quantity On Hand
-        </th>
-        <th>
-            Amount To Order
-        </th>
-        <th>
-            <p class=" remove-icon glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;"></p>
-        </th>
-    </tr>
-    <tbody>
-        @foreach (var item in Model.ProductOrderLines)
-        {
-            <tr class="table-dark" style="cursor:default;">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product.ProductDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product.ProductType.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product.QuantityOnHand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuantityOrdered)
-                </td>
-                <td>
-                    @if (Model.ProductOrderLines != null)
-                    {
-                    <p class=" remove-icon glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;"></p>
-                    }
-                </td>
+
+@if (Model.ProductOrderLines.Count() >= 1)
+{
+    <h2 class="SectionHeading">Products list</h2>
+    <table class="table">
+        <tr class="table-primary">
+            <th>
+                Product Name
+            </th>
+            <th>
+                Product Description
+            </th>
+            <th>
+                Product Type
+            </th>
+            <th>
+                Quantity On Hand
+            </th>
+            <th>
+                Amount To Order
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Subtotal
+            </th>
+            <th>
+                @if (Model.ProductOrderLines.Count() > 1)
+                {
+                    <a href="@Url.Action("RemoveAllFromList","ProductOrder")" class=" remove-icon glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;"></a>
+
+                }
+            </th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model.ProductOrderLines)
+            {
+                
+                temp = item.Product.SellingPrice * item.QuantityOrdered;
+                total += temp;
+                <tr class="table-dark" style="cursor:default;">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductType.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.QuantityOnHand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantityOrdered)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.SellingPrice)
+                    </td>
+                    <td>
+                        @temp.ToString("C2")
+                    </td>
+                    <td>
+                        @if (Model.ProductOrderLines != null)
+                        {
+                            <a href="@Url.Action("RemoveFromList","ProductOrder", new { id = item.ProductID })" class="remove-icon glyphicon glyphicon-remove-sign" style="color:red; text-decoration: none; margin-right: 3%;"></a>
+                        }
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td> </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total:</td>
+                <td>@total.ToString("C2")</td>
             </tr>
-        }
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
 
-<br />
+    <br />
 
-<div href="@Url.Action("","", new { Model.ProductOrderID } )" class="OptionButton ContinueBtn btn btn-success" style="float:right;"><span class="glyphicon glyphicon-ok-circle"></span> <br />Make Order for Client</div>
-<div class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</div>
+    <div onclick="document.getElementById('MakeOrder').style.display='block'" class="OptionButton ContinueBtn btn btn-success" style="float:right;"><span class="glyphicon glyphicon-ok-circle"></span> <br />Choose Delivery Address</div>
 
-<div id="MakeOrder" class="modal animate-opacity">
-    <div class="modal-content modal-background">
-        <header class="">
-            <h2>Confirm Order</h2>
-        </header>
-        <hr style="margin:0;" />
-        <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
-        <div class="">
-            <p>Are you sure you want to make this order?</p>
+    <div id="MakeOrder" class="modal animate-opacity">
+        <div class="modal-content modal-background">
+            <header class="">
+                <h2>Confirm Order</h2>
+            </header>
+            <hr style="margin:0;" />
+            <div style="text-align:center; font-size:500%"><span class="glyphicon glyphicon-info-sign" style="margin-top:3%;"></span></div>
+            <div class="">
+                <p>Are you sure you want to make this order?</p>
+            </div>
+            <hr style="margin:0;" />
+            <footer class="" style="">
+                <div onclick="document.getElementById('MakeOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</div>
+                <a href="@Url.Action("EmployeeChooseOrderLocation", "Location" , new {id = Model.ProductOrderID })" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
+            </footer>
         </div>
-        <hr style="margin:0;" />
-        <footer class="" style="">
-            <a href="" onclick="document.getElementById('MakeOrder').style.display='none'" class="btn btn-outline-danger" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-remove-circle"></span><br />No</a>
-            <a href="" onclick="" class="btn btn-outline-success" style="width:25%; margin:2%; margin-top:2%;"><span class="glyphicon glyphicon-ok-circle"></span><br />Yes</a>
-        </footer>
     </div>
-</div> 
+}
+
+<a href="@Url.Action("Index","Client")" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span> <br />Cancel</a>
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        $(function () {
+            var errorMessage = '@TempData["ErrorMessage"]'
+            if (errorMessages != '')
+                alertify.error(errorMessage);
+        });
+    </script>
+}
