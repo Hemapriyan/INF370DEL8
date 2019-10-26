@@ -11,16 +11,11 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class AssignDelivery
     {
         public int EmployeeID { get; set; }
         public int DeliveryID { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
-        [DisplayName("Assigned Date")]
         public System.DateTime DateAssigned { get; set; }
     
         public virtual Delivery Delivery { get; set; }

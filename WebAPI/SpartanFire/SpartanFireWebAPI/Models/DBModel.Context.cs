@@ -75,5 +75,6 @@ namespace SpartanFireWebAPI.Models
         public virtual DbSet<VehicleType> VehicleTypes { get; set; }
         public virtual DbSet<WorkDone> WorkDones { get; set; }
         public virtual DbSet<WriteOfProduct> WriteOfProducts { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
     }
 }

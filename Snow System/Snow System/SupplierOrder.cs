@@ -23,7 +23,6 @@ namespace Snow_System
         }
     
         public int SupplierOrderID { get; set; }
-        
         [DataType(DataType.Date)]
         [DisplayName("Order Date")]
         public System.DateTime OrderDate { get; set; }

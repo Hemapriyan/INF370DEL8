@@ -21,7 +21,7 @@ namespace Snow_System
         {
             this.CheckEquipments = new HashSet<CheckEquipment>();
         }
-    
+
         public int VehicleID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Text)]
@@ -44,7 +44,7 @@ namespace Snow_System
         [Required(ErrorMessage = "This field is required")]
         [DisplayName("Vehicle Type")]
         public int VehicleTypeID { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckEquipment> CheckEquipments { get; set; }
         public virtual VehicleType VehicleType { get; set; }

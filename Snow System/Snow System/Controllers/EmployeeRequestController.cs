@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -11,7 +12,7 @@ namespace Snow_System.Controllers
     {
         SpartanFireDBEntities1 db = new SpartanFireDBEntities1();
         AuditLog n = new AuditLog();
-        int ServiceRequestID;
+        static int ServiceRequestID = 0;
         // GET: EmployeeRequest
         public ActionResult Index()
         {
@@ -41,7 +42,14 @@ namespace Snow_System.Controllers
 
             model.EmployeeList = model.EmployeeList = db.Employees.Where(x => x.EmployeeTypeID == 2).ToList();
             model.DateAssigned = DateTime.Today;
+            ServiceRequest obj = db.ServiceRequests.ToList().FirstOrDefault(x => x.ServiceRequestID == ServiceRequestID);
+            ServiceRequestStatu stat = db.ServiceRequestStatus.ToList().FirstOrDefault(x => x.ServiceRequestStatusID == obj.ServiceRequestStatusID);
 
+            Location loc = db.Locations.ToList().FirstOrDefault(x => x.LocationID == obj.LocationID);
+
+            ViewBag.status = stat.Description;
+            ViewBag.Location = loc.StreetAddress + ", " + loc.Suburb + ", " + loc.City + ", " + loc.PostalCode;
+            ViewBag.date = obj.ServiceBookedDate.ToShortDateString();
 
             model.ServiceRequestID = ServiceRequestID;
 
@@ -59,19 +67,40 @@ namespace Snow_System.Controllers
                 var exists = db.EmployeeRequests.Where(x => x.EmployeeID == EmployeeID & x.ServiceRequestID == model.ServiceRequestID);
                 if(exists.Count() == 0)
                 {
-                    HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("EmployeeRequest", model).Result;
+                    var DateBooked = db.ServiceRequests.ToList().FirstOrDefault(x => x.ServiceRequestID == ServiceRequestID).ServiceBookedDate;
 
-                    TempData["SuccessMessage"] = "Saved Successfully";
+                    var BookedAlready = (from a in db.ServiceRequests.Where(x => x.ServiceBookedDate == DateBooked)
+                                         join b in db.EmployeeRequests.Where(x => x.EmployeeID == EmployeeID)
+                                        on a.ServiceRequestID equals b.ServiceRequestID
+                                        select new
+                                        {
+                                            a.ServiceRequestID
+                                        }).ToList();
 
-                    n.DateAccessed = DateTime.Now;
-                    n.TableAccessed = "Client";
-                    n.ChangesMade = "Created New Client";
-                    n.AuditLogTypeID = 2;
-                    n.UserID = model.UserID;
-                    db.AuditLogs.Add(n);
-                    db.SaveChanges();
+                    if(BookedAlready.Count() == 0)
+                    {
+                        HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("EmployeeRequest", model).Result;
 
-                    return RedirectToAction("AddorEdit", "EmployeeRequest");
+                        TempData["SuccessMessage"] = "Saved Successfully";
+
+                        n.DateAccessed = DateTime.Now;
+                        n.TableAccessed = "Client";
+                        n.ChangesMade = "Created New Client";
+                        n.AuditLogTypeID = 2;
+                        n.UserID = model.UserID;
+                        db.AuditLogs.Add(n);
+                        db.SaveChanges();
+
+                        return RedirectToAction("AddorEdit", "EmployeeRequest");
+                    }
+                    else
+                    {
+                        TempData["SuccessMessage"] = "Error: Employee already booked for the day";
+                    }
+                }
+                else
+                {
+                    TempData["SuccessMessage"] = "Error: Exists already";
                 }
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
@@ -91,7 +120,6 @@ namespace Snow_System.Controllers
                 }
                 throw raise;
             }
-            TempData["ErrorMessage"] = "Error: Exists already";
             model.EmployeeRequestList = db.EmployeeRequests.Where(x => x.ServiceRequestID == model.ServiceRequestID).ToList();
             model.Employee = new Employee();
             foreach (var item in model.EmployeeRequestList)
@@ -102,7 +130,7 @@ namespace Snow_System.Controllers
             return View(model);
         }
 
-        public ActionResult Delete(int EmployeeID, int ServiceRequestID)
+        public ActionResult Delete(int EmployeeID, int ServiceRequestId)
         {
             n.DateAccessed = DateTime.Now;
             n.TableAccessed = "Employee Request";
@@ -111,7 +139,7 @@ namespace Snow_System.Controllers
             n.UserID = EmployeeID;
             db.AuditLogs.Add(n);
 
-            EmployeeRequest employeeRequest = db.EmployeeRequests.Where(x => x.EmployeeID == EmployeeID & x.ServiceRequestID == ServiceRequestID).FirstOrDefault();
+            EmployeeRequest employeeRequest = db.EmployeeRequests.Where(x => x.EmployeeID == EmployeeID & x.ServiceRequestID == ServiceRequestId).FirstOrDefault();
 
             db.EmployeeRequests.Remove(employeeRequest);
 
@@ -120,7 +148,16 @@ namespace Snow_System.Controllers
             //HttpResponseMessage response = GlobalVariables.WebAPIClient.DeleteAsync("EmployeeRequest/" + id.ToString()).Result;
             TempData["SuccessMessage"] = "Deleted Successfully";
 
+            var EmployeeRequests = db.EmployeeRequests.Where(x => x.ServiceRequestID == ServiceRequestId).ToList();
+            if(EmployeeRequests.Count() == 0)
+            {
+                var temp = db.ServiceRequests.Find(employeeRequest.ServiceRequestID);
+                temp.ServiceRequestStatusID = 2;
+                db.Entry(temp).State = EntityState.Modified;
+                db.SaveChanges();
+            }
 
+            ServiceRequestID = ServiceRequestId;
             return RedirectToAction("AddorEdit", "EmployeeRequest");
         }
     }

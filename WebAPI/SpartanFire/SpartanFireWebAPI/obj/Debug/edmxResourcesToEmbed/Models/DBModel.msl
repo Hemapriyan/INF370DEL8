@@ -511,5 +511,18 @@
         <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="SpartanFireDBModel.Event">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+          <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+          <ScalarProperty Name="End" ColumnName="End" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

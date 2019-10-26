@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\justi\Documents\University\INF 370\Sel 8 Reexam\WebAPI\SpartanFire\SpartanFireWebAPI\Models\DBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\User\Desktop\DEL8REXAM\Wasomi\WebAPI\SpartanFire\SpartanFireWebAPI\Models\DBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

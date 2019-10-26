@@ -3,24 +3,30 @@
 @{
     ViewBag.Title = "AddorEdit";
 }
-
+@*//Code that im pushing . is merge working?*@
 
 @using (Html.BeginForm("AddorEdit", "EmployeeRequest", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <div class="CenteringContainer">
-            <div class="TopInfoContainer">
-                <h2 class="SectionHeading">Service Request Information</h2>
-                <div class="TopInfoLeft">
-                    <label for="ordID">  Service Request ID: </label> <span name="ordIDInfo"> @Model.ServiceRequestID</span><br />
-                </div>
-                <div class="TopInfoRight">
-                    <label for="ordStatus">Service Request status: </label> <span name="ordStatus">@ViewBag.Status</span><br />
-                    <label for="ordLocation">Service Location: </label> <span name="ordLocation"> </span>
-                </div>
+        <div class="TopInfoContainer">
+            <h2 class="SectionHeading">Service Request Information</h2>
+            <br />
+            <div class="TopInfoLeft">
+                <label for="ordID" style="font-size:18px;"> Date of Service: </label> <span name="ordIDInfo" style="color:black; font-size:20px;"><b> @ViewBag.date</b></span><br />
+                <label for="ordStatus" style="font-size:18px;">Service Request Status: </label> <span name="ordStatus" style="color:black;font-size:20px;"><b>@ViewBag.status</b></span><br />
+
             </div>
+
+            <div class="TopInfoRight">
+
+                <label for="ordLocation" style="font-size:18px;">Service Location: </label> <span name="ordLocation" style="color:black;font-size:20px;"><b> @ViewBag.Location</b></span>
+
+            </div>
+        </div>
+        <div class="CenteringContainer">
+
             <br />
             <h2>Assign Employee</h2>
             <hr />
@@ -35,7 +41,7 @@
                 </select>
                 <br />
                 <br />
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Assign Employee</button>
+                <button type="submit" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Assign Employee</button>
             </div>
             <br />
             @if (Model.EmployeeRequestList != null && Model.EmployeeRequestList.Count() > 0)
@@ -52,7 +58,7 @@
                             Surname
                         </th>
                         <th>
-                            Unassign
+                            Unassign Employee
                         </th>
                     </tr>
                     @if (Model == null)
@@ -74,7 +80,7 @@
                                     @Html.DisplayFor(modelItem => item.Employee.Surname)
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Delete","EmployeeRequest",new { EmployeeID = item.EmployeeID , ServiceRequestID = item.ServiceRequestID })" class="OptionButton BackBtn btn btn-danger" style="position: relative; bottom: 0; left: 0; "><span class="glyphicon glyphicon-remove-circle"></span><br />Delete</a>
+                                    <a href="@Url.Action("Delete","EmployeeRequest",new { EmployeeID = item.EmployeeID , ServiceRequestID = item.ServiceRequestID })" class="remove-icon glyphicon glyphicon-remove-sign" style="position: relative; bottom: 0; left: 0; color:red"></a>
                                 </td>
                             </tr>
                         }
@@ -98,12 +104,14 @@
 <script>
         $(function () {
             var successMessage = '@TempData["SuccessMessage"]'
-            var errorMessage='@TempData["ErrorMessage"]'
-            if (successMessage != '')
-                alertify.success(successMessage);
-            else if (errorMessage!='')
+            var errorMessage = '@TempData["ErrorMessage"]'
+            if (successMessage.includes("Error:"))
             {
-                alertify.error(errorMessages);
+                alertify.error(successMessage);
+            }
+            else if (successMessage != "")
+            {
+                alertify.success(successMessage);
             }
         });
 

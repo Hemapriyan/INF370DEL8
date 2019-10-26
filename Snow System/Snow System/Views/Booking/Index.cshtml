@@ -90,7 +90,7 @@
                 <td>
                     @if (item.ServiceRequestStatusID == 1)
                     {
-                        <a href="@Url.Action("Makebooking", "Calendar", new { id = item.ServiceRequestID })" class="btn btn-info"><span class="glyphicon glyphicon-calendar"></span> Book</a>
+                        <a href="@Url.Action("AddService", "Booking", new { id = item.ServiceRequestID })" class="btn btn-info"><span class="glyphicon glyphicon-calendar"></span> Book</a>
                     }
                     else if (item.ServiceRequestStatusID == 2)
                     {

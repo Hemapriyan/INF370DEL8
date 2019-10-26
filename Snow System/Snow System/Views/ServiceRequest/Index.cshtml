@@ -3,31 +3,39 @@
 @{
     ViewBag.Title = "Index";
 }
-
-    <h2 class="page-header pageHeading" style="text-align:center;">Service Requests </h2>
+<br />
+<h2 class="page-header pageHeading" style="text-align:center;">Service Requests </h2>
 <hr />
+@*//Code that im pushing . is merge working?*@
 
 <div style="text-align:center;">
     <p>
 
         @using (@Html.BeginForm("Index", "ServiceRequest", FormMethod.Get))
         {
+            <div style="margin-right:70px;">
+                <b>Search By:</b>
+                @Html.RadioButton("searchBy", "Service Status", true) <text>Service Status </text>
+                @Html.RadioButton("searchBy", "Location") <text>Street Address</text>
 
-            <b>Search By Service Request status:</b>@Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
+
+            </div>
+
+            @Html.TextBox("search") <input class="btn btn-primary" type="submit" value="Search" />
             <a href="@Url.Action("Index","ServiceRequest")" class="ActionButton ContinueBtn"><span class="glyphicon glyphicon-refresh"> </span>Refresh</a>
         }
 
     </p>
 </div>
 @*<a href="@Url.Action("AddorEdit","ServiceRequest")" class="ActionButton ContinueBtn btn btn-success" style="float:left; margin-right: 2%;"> <span class="glyphicon glyphicon-plus"></span>Add New</a>*@
-
+<a href="@Url.Action("Calendar","Booking")" class="ActionButton ContinueBtn btn btn-success" style="float:left; margin-right: 2%;"> <span class="glyphicon glyphicon-eye-open"></span> View Calendar</a>
 <table class="table table-hover">
     <tr class="table-primary">
         <th>
             @Html.DisplayNameFor(model => model.ServiceRequestID)
         </th>
         <th>
-            @Html.DisplayNameFor(model=>model.ServiceRequestStatusID)
+            @Html.DisplayNameFor(model => model.ServiceRequestStatusID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ServiceRequestDate)
@@ -42,7 +50,7 @@
             @Html.DisplayNameFor(model => model.LocationID)
         </th>
         <td>
-            @Html.DisplayNameFor(model=>model.IsFullDay)
+            @Html.DisplayNameFor(model => model.IsFullDay)
         </td>
         <th>Actions</th>
     </tr>
@@ -69,9 +77,9 @@
                     @Html.DisplayFor(modelItem => item.ServiceRequestDate)
                 </td>
                 <td>
-                    @if (item.ServiceBookedDate != null)
+                    @if (item.ServiceRequestStatusID == 2 || item.ServiceRequestStatusID == 3)
                     {
-                    @Html.DisplayFor(modelItem => item.ServiceBookedDate)
+                        @Html.DisplayFor(modelItem => item.ServiceBookedDate)
                     }
                 </td>
                 <td>
@@ -81,20 +89,31 @@
                     @Html.DisplayFor(modelItem => item.Location.StreetAddress), @Html.DisplayFor(modelItem => item.Location.Suburb), @Html.DisplayFor(modelItem => item.Location.City)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem=>item.IsFullDay)
+                    @Html.DisplayFor(modelItem => item.IsFullDay)
                 </td>
                 <td>
                     @if (item.ServiceRequestStatusID == 1)
                     {
-                        <a href="@Url.Action("Makebooking", "Calendar", new { id = item.ServiceRequestID })" class="btn btn-info"><span class="glyphicon glyphicon-calendar"></span> Book</a>
+                        <a href="@Url.Action("AddService", "Booking", new { id = item.ServiceRequestID })" class="btn btn-info"><span class="glyphicon glyphicon-calendar"></span> Book</a>
                     }
                     else if (item.ServiceRequestStatusID == 2)
                     {
                         <a href="@Url.Action("AddorEdit", "EmployeeRequest", new { id = item.ServiceRequestID })" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> Assign</a>
                     }
-                   
+                    else if (item.ServiceRequestStatusID == 3)
+                    {
+                        <a href="@Url.Action("AddorEdit", "EmployeeRequest", new { id = item.ServiceRequestID })" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> Assign</a>
+                    }
+                    @if (item.ServiceRequestStatusID == 1)
+                    {
+                        <a href="@Url.Action("AddorEdit", "ServiceRequest", new { id = item.ServiceRequestID })" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
+                    }
+                    @if (item.ServiceRequestStatusID == 2)
+                    {
+                        <a href="@Url.Action("AddService", "Booking", new { id = item.ServiceRequestID })" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit Booking</a>
 
-                    <a href="@Url.Action("AddorEdit", "ServiceRequest", new { id = item.ServiceRequestID })" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
+                    }
+
                     <a onclick="Delete(@item.ServiceRequestID)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
@@ -121,3 +140,6 @@
         }
     </script>
 }
+
+
+

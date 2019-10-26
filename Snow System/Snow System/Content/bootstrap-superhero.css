@@ -6190,7 +6190,7 @@ a.close.disabled {
 .modal-dialog-centered.modal-dialog-scrollable::before {
   content: none;
 }
-
+/*
 .modal-content {
   position: relative;
   display: -webkit-box;
@@ -6326,7 +6326,7 @@ a.close.disabled {
   .modal-xl {
     max-width: 1140px;
   }
-}
+}*/
 
 .tooltip {
   position: absolute;
@@ -10799,7 +10799,7 @@ label,
   opacity: 1;
 }
 
-.modal-header, .modal-footer {
+/*.modal-header, .modal-footer {
   background-color: rgba(255, 255, 255, 0.075);
 }
 
@@ -10811,7 +10811,7 @@ label,
 
 .modal-header .close:hover, .modal-header .close:focus, .modal-footer .close:hover, .modal-footer .close:focus {
   opacity: 1;
-}
+}*/
 
 @font-face {
     font-family: "Glyphicons Halflings";
@@ -11784,9 +11784,9 @@ label,
     content: "\e236";
 }
 
-.glyphicon-modal-window:before {
+/*.glyphicon-modal-window:before {
     content: "\e237";
-}
+}*/
 
 .glyphicon-oil:before {
     content: "\e238";

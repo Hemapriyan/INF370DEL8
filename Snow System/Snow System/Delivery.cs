@@ -22,7 +22,7 @@ namespace Snow_System
             this.AssignDeliveries = new HashSet<AssignDelivery>();
             this.DeliveryLines = new HashSet<DeliveryLine>();
         }
-    
+
         public int DeliveryID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Date)]
@@ -30,10 +30,10 @@ namespace Snow_System
         public System.DateTime DateOfDelivery { get; set; }
         public int DeliveryStatusID { get; set; }
         public int ProductOrderID { get; set; }
-        
+
         [DisplayName(" Client Signature")]
         public byte[] DeliverySignature { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssignDelivery> AssignDeliveries { get; set; }
         public virtual DeliveryStatu DeliveryStatu { get; set; }

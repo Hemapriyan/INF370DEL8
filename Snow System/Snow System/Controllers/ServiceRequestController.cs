@@ -8,14 +8,41 @@ using System.Web.Mvc;
 namespace Snow_System.Controllers
 {
     public class ServiceRequestController : Controller
-    {
-        // GET: ServiceRequest
-        
+    {//Code that im pushing . is merge working?
+     // GET: ServiceRequest
+
         private SpartanFireDBEntities1 db = new SpartanFireDBEntities1();
         public ActionResult Index(string searchBy, string search)
         {
 
-            return View(db.ServiceRequests.Where(x => x.ServiceRequestStatu.Description.ToString().StartsWith(search) || search == null).ToList());
+
+            //List<Event> events = db.Events.ToList();
+
+            //db.Events.Remove(events[0]);
+            //db.SaveChanges();
+            try
+            {
+                foreach (ServiceRequest item in db.ServiceRequests.ToList())
+                {
+                    Event items = db.Events.Find(item.ServiceRequestID);
+                    db.Events.Remove(items);
+                    db.SaveChanges();
+                }
+            }
+            catch
+            {
+
+            }
+
+            if (searchBy == "Location")
+            {
+                return View(db.ServiceRequests.Where(x => x.Location.StreetAddress.StartsWith(search) || search == null).ToList());
+            }
+            else 
+            {
+                return View(db.ServiceRequests.Where(x => x.ServiceRequestStatu.Description.StartsWith(search) || search == null).ToList());
+            }
+           // return View(db.ServiceRequests.Where(x => x.ServiceRequestStatu.Description.ToString().StartsWith(search) || search == null).ToList());
             //return View();
         }
 
@@ -76,13 +103,21 @@ namespace Snow_System.Controllers
            // model_.Location = new Location();
             //model_.Location.LocationID = eqp.Location.LocationID;
             
-            model_.ServiceRequestDate = DateTime.Today;
-            model_.ServiceRequestStatusID = 1;
 
             if (eqp.ServiceRequestID == 0)
             {
-                HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("ServiceRequest", model_).Result;
+                model_.ServiceRequestDate = DateTime.Today;
+                model_.ServiceRequestStatusID = 1;
+                model_.ServiceBookedDate = new DateTime(2000, 1,1 );
+                model_.ServiceBookedEndDate = new DateTime(2000, 1, 1);
+                model_.IsFullDay = false;
+                db.ServiceRequests.Add(model_);
+                db.SaveChanges();
+
+
+                //HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("ServiceRequest", model_).Result;
                 TempData["SuccessMessage"] = "Saved Successfully";
+          
 
 
             }

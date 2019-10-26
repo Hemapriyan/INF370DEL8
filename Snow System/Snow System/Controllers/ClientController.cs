@@ -10,10 +10,10 @@ using System.Web.Mvc;
 
 namespace Snow_System.Controllers
 {
-   
+
     public class ClientController : Controller
     {
-       
+
         // GET: Client
         private SpartanFireDBEntities1 db = new SpartanFireDBEntities1();
         AuditLog n = new AuditLog();
@@ -66,7 +66,7 @@ namespace Snow_System.Controllers
             {
                 Client cust = new Client();
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Client/" + id.ToString()).Result;
-  
+
                 cust = response.Content.ReadAsAsync<Client>().Result;
                 cust.UserName = cust.User.UserEmail;
                 cust.Password = cust.User.UserPassword;
@@ -83,13 +83,13 @@ namespace Snow_System.Controllers
             }
 
 
-        }                
-            
-            
-        
+        }
+
+
+
 
         [HttpPost]
-        public ActionResult AddorEdit(Client emp,int LocationTypeID)
+        public ActionResult AddorEdit(Client emp, int LocationTypeID)
         {
             //Location loc = new Location();
 
@@ -133,7 +133,7 @@ namespace Snow_System.Controllers
                     model_.User.UserPassword = RandomPassword(7);
 
                     HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("Client", model_).Result;
-                   
+
                     TempData["SuccessMessage"] = "Saved Successfully";
 
                     n.DateAccessed = DateTime.Now;
@@ -164,14 +164,14 @@ namespace Snow_System.Controllers
             }
             else
             {
-                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Client/"+ model_.ClientID, model_).Result;
+                HttpResponseMessage response = GlobalVariables.WebAPIClient.PutAsJsonAsync("Client/" + model_.ClientID, model_).Result;
                 TempData["SuccessMessage"] = "Updated Successfully";
                 n.DateAccessed = DateTime.Now;
                 n.TableAccessed = "Client";
                 n.ChangesMade = "Updated Client";
                 n.AuditLogTypeID = 3;
                 n.UserID = emp.User.UserID;
-                db.AuditLogs.Add(n);                
+                db.AuditLogs.Add(n);
             }
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -197,9 +197,9 @@ namespace Snow_System.Controllers
 
             db.SaveChanges();
 
-            HttpResponseMessage response = GlobalVariables.WebAPIClient.DeleteAsync("Client/"+id.ToString()).Result;
+            HttpResponseMessage response = GlobalVariables.WebAPIClient.DeleteAsync("Client/" + id.ToString()).Result;
             TempData["SuccessMessage"] = "Deleted Successfully";
-                       
+
 
             return RedirectToAction("Index");
 

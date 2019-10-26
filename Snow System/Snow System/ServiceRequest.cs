@@ -24,29 +24,29 @@ namespace Snow_System
             this.EmployeeRequests = new HashSet<EmployeeRequest>();
             this.Services = new HashSet<Service>();
         }
-    
+
         public int ServiceRequestID { get; set; }
         [DisplayName("Service Request Status")]
         public int ServiceRequestStatusID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Date)]
         [DisplayName("Service Request Date")]
-      
+
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
-        
+
         public System.DateTime ServiceRequestDate { get; set; }
-        
+
         [DataType(DataType.Date)]
         [DisplayName("Service Booked Date")]
-        
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
-      
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy HH:mm}")]
+
         public System.DateTime ServiceBookedDate { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy HH:mm}")]
         [DisplayName("Service Booked End Date")]
         public Nullable<System.DateTime> ServiceBookedEndDate { get; set; }
-        
+
         [DisplayName("Comment")]
         public string Comment { get; set; }
         [DisplayName("Location")]
@@ -54,7 +54,7 @@ namespace Snow_System
 
         [DisplayName("Full Day Service")]
         public Nullable<bool> IsFullDay { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientFeedback> ClientFeedbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

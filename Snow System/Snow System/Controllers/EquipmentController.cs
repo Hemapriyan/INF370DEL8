@@ -35,6 +35,7 @@ namespace Snow_System.Controllers
                 return View(new Equipment());
             else
             {
+                
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.GetAsync("Equipment/" + id.ToString()).Result;
                 return View(response.Content.ReadAsAsync<Equipment>().Result);
             }
@@ -43,7 +44,7 @@ namespace Snow_System.Controllers
 
         [HttpPost]
 
-        public ActionResult AddorEdit(Equipment eqp)
+        public ActionResult AddorEdit(Equipment eqp, string Date)
         {
             v.DateAccessed = DateTime.Now;
             v.TableAccessed = "Equipment";
@@ -59,7 +60,19 @@ namespace Snow_System.Controllers
            // n.UserID = eqp.user.UserID;
             db.AuditLogs.Add(n);
             db.SaveChanges();
+            //10/25/2019
+            //0123456789
+            eqp.Quantity = 2;
+            if (Date.Length > 0)
+            {
+                int month = Convert.ToInt32(Date.Substring(0, 2));
+                int day = Convert.ToInt32(Date.Substring(3, 2));
+                int year = Convert.ToInt32(Date.Substring(6, 4));
+                DateTime obj = new DateTime(year, month, day);
 
+
+                eqp.PurchaseDate = obj;
+            }
             if (eqp.EquipmentID == 0)
             {
                 HttpResponseMessage response = GlobalVariables.WebAPIClient.PostAsJsonAsync("Equipment", eqp).Result;
@@ -79,7 +92,6 @@ namespace Snow_System.Controllers
                 db.AuditLogs.Add(n);
                 db.SaveChanges();
                 TempData["SuccessMessage"] = "Saved Successfully";
-
 
 
             }

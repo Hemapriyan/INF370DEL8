@@ -23,7 +23,7 @@ namespace Snow_System
             this.Complaints = new HashSet<Complaint>();
             this.Locations = new HashSet<Location>();
         }
-    
+
         public int ClientID { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Text)]
@@ -40,11 +40,11 @@ namespace Snow_System
         [MinLength(10)]
         public string ContactNumber { get; set; }
         [Required(ErrorMessage = "This field is required")]
-       
+
         [DisplayName("Client Type")]
         public int ClientTypeID { get; set; }
         public int UserID { get; set; }
-    
+
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyInfo> CompanyInfoes { get; set; }

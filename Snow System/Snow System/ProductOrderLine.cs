@@ -21,7 +21,7 @@ namespace Snow_System
         {
             this.ProductOrderReturnLines = new HashSet<ProductOrderReturnLine>();
         }
-        
+
         [DataType(DataType.Currency)]
         [DisplayName("Selling Price")]
         public double Selling_Price { get; set; }
@@ -35,7 +35,7 @@ namespace Snow_System
         public System.DateTime OrderDate { get; set; }
         public int ProductID { get; set; }
         public int ProductOrderID { get; set; }
-    
+
         public virtual Product Product { get; set; }
         public virtual ProductOrder ProductOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

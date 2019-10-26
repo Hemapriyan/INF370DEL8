@@ -451,6 +451,12 @@ C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow Sy
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.csproj.CopyComplete
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.pdb
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\FullCalendar.MVC4.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.GData.AccessControl.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.GData.Calendar.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.GData.Client.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\Google.GData.Extensions.dll
+C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\FullCalendar.MVC4.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\FullCalendar.MVC5.dll
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\bin\FullCalendar.MVC5.xml
 C:\Users\User\Desktop\DEL8REXAM\Wasomi\Snow System\Snow System\obj\Debug\Snow System.csprojAssemblyReference.cache

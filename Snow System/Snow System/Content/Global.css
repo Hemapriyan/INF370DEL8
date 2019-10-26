@@ -854,7 +854,7 @@ ul.dropdown-account {
 
 
 
-.modal {
+/*.modal {
     z-index: 3;
     display: none;
     padding-top: 200px;
@@ -975,7 +975,7 @@ ul.dropdown-account {
     to {
         opacity: 1
     }
-}
+}*/
 
 .serviceitempiece {
     width: 33.3333%;
@@ -1167,203 +1167,7 @@ ul.dropdown-account {
     }
 }
 
-.dash-container{
-    display:block;
-}
 
-.dash-main {
-    text-align: center;
-    max-height: 600px;
-    float: left;
-    width: 49%;
-    margin-left: 1%;
-    margin-bottom: 2%;
-}
+/*ASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD*/
 
-.dash-card {
-    text-align: center;
-    max-height: 300px;
-    float: left;
-    width: 49%;
-    margin-left: 1%;
-    margin-bottom: 2%;
-}
-
-    .dash-card a {
-        color: #DF691A;
-    }
-
-        .dash-card a:hover {
-            color: #9a4912;
-        }
-
-
-.dash-table{
-    width: 100%;
-    height: 100%;
-}
-
-.card-body {
-    padding: 0px;
-    height: 200px;
-    text-align: center;
-    background-color: #0f2b45;
-}
-
-    .card-body .th, .card-body .td {
-        padding: 0.5rem;
-        vertical-align: middle;
-}
-    .card-body table{
-        margin-bottom: 0px;
-        text-align:center;
-    }
-.dash-none{
-    padding-top: 65px;
-    text-align:center;
-}
-
-.card-btn{
-    width: 45%;
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-top: 2%;
-}
-
-.card-footer{
-    padding: 0px;
-}
-
-.fixed_header ::-webkit-scrollbar {
-    width: 3px;
-}
-
-.fixed_header ::-webkit-scrollbar-track {
-}
-
-.fixed_header ::-webkit-scrollbar-thumb {
-    background: red;
-}
-
-.fixed_header ::-webkit-scrollbar-thumb :hover {
-    background: black;
-}
-
-
-/*table with fixed heading*/
-
-.fixed_header {
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-}
-
-    .fixed_header tbody {
-        display: block;
-        overflow: auto;
-        height: 100%;
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .fixed_header thead tr {
-        display:block;
-    }
-
-
-    .fixed_header th, .fixed_header td {
-        padding: 5px;
-        width: 200px;
-    }
-
-/*charts*/
-#TypeChart{
-    text-align: center;
-}
-.dash-graph {
-    float: left;
-    display: inline-block;
-}
-
-.dash-card-large{
-    width: 99%;
-    height: 600px;
-}
-.card-fold .card-header:hover {
-    background-color: rgb(106, 122, 138);
-    cursor: pointer;
-}
-
-#services {
-    display: none;
-    height: 100%;
-}
-.card-body-large{
-    height: 400px;
-}
-
-/*Task for the day*/
-
-.task-list-item {
-    border-bottom: solid thin #1e3042;
-}
-
-    .task-list-item:hover {
-        background-color: #853500;
-        cursor: pointer;
-    }
-
-.task-item{
-    padding: 1% 5% 1% 5%;
-}
-
-.task-list {
-    border: solid thin #1e3042;
-    width: 50%;
-    display: inline-block;
-    float: left;
-    text-align: left;
-    height: 100%;
-}
-
-.task-info {
-    width: 50%;
-    display: inline-block;
-    float: right;
-    border: solid thin #1e3042;
-    height: 100%;
-    padding: 5%;
-}
-
-.toleft {
-    text-align: left;
-    height: 419px;
-}
-
-.card-subheading {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    background-color: initial;
-    border-bottom: solid thin #1e3042;
-    margin-bottom:0px;
-}
-
-.card-header {
-    background-color: #6c3e1f;
-}
-
-.card-footer {
-    background-color: #6c3e1f;
-}
-
-.card-btn-large{
-    width: 70%;
-    padding: 1% 15% 1% 15%;
-}
-
-.Selected-Service {
-    background-color: #df691a;
-    color: black;
-    border-bottom: solid thin #1e3042;
-}
 

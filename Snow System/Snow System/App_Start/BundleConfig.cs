@@ -20,10 +20,12 @@ namespace Snow_System
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-datepicker.js"));//added for date picker
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-superhero.css",
+                      "~/Content/bootstrap-datepicker.css",//added for date picker
                       "~/Content/site.css"));
         }
     }

@@ -21,15 +21,16 @@ namespace Snow_System
         {
             this.CheckEquipmentLines = new HashSet<CheckEquipmentLine>();
         }
-    
+
         public int EquipmentID { get; set; }
         public string Description { get; set; }
         public int Quantity { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [DisplayName("Purhased Date")]
+        
         public System.DateTime PurchaseDate { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckEquipmentLine> CheckEquipmentLines { get; set; }
 

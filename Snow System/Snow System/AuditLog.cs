@@ -11,21 +11,12 @@ namespace Snow_System
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class AuditLog
     {
         public int AuditLogID { get; set; }
-        
-        [DisplayName("Date Accessed")]
         public System.DateTime DateAccessed { get; set; }
-
-        
-        [DisplayName("Table Accessed")]
         public string TableAccessed { get; set; }
-        
-        [DisplayName("Change Made")]
         public string ChangesMade { get; set; }
         public int AuditLogTypeID { get; set; }
         public int UserID { get; set; }

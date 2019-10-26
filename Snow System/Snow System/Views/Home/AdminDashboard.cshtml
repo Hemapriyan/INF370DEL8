@@ -31,12 +31,14 @@
         }
     </script>
 }
-<div>
-    <a href="@Url.Action("ExportData","Export")" class="btn-admin btn btn-outline-primary"><span class="glyphicon glyphicon-export"></span> <br />Export Data</a>
-    <a href="@Url.Action("Index","EmployeeType")" class="btn-admin btn btn-outline-primary"><span class="glyphicon glyphicon-user"></span> <br />Employee Type</a>
-    <a href="@Url.Action("Index","ProductType")" class="btn-admin btn btn-outline-primary"><span class="glyphicon glyphicon-asterisk"></span> <br />Product Type</a>
-    <a href="@Url.Action("Index","VAT")" class="btn-admin btn btn-outline-primary"><span class="glyphicon glyphicon-certificate"></span> <br />VAT</a>
-    <a href="@Url.Action("Index", "AuditLog")" class="btn-admin btn btn-outline-primary"><span class="glyphicon glyphicon-list-alt"></span> <br />Audit Log</a>
-    <div class="btn-admin btn btn-outline-primary"><span class="glyphicon glyphicon-file"></span> <br />Generate And Email Certificate</div>
+<div class="jumbotron CenteringContainer">
+    <a href="@Url.Action("ExportData","Export")" class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-export"></span> <br />Export Data</a>
+    <a href="@Url.Action("Index","EmployeeType")" class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-user"></span> <br />Employee Type</a>
+    <a href="@Url.Action("Index","ProductType")" class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-asterisk"></span> <br />Product Type</a>
+    <a href="@Url.Action("Index","VAT")" class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-certificate"></span> <br />VAT</a>
+    <a href="@Url.Action("Index", "AuditLog")" class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> <br />Audit Log</a>
+    <a href="@Url.Action("AddorEdit","BankingDetail")" class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <br />Update Banking Details</a>
+
+    <div class="btn-admin btn btn-primary"><span class="glyphicon glyphicon-file"></span> <br />Generate And Email Certificate</div>
 </div>
 

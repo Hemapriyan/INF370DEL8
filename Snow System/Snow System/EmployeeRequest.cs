@@ -18,11 +18,11 @@ namespace Snow_System
     {
         public int EmployeeID { get; set; }
         public int ServiceRequestID { get; set; }
-        
+
         [DataType(DataType.Date)]
         [DisplayName("Date Assigned")]
         public System.DateTime DateAssigned { get; set; }
-    
+
         public virtual Employee Employee { get; set; }
         public virtual ServiceRequest ServiceRequest { get; set; }
 
